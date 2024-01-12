@@ -2,6 +2,8 @@
 
 return [
 
+    'app_name'          => 'وصل',
+    'price_additional_interface' => 'سعر الواجهة الاضافية',
     //Login Page
     'access'            => 'قم بالتسجيل للدخول الي لوحه التحكم',
     'login'             => 'تسجيل الدخول',
@@ -23,6 +25,21 @@ return [
     'locationSuccess'   => 'تم اضافه الموقع بنجاح',
     'latitude'           => 'أدخل بيانات موقعك',
     'longitude'         => 'أدخل بيانات موقعك',
+    'map'         => 'الخريطه',
+    'send_noty'         => 'ارسال اشعار',
+    'sended_successfully'         => 'تم الارسال بنجاح',
+
+    'brofits'         => 'الارباح',
+    'trips_count'         => 'عدد الرحلات',
+    'total_brofits'         => 'اجمالي الارباح',
+    'today_brofits'         => 'ارباح اليوم',
+    'tatal_tax'         => 'اجمالي الضريبه',
+    'statuss'                =>'الحاله',
+    'main_reports'                =>'تقرير الرحلات',
+    'coose_statuss'                =>'اختر الحاله',
+    'export_to_excel'                =>'تصدير الى Excel',
+    'export_to_pdf'                =>'تصدير الى PDF',
+    'commission_due'                =>'العموله المستحقه المتبقيه على السائق',
 
     //Common
     'incorrect_info' => 'معلومات غير صحيحة',
@@ -41,19 +58,21 @@ return [
     'no'             => 'لا',
     'submit'         => 'تاكيد',
     'name'           => 'الاسم',
-    'stauts'         => 'الحاله',
-    'Not_dependence' => 'الغاءاعتمادالتاجر',
-    'dependence'     => 'اعتمادالتاجر',
-    'inactive'       => 'الغاء تفعيل التاجر',
-    'active'         => 'تفعيل التاجر',
-    'commercial_register' => 'صورة السجل التجارى',
-    'user_type' => 'المستهدف',
+    'verify_code'    => 'الرمز التأكيدى',
+    'your_verify_code'=> 'الرمز التأكيدى الخاص بك: ',
+    'unverified_account'=> "لم يتم التحقق من حسابك",
+    'wrong_code'      => 'الكود غير صحيح',
+    'code_sent'       => 'تم ارسال الكود بنجاح',
+    'your_verify_code' => 'رمز التحقق الخاص بك: ',
+    'account_not_active'=>'لم يتم تفعيل حسابك بعد',
+
 
     'reqEmail'           => 'البريد الالكتروني مطلوب',
     'unique_username'    => 'اسم المستخدم مقرر يرجي استخدام اسم اخر',
     'unique_email'       => 'هذا البريد مستخدم من قبل',
     'req_password'       => 'كلمت المرور مطلوبه',
     'password_confirmed' => 'كلمت المرور غير متطابقه',
+    'not_enough_balance' => 'ليس لديك رصيد كافى',
 
     'reqCountry'   => 'الدوله مطلوبه',
     'reqAddress'   => 'العنوان مطلوب',
@@ -76,10 +95,7 @@ return [
     'added_successfully'   => 'تم إضافه البيانات بنجاح',
     'updated_successfully' => 'تم تعديل البيانات بنجاح',
     'deleted_successfully' => 'تم حذف البيانات بنجاح',
-
-
-    'special_ads'			=>'الاعلانات المميزة',
-    'special_advertisements'=>'الاعلانات المميزة',
+    'canceled_successfully' => 'تم الالغاء بنجاح',
 
     //NaveBar
     'main' => 'الرئيسيه',
@@ -109,6 +125,7 @@ return [
     'oldPass'                => 'كلمه المرور القديمه',
     'newPass'                => 'كلمه المرور الجديده',
     'password_confirmation'  => 'تاكيد كلمه المرور الجديده',
+    'balance'                => 'الرصيد',
 
     // Setting
     'technical-support'   => 'الدعم الفني',
@@ -123,7 +140,28 @@ return [
     'contactUs'           => 'تواصل معانا',
     'aboutAs'             => 'من نحن',
     'about'               => 'من نحن',
+    'general'             => 'عام',
+    'min_order'           => 'الحد الأدنى لقيمة الطلب',
+    'confirm_renew'      => 'هل أنت متأكد؟',
+    'confirm_complete'   => 'هل أنت متأكد؟',
+    'payment_api_token'  => 'توكن بوابة الدفع',
+    'max_distance'       => 'أقصى مسافة من السائق',
+    'help_questions'     => 'أسئلة المساعدة',
+    'question'           => 'السؤال',
+    'answer'             => 'الاجابة',
+    'question_ar'        => 'السؤال بالعربية',
+    'question_en'        => 'السؤال بالانجليزية',
+    'question_fr'        => 'السؤال بالنرويجي',
+    'answer_ar'          => 'الاجابة بالعربية',
+    'answer_en'          => 'الاجابة بالانجليزية',
+    'answer_fr'          => 'الاجابة بالنرويجي',
 
+    'users_reports'      => 'بلاغات العملاء',
+    'message'            => 'الرسالة',
+    'trip'               => 'الرحلة',
+    'app_tirp_percent'   => 'نسبة التطبيق من الرحلة',
+    'referral_code_price'=> 'سعر رمز الاحالة',
+    'referral_code_trips'=> 'تطبيق رمز الإحالة بعد كم رحلة؟',
 
     // Categories
 
@@ -149,15 +187,98 @@ return [
     'details_name'  => 'اسم متغير التفاصيل',
     'details_name_ar'  => 'اسم متغير التفاصيل بالعربية',
     'details_name_en'  => 'اسم متغير التفاصيل بالانجليزية',
-    'icon'          => 'ايقونة',
+    'subtitle'      =>'العنوان الفرعى',
+    'subtitle_ar'   =>'العنوان الفرعى بالعربية',
+    'subtitle_en'   =>'العنوان الفرعى بالانجليزية',
+    'price_for_kilo'=>'سعر الكيلومتر',
+
+    //brands
+    'brands'        =>'الماركات',
+    'cars'          =>'السيارات',
+    'colors'        =>'الألوان',
+    'manufacturing_years'=>'سنوات الصنع',
+    'year'          =>'السنة',
+
+    //restaurants
+    'restaurants'           =>'المطاعم',
+    'restaurant_name'       =>'اسم المطعم',
+    'orders'                =>'الطلبات',
+    'items'                 =>'الأصناف',
+
+    //driver
+    'drivers'               =>'السائقون',
+    'driver_name'           =>'اسم السائق',
+    'driver'                =>'السائق',
+    'registration_number'   =>'رقم الهوية/الاقامة',
+    'deactivate'            =>'تعطيل الحساب',
+    'activate'              =>'تفعيل الحساب',
+    'car_details'           =>'تفاصيل السيارة',
+    'brand'                 =>'الماركة',
+    'color'                 =>'اللون',
+    'car'                   =>'نوع السيارة',
+    'manufacturing_year'    =>'سنة الصنع',
+    'car_number'            =>'رقم السيارة',
+    'car_front_image'       =>'صورة السيارة من الأمام',
+    'car_back_image'        =>'صورة السيارة من الخلف',
+    'car_form_image'        =>'صورة استمارة السيارة',
+    'car_license_image'     =>'رخصة السيارة',
+    'driving_license_image' =>'رخصة القيادة',
+
+    //bundles
+    'desc_ar'               =>'الوصف بالعربية',
+    'desc_en'               =>'الوصف بالانجليزية',
+    'bundles'               =>'الباقات',
+    'bundle'                =>'الباقة',
+    'subscription_status'   =>'حالة الاشتراك',
+    'active'                =>'مفعل',
+    'inactive'              =>'غير مفعل',
+    'renew'                 =>'تجديد',
+    'paid_price'            =>'المبلغ المدفوع',
+    'delivered_price'       =>'المبلغ المحول',
+
+    //trips
+    'trips'                 =>'الرحلات',
+    'customer_phone'        =>'هاتف العميل',
+    'trip_status'           =>'حالة الرحلة',
+    'src_address'           =>'عنوان البداية',
+    'src_lat'               =>'خط عرض البداية',
+    'src_lng'               =>'خط طول البداية',
+    'dest_address'          =>'عنوان جهة الوصول',
+    'dest_lat'              =>'خط طول جهة الوصول',
+    'dest_lng'              =>'خط عرض جهة الوصول',
+    'tax_value'             =>'قيمة الضريبة',
+    'trip_details'          =>'تفاصيل الرحلة',
+    'no_near_cars'          =>'لا يوجد سيارات بالقرب منك من فضلك حاول فى وقت لاحق',
+
+    //bank_accounts
+    'bank_accounts'         =>'الحسابات البنكية',
+    'bank_name'             =>'اسم المصرف',
+    'bank_name_ar'          =>'اسم المصرف بالعربية',
+    'bank_name_en'          =>'اسم المصرف بالانجليزية',
+    'account_owner_name'    =>'اسم صاحب الحساب',
+    'account_number'        =>'رقم الحساب',
+    'iban'                  =>'الايبان',
+    'deposits'              =>'الودائع',
+    'receipt'               =>'الايصال',
+    'completed'             =>'منتهى',
+    'complete'              =>'انهاء',
+
+    'android_app_link'      =>'رابط تطبيق الاندرويد',
+
 
     //coupons
-    'coupons'       => 'كوبونات',
+    'coupons'       => 'العروض الترويجية',
     'coupon_code'   => 'كود الكوبون',
     'discount_percent'=> 'نسبة الخصم',
     'count_of_use'  =>'عدد مرات الاستخدام',
     'times_for_user'=>'عدد المرات للمستخدم',
-    'false_coupon'  =>'الكوبون غير صحيح',
+    'false_coupon'  => 'الكوبون غير صحيح',
+    'coupon_type'       =>'نوع الكوبون',
+    'percent'           =>'نسبة',
+    'discount_max_value'=>'الحد الاقصى لقيمة الخصم',
+    'discount_value'    =>'قيمة الخصم',
+    'coupon_value'      =>'قيمة',
+    'count_of_trips'    =>'عدد الرحلات',
 
     //feedback
     'feedback'      => 'تعليقات المستخدمين',
@@ -166,19 +287,18 @@ return [
 
 
     // Country
-
-    'country'            => 'الولايات',
-    'state'              => 'ولاية',
-    'countryAr'          => 'الولاية بالعربيه',
-    'countryEn'          => 'الولاية بالانجليزيه',
-    'reqStatNameAr'      => 'الولاية بالعربيه مطلوبه',
-    'reqStatNameEn'      => 'الولاية بالانجليزيه مطلوبه',
+    'country'            => 'الدول',
+    'state'              => 'الدولة',
+    'countryAr'          => 'الدولة بالعربيه',
+    'countryEn'          => 'الدولة بالانجليزيه',
+    'reqStatNameAr'      => 'الدولة بالعربيه مطلوبه',
+    'reqStatNameEn'      => 'الدولة بالانجليزيه مطلوبه',
     'uniqueStatNameEn'   => 'الاسم بالانجليزيه مقرر',
     'uniqueStatNameAr'   => 'الاسم بالعربيه مقرر',
     'govern'             => 'المدن',
     'governAr'           => 'المدينة بالعربيه',
     'governEn'           => 'المدينة بالانجليزيه',
-    'countryEn'          => 'الولاية بالانجليزيه',
+    'countryEn'          => 'الدولة بالانجليزيه',
     'reqGovernNameAr'    => 'المدينة بالعربيه مطلوبه',
     'reqGovernNameEn'    => 'المدينة بالانجليزيه مطلوبه',
     'uniqueGovernNameEn' => 'المدينة بالانجليزيه مقرر',
@@ -187,6 +307,18 @@ return [
     'districts'          =>'الأحياء',
     'district_ar'        =>'الحى بالعربية',
     'district_en'        =>'الحى بالانجليزية',
+
+    'countries'          =>'الدول',
+    'country_name'       =>'الدولة',
+    'choose_country'     =>'اختر دولة',
+    'select_country'     =>'اختر دولة',
+    'currencies'         =>'العملات',
+    'recharge_cards'     =>'كروت الشحن',
+    'code'               => 'الكود',
+    'status_code'        => 'حالة الكود',
+    'code_valid' => 'صالح للاستخدام',
+    'code_not_valid' => 'غير صالح',
+    'choose_currency'    =>'اختر عملة',
 
     // Providers
     'provider'   => 'مقدمين الخدمات',
@@ -219,6 +351,8 @@ return [
     'rate'       => 'التقيم',
     'reqPrice'   => 'السعر مطلوب',
     'website'    => 'الموقع الالكتروني',
+    'wallet'     => 'رصيد المحفظة',
+    'add_balance'=> 'اضافة رصيد',
 
 
     // Api
@@ -236,17 +370,6 @@ return [
     'ad_fees'               =>'رسوم الاعلان الواحد',
     'ad_expiration'         =>' مدة الاعلان بالايام',
     'advertisement_fees_expiration'=>'مدة الاعلان والرسوم',
-    'expiration'			=>'المدة',
-
-    'merchant'          => 'التاجر',
-    'merchants'         => 'التجار',
-    'remainder_ads'     => 'الإعلانات المتبقية',
-    'country_code'      => 'رمز الدولة',
-    'dependence'        => 'الاعتماد',
-    'count_rate'        => 'عدد التقييمات',
-    'avg_rate'          => 'متوسط التقييمات',
-    'commercial_registration_no' => 'رقم السجل التجاري',
-
 
      //advertisements
      'advertisement_types'   =>'أنواع الاعلانات',
@@ -269,13 +392,19 @@ return [
     //dashboard index
     'show'      => 'عرض',
 
-    'subscription'=>'الاشتراكات',
+    'subscription'=>'الاشتراك',
     'admin' => 'المشرفين',
 
     //notifications
     'notifications'     =>'الاشعارات',
     'title'             =>'العنوان',
+    'title_ar'          =>'العنوان بالعربية',
+    'title_en'          =>'العنوان بالانجليزية',
+    'title_fr'          =>'العنوان بالنرويجي',
     'body'              =>'المحتوى',
+    'body_ar'           =>'المحتوى بالعربية',
+    'body_en'           =>'المحتوى بالانجليزية',
+    'body_fr'           =>'المحتوى بالنرويجي',
     'all'               =>'ارسال الى الكل',
     'send'              =>'ارسال',
     'add_notify'        =>'اضافة اشعار',
@@ -284,6 +413,26 @@ return [
     'chat_notify_title'    =>'رسالة من: ',
     'chat_notify_body'     =>'',
     'saveToDatabase'       =>'اظهرها فى اشعارات التطبيق',
+    'timed_nots'        =>'الاشعارات المؤجلة',
+
+    'bundle_subscription'   =>'لقد اشترك فى الباقة بنجاح',
+    'balance_adding'        =>'تم اضافة رصيد الى محفظتك بقيمة: ',
+    'balance_transfering'   =>'تم تحويل رصيد اليك بقيمة: ',
+    'referral_code_not'     =>'نظرًا لرمز الإحالة المستخدم عند التسجيل تم اضافة رصيد الى محفظتك بقيمة: ',
+    'you_have_new_trip_not' =>'لديك رحلة جديدة فى الانتظار',
+    'you_have_new_order_not' =>'لديك شحنه جديدة فى الانتظار',
+    'trip_acceptance_not'   =>'السائق فى الطريق اليك',
+    'order_acceptance_not'   =>'السائق فى الطريق اليك',
+    'trip_starting_not'     =>'بدأ السائق الرحلة',
+    'trip_finishing_not'    =>'انتهت رحلتك بنجاح',
+    'order_finishing_not'    =>' تم تسليم الشحنه بنجاح',
+    'trip_offer_not'    =>'تم ارسال عرض سعر جديد',
+    'reject_offer_successfully' => 'تم رفض العرض بنجاح',
+    'reject_offer' => 'تم رفض عرض السعر الخاص بك ويمكنك انشاء عرض اخر',
+    'reject_trip_successfully' => 'تم رفض الرحلة بنجاح',
+    'trip_started' => 'تم بدا الرحلة',
+    'collecting_the_fare' => 'تم تحصيل الاجرة بنجاح',
+    'reject_order_successfully' => 'تم رفض طلب الشحن بنجاح',
 
     //sliders
     'slider_image_en'   =>'صورة السلايدر بالانجليزية',
@@ -317,6 +466,17 @@ return [
     'addNewProduct'     =>'أضف منتج جديد',
     'product_name'      =>'اسم المنتج',
     'select_product'    =>'اختر منتج',
+    'wholesale_price'   =>'سعر الجملة',
+    'retail_price'      =>'سعر التجزئة',
+    'min_wholesale'     =>'الحد الأدنى للجملة',
+    'select_units'      =>'اختر الوحدات',
+    'units'             =>'الوحدات',
+    'increase_by'       =>'مقدار زيادة الكمية',
+    'related_products'  =>'منتجات ذات صلة',
+    'retail_discount'   =>'خصم التجزئة',
+    'retail_discount_end_date' =>'تاريخ انتهاء خصم التجزئة',
+    'wholesale_discount'=>'خصم الجملة',
+    'wholesale_discount_end_date'=>'تاريخ انتهاء خصم الجملة',
 
     //attributes
     'attributes'        =>'المواصفات',
@@ -332,12 +492,6 @@ return [
     //orders
     'order'             =>'الطلبات',
     'customerName'      =>'اسم العميل',
-    'pharmacyName'      =>'الصيدلية',
-    'pharmacyPhone'     =>'هاتف الصيدلية',
-    'deliveryName'      =>'اسم الدليفرى',
-    'deliveryPhone'     =>'هاتف الدليفرى',
-    'plainOrder'        =>'طلب عادى',
-    'fastOrder'         =>'طلب سريع',
     'subscribe'         =>'الاشترك',
     'paymentWay'        =>'طريقة الدفع',
     'deliveryCost'      =>'تكلفة التوصيل',
@@ -348,12 +502,64 @@ return [
     'date'              =>'التاريخ',
     'orderDetails'      =>'تفاصيل الطلب',
     'orderCart'         =>'محتويات الطلب',
-    'orderDates'        =>'تواريخ توصيل الطلب',
-    'oneMonth'          =>'شهر واحد',
-    'threeMonth'        =>'ثلاثة أشهر',
-    'currentOrder'      =>'جارى التنفيذ',
-    'waitingOrder'      =>'فى انتظار الصيدلية',
-    'finishedOrder'     =>'طلب منتهى',
+    'new_order'         =>'طلب جديد',
+    'preparing'         =>'جارى تحضير الطلب',
+    'delivering'        =>'جارى توصيل الطلب',
+    'delivered'         =>'تم استلام الطلب',
+    'wholesale'         =>'جملة',
+    'retail'            =>'تجزئة',
+    'buying_mode'       =>'وضع الشراء',
+    'visa'              =>'فيزا',
+    'cash'              =>'كاش',
+    'wallet'            =>'المحفظة',
+    'kilo'              =>'كيلو',
+    'box'               =>'كرتونة',
+    'buying_type'       =>'وحدة الشراء',
+    'status_changed'    =>'تم تغيير حالة الطلب بنجاح',
+    'cancel'            =>'الغاء',
+    'canceled_orders'   =>'الطلبات الملغية',
+    'change_order_status'=>'تغيير حالة الطلب',
+    'canceler_admin'    =>'المشرف اللاغى',
+
+    'order_title'       =>'عنوان الطلب',
+    'order_details'     =>'تفاصيل الطلب',
+    'special_orders'    =>'الطلبات الخاصة',
+    'order_status'      =>'حالة الطلب',
+    'price_delivered'   =>'تم استلام المبلغ',
+    'preparing_started' =>'تم البدء فى تحضير الطلب',
+    'finishing_closed'  =>'الطلب قرب الانتهاء',
+
+    //payment notices
+    'payment_notice'    =>'احضار دفع',
+
+    //delivery distance
+    'delivery_distance' =>'مسافات التوصيل',
+    'from'              =>'من',
+    'to'                =>'الى',
+    'delivery_price'     =>'سعر التوصيل',
+
+    //delivery times
+    'delivery_times'     =>'أوقات التوصيل',
+    'delivery_time'     =>'وقت التوصيل',
+    'period'             =>'الفترة',
+    'am'                 =>'صباحا',
+    'pm'                 =>'مساء',
+    'delivery_dates'     =>'تواريخ التوصيل',
+    'delivery_date'      =>'تاريخ التوصيل',
+    'expired_date'       =>'تاريخ منتهى',
+
+    //address types
+    'address_types'     =>'أنواع العنوان',
+    'name_ar'           =>'الاسم بالعربية',
+    'name_en'           =>'الاسم بالانجليزية',
+    'name_fr'           =>'الاسم بالنرويجي',
+    'desc_fr'           =>'الوصف بالنرويجي',
+    'icon'              =>'الأيقونة',
+
+    //free delivery
+    'free_delivery'     =>'التوصيل المجانى',
+    'day'               =>'يوم',
+    'out_distance'      =>'المسافة خارج النطاق',
 
     //about us
     'about_ar'          =>'من نحن بالعربية',
@@ -365,16 +571,83 @@ return [
     'three_month_cost'  =>'سعر التوصيل لباقة الثلاثة أشهر',
     'tax'               =>'النسبة المئوية للضريبة',
 
-    //report
-    'report'            =>'التقرير',
-    'total_users_subscriptions' =>'إجمالي أرباح اشتراكات المستخدمين',
-    'total_ads_earnings'=>'إجمالي أرباح الاعلانات',
-    'total_used_coupons'=>'إجمالي عدد الكوبونات المستخدمة',
-    'total_coupons_discount'=>'إجمالي قيمة الخصم من الكوبونات',
-    'final_total_earnings'=>'إجمالي الأرباح النهائية',
-    'from'              =>'من',
-    'to'                =>'الى',
+    'not_enough_wallet'=>"ليس لديك رصيد كاف في محفظتك",
+    'req_payment_method'=>'طريقة الدفع مطلوبة',
+    'req_delivery_time'=>'وقت التوصيل مطلوب',
+    'req_delivery_date'=>'تاريخ التوصيل مطلوب',
+    'andriod_app_link'=>'رابط تطبيق الاندرويد',
+    'ios_app_link'=>'رابط تطبيق الايفون',
+
+    'req_phone' => 'رقم الهاتف مطلوب',
+
+
+
+    'journy_end'            => 'انتهاء الرحله',
+    'trip_over'             => 'تم انتهاء الرحله',
+    'trip_number'           => 'رقم الرحله',
+    'distance'              => 'المسافه',
+    'total_price'           => 'السعر الكلي',
+
+    'low_price'             => 'أقل سعر',
+    'waiting_cost'          => 'تكلفه الانتظار',
+    'trip_scheduled'          => 'تم جدوله الرحله',
+    'order_scheduled'          => 'تم جدوله الشحنه',
+
+
+
+
+    'countryFR'          => 'الدوله بالنرويجي',
+    'catFR'          => 'القسم بالنرويجي',
+    'subtitle_fr'          => 'العنوان الفرعي بالنرويجي',
+    'about_fr'          => 'من نحن بالنرويجي',
+    'term_fr'          => 'الشروط بالنرويجي',
+
+
+
+    'car_image' => 'صورة السيارة',
+    'driving_license' => 'رخصة قيادة',
+    'tax_return' => 'اقرار ضريبى',
+    'car_insurance' => 'تأمين السيارة',
+    'taxi_driver_license' => 'رخصة_سائق_تاكسي',
+    'bank_statement' => 'كشف حساب بنكى',
+    'identity' => 'هوية',
+    'company_certificate' => 'شهادة_شركة',
+    'taxi_license' => 'رخصة سيارة أجرة',
+    'carriage_card' => 'بطاقة النقل',
+    'logo' => 'اللوجو',
+
+    'download' => 'تحميل ملف PDF',
+
+
+    'on_site_trip' => 'تم الوصول الى موقع بدء الرحلة',
+    'on_site_order' => 'تم الوصول الى موقع بدء الشحنه',
+    'on_way' => 'فى الطريق اليك',
+
+    'company_name' => 'اسم الشركة',
+    'tax_record' => 'السجل الضريبي',
+
+    'review_added' => 'تم التقييم بنجاح',
+
+    'New_trip'       => 'جديدة',
+    'New_order'       => 'جديد',
+    'Underway_trip'  => 'قيد التنفيذ',
+    'completed_trip' => 'مكتملة',
+    'scheduled_trip' => 'مجدولة',
+    'cancel_trip'    => 'ملغية',
+    'The_balance_is_insufficient' => 'الرصيد غير كافى من فضلك اضف رصيد اولا',
+    'accept_Offer'  => 'مبروك تم قبول عرض السعر الخاص بك',
+    'order_received'=> 'السائق  استلم الشحنة',
+    'receiving_point' => 'السائق فى نقطة الاستلام',
+    'order_delivery_point'=> 'السائق فى نقطة تسليم الشحنة',
+    'order_details' => 'تفاصيل الشحنه/الطلب',
+
+    'photo_one' => 'اول صورة',
+    'photo_two' => 'ثانى صورة',
+    'photo_three' => 'ثالث صورة',
+    'app_order_percent' => 'نسبة التطبيق من الشحنه/الطلب',
+    'order_end_time' => 'وقت تسليم الشحنه /الطلب',
+    'no_driver_id' => 'لا يوجد سائق لهذه الرحلة',
+
+
+
 ];
-
-
-?>

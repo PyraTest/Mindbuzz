@@ -50,7 +50,6 @@
                         </div>
                     </li>
 
-
                     <li class="dropdown dropdown-lang nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span>

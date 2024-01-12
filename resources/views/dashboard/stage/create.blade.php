@@ -47,69 +47,25 @@ $active_links = ['sub_services' , 'addsub_services'];
 
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" action="{{route('admin.add_program')}}" method="post"
+                                    <form class="form" action="{{route('admin.add_stage')}}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="form-body">
 
 
-                                            <h4 class="form-section"><i class="ft-home"></i> بيانات خدمة فرعية </h4>
+                                            <h4 class="form-section"><i class="ft-home"></i> بيانات المدرسه </h4>
 
                                             <div class="row">
                                                
 
-                                                
-
+                            
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('admin.name') }}</label>
                                                         <input type="text" name="name"
-                                                            class="form-control"   required>
+                                                            class="form-control" required>
                                                         @error('name')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.courses') }}</label>
-                                                        <select name="course_id" id="" class="form-control" required>
-                                                            @foreach($courses as $course)
-                                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        
-                                                        @error('course_id')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.stages') }}</label>
-                                                        <select name="stage_id" id="" class="form-control" required>
-                                                            @foreach($stages as $stage)
-                                                            <option value="{{ $stage->id }}">{{ $stage->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        
-                                                        @error('stage_id')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.schools') }}</label>
-                                                        <select name="school_id" id="" class="form-control" required>
-                                                            @foreach($schools as $school)
-                                                            <option value="{{ $school->id }}">{{ $school->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        
-                                                        @error('school_id')
                                                         <span class="text-danger">{{$message}}</span>
                                                         @enderror
                                                     </div>

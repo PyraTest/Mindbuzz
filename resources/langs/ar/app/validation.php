@@ -6,7 +6,6 @@ return [
     'name_min'                                  => 'الاسم يجب ان يكون اكثر من ٣ حروف',
     'name_max'                                  => 'name must not be more than 3 charachters',
     'phone_required'                            => 'الهاتف مطلوب',
-    'country_required'                            => 'رقم البلد مطلوب',
     'phone_unique'                              => 'هذا الرقم مستخدم من قبل',
     'country_code_required'                     => 'كود الدولة مطلوب',
     'city_id_required'                          => 'المدينة مطلوبة',

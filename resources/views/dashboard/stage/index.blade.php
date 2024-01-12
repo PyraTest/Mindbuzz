@@ -49,7 +49,7 @@ $active_links = ['users' , 'showusers'];
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('admin/sidebar.main')}}</a>
                             </li>
-                            <li class="breadcrumb-item active"> {{__('admin.programs')}}
+                            <li class="breadcrumb-item active"> {{__('admin.users')}}
                             </li>
                         </ol>
                     </div>
@@ -64,7 +64,7 @@ $active_links = ['users' , 'showusers'];
                         <div class="card">
                             <div class="card-header">
 
-                                <h3 class="card-title">{{__('admin.programs')}}</h3>
+                                <h3 class="card-title">{{__('admin.users')}}</h3>
 
                                     <a class="heading-elements-toggle"><i
                                         class="la la-ellipsis-v font-medium-3"></i></a>
@@ -93,33 +93,31 @@ $active_links = ['users' , 'showusers'];
                                         <tr>
                                             <th>#</th>
                                             <th>{{ __('admin.name') }} </th>
-                                            <th>{{ __('admin.courses') }} </th>
-                                            <th>{{ __('admin.stages') }}</th>
-                                            <th>{{ __('admin.schools') }}</th>
-                                            {{--  <th>{{ __('admin.balance') }}</th>  --}}
-                                            {{-- <th>{{ __('admin.icon') }}</th> --}}
+                                            
                                             <th>{{ __('admin/forms.operations') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
-                                            @foreach($programs as $index => $program)
+                                            @foreach($stages as $index => $stage)
                                             
                                                 <tr>
                                                     <td class="text-info">{{$index + 1}}</td>
-                                                    <td class="text-info">{{$program->name}}</td>
-                                                    <td class="text-info">{{$program->course->name}}</td>
-                                                    <td class="text-info">{{$program->stage->name}}</td>
-                                                    <td class="text-info">{{$program->school->name}}</td>
+                                                    <td class="text-info">{{$stage->name}}</td>
                                                     
                                                     <!--<td class="text-info"></td>-->
                                                     
                                                     
-                                                    
-
+                              
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                             
+                                                            {{--  @if($user->type == '1')
+                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
+                                                                        class="btn btn-outline-danger box-shadow-3 mr-1 ">@lang('admin.inactive')</a>
+                                                            @else
+                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
+                                                                        class="btn btn-outline-primary box-shadow-3 mr-1 ">@lang('admin.active')</a>
+                                                            @endif  --}}
                                                             <a href="#"
                                                                 class="btn btn-info box-shadow-3 mr-1 "><i class="ft-edit"></i></a>
 
@@ -136,7 +134,7 @@ $active_links = ['users' , 'showusers'];
                                     </div>
 
                                     <div class="justify-content-center d-flex">
-                                        {!! $programs->appends(Request::except('page'))->render() !!}
+                                        {!! $stages->appends(Request::except('page'))->render() !!}
                                     </div>
                                 </div>
                             </div>
