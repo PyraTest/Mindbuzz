@@ -38,46 +38,59 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', 'Site\SiteController@index');
 
 Route::group([
-  'prefix' => LaravelLocalization::setLocale(),
-  'middleware' => ['localizationRedirect', 'localeViewPath'],
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localizationRedirect', 'localeViewPath'],
 ], function () {
-    
-    
-  Route::group(['prefix' => 'dashboard', 'namespace' => 'App\Http\Controllers\Dashboard'], function () {
-      
-    Route::get('/', 'DashboardController@index')->name('admin.dashboard')->middleware('adminauth:admin');
-    //Login process
-    Route::get('/login', 'AuthController@login')->name('admin.login');
-    Route::post('/do-login', 'AuthController@doLogin')->name('admin.doLogin');
-     Route::name('admin.')->middleware('adminauth:admin')->group(function () {
-        //Logout proccess
-        Route::get('/logout', 'AuthController@logout')->name('logout');
-        
+
+
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'App\Http\Controllers\Dashboard'], function () {
+
+        Route::get('/', 'DashboardController@index')->name('admin.dashboard')->middleware('adminauth:admin');
+        //Login process
+        Route::get('/login', 'AuthController@login')->name('admin.login');
+        Route::post('/do-login', 'AuthController@doLogin')->name('admin.doLogin');
+        Route::name('admin.')->middleware('adminauth:admin')->group(function () {
+            //Logout proccess
+            Route::get('/logout', 'AuthController@logout')->name('logout');
+        });
+
+
+        Route::group(['prefix' => 'program'], function () {
+            Route::get('/', 'DashboardController@getPrograms')->name('admin.programs');
+            Route::get('/create', 'DashboardController@createProgram')->name('admin.create_program');
+            Route::post('/store', 'DashboardController@addProgram')->name('admin.add_program');
+        });
+        Route::group(['prefix' => 'schools'], function () {
+            Route::get('/', 'DashboardController@getSchools')->name('admin.schools');
+            Route::get('/create', 'DashboardController@createSchool')->name('admin.create_school');
+            Route::post('/store', 'DashboardController@addSchool')->name('admin.add_school');
+        });
+        Route::group(['prefix' => 'courses'], function () {
+            Route::get('/', 'DashboardController@getCourses')->name('admin.courses');
+            Route::get('/create', 'DashboardController@createCourse')->name('admin.create_course');
+            Route::post('/store', 'DashboardController@addCourse')->name('admin.add_course');
+        });
+        Route::group(['prefix' => 'stages'], function () {
+            Route::get('/', 'DashboardController@getStages')->name('admin.stages');
+            Route::get('/create', 'DashboardController@createStage')->name('admin.create_stage');
+            Route::post('/store', 'DashboardController@addStage')->name('admin.add_stage');
+        });
+        Route::group(['prefix' => 'units'], function () {
+            Route::get('/', 'DashboardController@getUnits')->name('admin.units');
+            Route::get('/create', 'DashboardController@createUnit')->name('admin.create_unit');
+            Route::post('/store', 'DashboardController@addUnit')->name('admin.add_unit');
+            Route::get('/edit/{id}', 'DashboardController@editUnit')->name('admin.edit_unit');
+            Route::patch('/update/{id}', 'DashboardController@updateUnit')->name('admin.update_unit');
+            Route::delete('/delete/{id}', 'DashboardController@deleteUnit')->name('admin.delete_unit');
+        });
+
+        Route::group(['prefix' => 'tests'], function () {
+            Route::get('/', 'DashboardController@getTests')->name('admin.tests');
+            Route::get('/create', 'DashboardController@createTest')->name('admin.create_test');
+            Route::post('/store', 'DashboardController@addTest')->name('admin.add_test');
+            Route::get('/edit/{id}', 'DashboardController@editTest')->name('admin.edit_test');
+            Route::patch('/update/{id}', 'DashboardController@updateTest')->name('admin.update_test');
+            Route::delete('/delete/{id}', 'DashboardController@deleteTest')->name('admin.delete_test');
+        });
     });
-
-
-    Route::group(['prefix' => 'program'], function () {
-      Route::get('/', 'DashboardController@getPrograms')->name('admin.programs');
-      Route::get('/create', 'DashboardController@createProgram')->name('admin.create_program');
-      Route::post('/store', 'DashboardController@addProgram')->name('admin.add_program');
-  });
-    Route::group(['prefix' => 'schools'], function () {
-      Route::get('/', 'DashboardController@getSchools')->name('admin.schools');
-      Route::get('/create', 'DashboardController@createSchool')->name('admin.create_school');
-      Route::post('/store', 'DashboardController@addSchool')->name('admin.add_school');
-  });
-    Route::group(['prefix' => 'courses'], function () {
-      Route::get('/', 'DashboardController@getCourses')->name('admin.courses');
-      Route::get('/create', 'DashboardController@createCourse')->name('admin.create_course');
-      Route::post('/store', 'DashboardController@addCourse')->name('admin.add_course');
-  });
-    Route::group(['prefix' => 'stages'], function () {
-      Route::get('/', 'DashboardController@getStages')->name('admin.stages');
-      Route::get('/create', 'DashboardController@createStage')->name('admin.create_stage');
-      Route::post('/store', 'DashboardController@addStage')->name('admin.add_stage');
-  });
-
-    
-  });
 });
-
