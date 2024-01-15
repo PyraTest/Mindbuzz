@@ -47,30 +47,60 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.update_test', $tests->id) }}"
-                                            method="post" enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.update_ending', $endings->id) }}"
+                                            method="post">
                                             @csrf
                                             @method('PATCH')
 
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> تعديل النهاية </h4>
 
                                                 <div class="row">
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.programs') }}</label>
+                                                            <select name="program_id" class="form-control" id="">
+
+                                                                @foreach ($programs as $program)
+                                                                    <option
+                                                                        value="{{ $program->id }}"{{ $endings->program_id == $program->id ? 'selected' : '' }}>
+                                                                        {{ $program->name }}
+                                                                    </option>
+                                                                @endforeach
+
+                                                            </select>
+                                                            {{-- <input type="text" name="program_id" class="form-control"
+                                                                required value="{{ $benchmarks->program->name }}"> --}}
+                                                            @error('program_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.test') }}</label>
-                                                            <select name="type" id="" class="form-control">
-                                                                @foreach ($types as $type)
+                                                            <select name="test_id" id="" class="form-control">
+
+                                                                @foreach ($tests as $test)
                                                                     <option
-                                                                        value="{{ $type }}"{{ $type == $tests->type ? 'selected' : '' }}>
-                                                                        {{ \App\Models\Test::getTypeLabels()[$type] }}
+                                                                        value="{{ $test->id }}"{{ $endings->test_id == $test->id ? 'selected' : '' }}>
+                                                                        @if ($test->type == 0)
+                                                                            Test
+                                                                        @elseif ($test->type == 1)
+                                                                            Quiz
+                                                                        @else
+                                                                            Homework
+                                                                        @endif
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('type')
+                                                            @error('test_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>

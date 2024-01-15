@@ -47,7 +47,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.update_test', $tests->id) }}"
+                                        <form class="form" action="{{ route('admin.update_question', $questions->id) }}"
                                             method="post" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
@@ -55,22 +55,62 @@ $active_links = ['sub_services', 'addsub_services'];
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> تعديل السؤال </h4>
 
                                                 <div class="row">
 
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.number') }}</label>
+                                                            <input type="text" name="number" class="form-control"
+                                                                required value="{{ $questions->number }}">
+                                                            @error('number')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.question') }}</label>
+                                                            <input type="text" name="question" class="form-control"
+                                                                required value="{{ $questions->question }}">
+                                                            @error('question')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.answer') }}</label>
+                                                            <input type="text" name="answer" class="form-control"
+                                                                required value="{{ $questions->answer }}">
+                                                            @error('answer')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.test') }}</label>
-                                                            <select name="type" id="" class="form-control">
-                                                                @foreach ($types as $type)
+                                                            <select name="test_id" id="" class="form-control">
+
+                                                                @foreach ($tests as $test)
                                                                     <option
-                                                                        value="{{ $type }}"{{ $type == $tests->type ? 'selected' : '' }}>
-                                                                        {{ \App\Models\Test::getTypeLabels()[$type] }}
+                                                                        value="{{ $test->id }}"{{ $questions->test_id == $test->id ? 'selected' : '' }}>
+                                                                        @if ($test->type == 0)
+                                                                            Test
+                                                                        @elseif ($test->type == 1)
+                                                                            Quiz
+                                                                        @else
+                                                                            Homework
+                                                                        @endif
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('type')
+                                                            @error('test_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>

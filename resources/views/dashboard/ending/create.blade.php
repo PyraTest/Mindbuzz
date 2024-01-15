@@ -47,34 +47,53 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.update_test', $tests->id) }}"
-                                            method="post" enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.add_ending') }}" method="post"
+                                            enctype="multipart/form-data">
                                             @csrf
-                                            @method('PATCH')
 
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات النهاية </h4>
 
                                                 <div class="row">
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.test') }}</label>
-                                                            <select name="type" id="" class="form-control">
-                                                                @foreach ($types as $type)
-                                                                    <option
-                                                                        value="{{ $type }}"{{ $type == $tests->type ? 'selected' : '' }}>
-                                                                        {{ \App\Models\Test::getTypeLabels()[$type] }}
+                                                            <label>{{ __('admin.programs') }}</label>
+                                                            <select name="program_id" class="form-control" id="">
+                                                                @foreach ($programs as $program)
+                                                                    <option value="{{ $program->id }}">{{ $program->name }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('type')
+                                                            @error('program_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.test') }}</label>
+                                                            <select name="test_id" class="form-control" id="">
+                                                                @foreach ($tests as $test)
+                                                                    <option value="{{ $test->id }}">
+                                                                        @if ($test->type == 0)
+                                                                            test
+                                                                        @elseif ($test->type == 1)
+                                                                            quiz
+                                                                        @else
+                                                                            Homework
+                                                                        @endif
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('answer')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
 
                                                 </div>
 
@@ -88,7 +107,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> اضافة
                                                 </button>
                                             </div>
                                         </form>

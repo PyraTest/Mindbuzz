@@ -12,4 +12,12 @@ class Test extends Model
     const TYPE_QUIZ = 1;
     const TYPE_HOMEWORK = 2;
     protected $fillable = ['type']; // Adjust as needed
+    public static function getTypeLabels()
+    {
+        return [
+            self::TYPE_TEST => 'Test',
+            self::TYPE_QUIZ => 'Quiz',
+            self::TYPE_HOMEWORK => 'Homework',
+        ];
+    }
 }

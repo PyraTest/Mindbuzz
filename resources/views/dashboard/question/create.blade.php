@@ -47,30 +47,65 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.update_test', $tests->id) }}"
-                                            method="post" enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.add_question') }}" method="post"
+                                            enctype="multipart/form-data">
                                             @csrf
-                                            @method('PATCH')
 
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات السؤال </h4>
 
                                                 <div class="row">
 
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.numbers') }}</label>
+                                                            <input type="text" name="number" class="form-control"
+                                                                required>
+                                                            @error('number')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.question') }}</label>
+                                                            <input type="text" name="question" class="form-control"
+                                                                required>
+                                                            @error('question')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.answer') }}</label>
+                                                            <textarea name="answer" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                            @error('answer')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.test') }}</label>
-                                                            <select name="type" id="" class="form-control">
-                                                                @foreach ($types as $type)
-                                                                    <option
-                                                                        value="{{ $type }}"{{ $type == $tests->type ? 'selected' : '' }}>
-                                                                        {{ \App\Models\Test::getTypeLabels()[$type] }}
+                                                            <select name="test_id" id="" class="form-control">
+                                                                @foreach ($tests as $test)
+                                                                    <option value="{{ $test->id }}">
+                                                                        @if ($test->type == 0)
+                                                                            test
+                                                                        @elseif ($test->type == 1)
+                                                                            quiz
+                                                                        @else
+                                                                            Homework
+                                                                        @endif
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('type')
+                                                            @error('test_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
@@ -88,7 +123,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> اضافة
                                                 </button>
                                             </div>
                                         </form>

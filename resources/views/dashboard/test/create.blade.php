@@ -54,7 +54,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المادة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> انشاء اختبار </h4>
 
                                                 <div class="row">
 

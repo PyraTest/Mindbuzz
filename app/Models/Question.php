@@ -9,9 +9,9 @@ class Question extends Model
 {
     use HasFactory;
 
-
-    public function test(){
-        return $this->belongsTo(Test::class , 'test_id');
+    protected $guarded = [];
+    public function test()
+    {
+        return $this->belongsTo(Test::class, 'test_id');
     }
-
 }
