@@ -47,10 +47,9 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.update_test', $tests->id) }}"
-                                            method="post" enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.add_unit') }}" method="post"
+                                            enctype="multipart/form-data">
                                             @csrf
-                                            @method('PATCH')
 
                                             <div class="form-body">
 
@@ -58,20 +57,43 @@ $active_links = ['sub_services', 'addsub_services'];
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات المادة </h4>
 
                                                 <div class="row">
+
+
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.name') }}</label>
-                                                            <select name="type" id="" class="form-control">
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 0 ? 'selected' : ''}} value="0">Test</option>
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 1 ? 'selected' : ''}} value="1">Quiz</option>
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 2 ? 'selected' : ''}} value="2">Homework</option>
-                                                            </select>
+                                                            <input type="text" name="name" class="form-control"
+                                                                required>
                                                             @error('name')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                     
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.numbers') }}</label>
+                                                            <input type="text" name="number" class="form-control"
+                                                                required>
+                                                            @error('number')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.programs') }}</label>
+                                                            <select name="program_id" id="" class="form-control">
+                                                                @foreach ($programs as $program)
+                                                                <option value="{{$program->id}}">{{$program->name}}</option>
+
+                                                                @endforeach
+                                                            </select>
+                                                            @error('program_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
                                                 </div>
 
@@ -85,7 +107,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> اضافة
                                                 </button>
                                             </div>
                                         </form>

@@ -82,6 +82,16 @@ Route::group([
             Route::get('/edit/{id}', 'DashboardController@editUnit')->name('admin.edit_unit');
             Route::patch('/update/{id}', 'DashboardController@updateUnit')->name('admin.update_unit');
             Route::delete('/delete/{id}', 'DashboardController@deleteUnit')->name('admin.delete_unit');
+
+
+            // Journey Start
+            Route::get('/begin/{id}', 'DashboardController@getUnitBeginning')->name('admin.unit_begin');
+            Route::get('/create_begin/{id}', 'DashboardController@createUnitBeginning')->name('admin.create_unit_begin');
+            Route::post('/store_begin', 'DashboardController@storeUnitBeginning')->name('admin.store_unit_begin');
+            Route::get('/lessons/{id}', 'DashboardController@getUnitLessons')->name('admin.unit_lessons');
+            Route::get('/checkpoints/{id}', 'DashboardController@getUnitCheckpoint')->name('admin.unit_checkpoint');
+            Route::get('/end/{id}', 'DashboardController@getUnitEnding')->name('admin.unit_end');
+            // Journey End
         });
 
         Route::group(['prefix' => 'tests'], function () {
