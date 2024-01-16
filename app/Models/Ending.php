@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ending extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'program_id',
-        'test_id',
-    ];
+    protected $guarded = [];
     public function program()
     {
         return $this->belongsTo(Program::class, 'program_id');

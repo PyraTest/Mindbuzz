@@ -116,5 +116,13 @@ Route::group([
             Route::patch('/update/{id}', 'DashboardController@updateEnding')->name('admin.update_ending');
             Route::delete('/delete/{id}', 'DashboardController@deleteEnding')->name('admin.delete_ending');
         });
+        Route::group(['prefix' => 'beginnings'], function () {
+            Route::get('/', 'DashboardController@getBeginnings')->name('admin.beginnings');
+            Route::get('/create', 'DashboardController@createBeginning')->name('admin.create_beginning');
+            Route::post('/store', 'DashboardController@addBeginning')->name('admin.add_beginning');
+            Route::get('/edit/{id}', 'DashboardController@editBeginning')->name('admin.edit_beginning');
+            Route::patch('/update/{id}', 'DashboardController@updateBeginning')->name('admin.update_beginning');
+            Route::delete('/delete/{id}', 'DashboardController@deleteBeginning')->name('admin.delete_beginning');
+        });
     });
 });

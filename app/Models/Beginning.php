@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Beginning extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
-    public function program(){
-        return $this->belongsTo(Program::class , 'program_id');
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
-    public function test(){
-        return $this->belongsTo(Test::class , 'test_id');
+    public function test()
+    {
+        return $this->belongsTo(Test::class, 'test_id');
     }
 }
