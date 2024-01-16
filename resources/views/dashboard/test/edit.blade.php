@@ -55,23 +55,26 @@ $active_links = ['sub_services', 'addsub_services'];
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المادة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
 
                                                 <div class="row">
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.name') }}</label>
+                                                            <label>{{ __('admin.test') }}</label>
                                                             <select name="type" id="" class="form-control">
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 0 ? 'selected' : ''}} value="0">Test</option>
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 1 ? 'selected' : ''}} value="1">Quiz</option>
-                                                                <option {{ \App\Models\Test::find($tests->id)->type == 2 ? 'selected' : ''}} value="2">Homework</option>
+                                                                @foreach ($types as $type)
+                                                                    <option
+                                                                        value="{{ $type }}"{{ $type == $tests->type ? 'selected' : '' }}>
+                                                                        {{ \App\Models\Test::getTypeLabels()[$type] }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
-                                                            @error('name')
+                                                            @error('type')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                     
 
                                                 </div>
 

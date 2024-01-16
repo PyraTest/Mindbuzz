@@ -102,5 +102,29 @@ Route::group([
             Route::patch('/update/{id}', 'DashboardController@updateTest')->name('admin.update_test');
             Route::delete('/delete/{id}', 'DashboardController@deleteTest')->name('admin.delete_test');
         });
+        Route::group(['prefix' => 'questions'], function () {
+            Route::get('/', 'DashboardController@getQuestions')->name('admin.questions');
+            Route::get('/create', 'DashboardController@createQuestion')->name('admin.create_question');
+            Route::post('/store', 'DashboardController@addQuestion')->name('admin.add_question');
+            Route::get('/edit/{id}', 'DashboardController@editQuestion')->name('admin.edit_question');
+            Route::patch('/update/{id}', 'DashboardController@updateQuestion')->name('admin.update_question');
+            Route::delete('/delete/{id}', 'DashboardController@deleteQuestion')->name('admin.delete_question');
+        });
+        Route::group(['prefix' => 'benchmarks'], function () {
+            Route::get('/', 'DashboardController@getBenchmarks')->name('admin.benchmarks');
+            Route::get('/create', 'DashboardController@createBenchmark')->name('admin.create_benchmark');
+            Route::post('/store', 'DashboardController@addBenchmark')->name('admin.add_benchmark');
+            Route::get('/edit/{id}', 'DashboardController@editBenchmark')->name('admin.edit_benchmark');
+            Route::patch('/update/{id}', 'DashboardController@updateBenchmark')->name('admin.update_benchmark');
+            Route::delete('/delete/{id}', 'DashboardController@deleteBenchmark')->name('admin.delete_benchmark');
+        });
+        Route::group(['prefix' => 'endings'], function () {
+            Route::get('/', 'DashboardController@getEndings')->name('admin.endings');
+            Route::get('/create', 'DashboardController@createEnding')->name('admin.create_ending');
+            Route::post('/store', 'DashboardController@addEnding')->name('admin.add_ending');
+            Route::get('/edit/{id}', 'DashboardController@editEnding')->name('admin.edit_ending');
+            Route::patch('/update/{id}', 'DashboardController@updateEnding')->name('admin.update_ending');
+            Route::delete('/delete/{id}', 'DashboardController@deleteEnding')->name('admin.delete_ending');
+        });
     });
 });

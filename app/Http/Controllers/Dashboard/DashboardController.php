@@ -9,14 +9,17 @@ use DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\Advertisment;
+use App\Models\Benchmark;
 use App\Models\SalonReserve;
 use App\Models\Transaction;
 use App\Models\Sliders;
 use App\Models\Program;
 use App\Models\School;
 use App\Models\Course;
+use App\Models\Ending;
 use App\Models\Stage;
 use App\Models\Privacy;
+use App\Models\Question;
 use App\Models\Test;
 use App\Models\Unit;
 use App\Models\UnitBeginning;
@@ -207,18 +210,25 @@ class DashboardController extends Controller
     }
     public function editTest($id)
     {
-        $tests = Test::findOrFail($id);
-        return view('dashboard.test.edit')->with("tests", $tests);
+        $tests = Test::find($id);
+
+        if (!$tests) {
+            return redirect()->route('tests')->with('error', 'Test not found');
+        }
+
+        $types = Test::distinct('type')->pluck('type');
+
+        return view('dashboard.test.edit', compact('tests', 'types'));
     }
     public function updateTest(Request $request, $id)
     {
+
         $tests = Test::findOrFail($id);
         $data = $request->except('_token');
         $tests->update($data);
 
         return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
     }
-
     public function deleteTest(Request $request, $id)
     {
         try {
@@ -243,8 +253,193 @@ class DashboardController extends Controller
         // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
     }
 
-    //  Tests
+    //  End Tests
 
+
+
+    //  Questions
+    public function getQuestions()
+    {
+        $questions = Question::paginate(3);
+        return view('dashboard.question.index')->with("questions", $questions);
+    }
+    public function createQuestion()
+    {
+        $tests = Test::all();
+        return view('dashboard.question.create', compact("tests"));
+    }
+    public function addQuestion(Request $request)
+    {
+
+        $data = $request->except('_token');
+        $question = Question::create($data);
+
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editQuestion($id)
+    {
+        $questions = Question::findOrFail($id);
+        $tests = Test::all();
+        return view('dashboard.question.edit', compact("tests"))->with("questions", $questions);
+    }
+    public function updateQuestion(Request $request, $id)
+    {
+
+        $questions = Question::findOrFail($id);
+        $data = $request->except('_token');
+        $questions->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deleteQuestion(Request $request, $id)
+    {
+        try {
+            $question = Question::findOrFail($id);
+            $question->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End Questions
+
+
+    //  Benchmarks
+    public function getBenchmarks()
+    {
+        $benchmarks = Benchmark::paginate(3);
+        return view('dashboard.benchmark.index')->with("benchmarks", $benchmarks);
+    }
+    public function createBenchmark()
+    {
+        $programs = Program::all();
+        $tests = Test::all();
+        return view('dashboard.benchmark.create', compact("tests", "programs"));
+    }
+    public function addBenchmark(Request $request)
+    {
+
+        $data = $request->except('_token');
+        $benchmark = Benchmark::create($data);
+
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editBenchmark($id)
+    {
+        $benchmarks = Benchmark::findOrFail($id);
+        $programs = Program::all();
+        $tests = Test::all();
+
+        return view('dashboard.benchmark.edit', compact("programs", "tests"))->with("benchmarks", $benchmarks);
+    }
+    public function updateBenchmark(Request $request, $id)
+    {
+
+        $benchmarks = Benchmark::findOrFail($id);
+        $data = $request->except('_token');
+        $benchmarks->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deleteBenchmark(Request $request, $id)
+    {
+        try {
+            $benchmark = Benchmark::findOrFail($id);
+            $benchmark->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End Benchmarks
+    //  Benchmarks
+    public function getEndings()
+    {
+        $endings = Ending::paginate(3);
+        return view('dashboard.ending.index')->with("endings", $endings);
+    }
+    public function createEnding()
+    {
+        $programs = Program::all();
+        $tests = Test::all();
+        return view('dashboard.ending.create', compact("tests", "programs"));
+    }
+    public function addEnding(Request $request)
+    {
+
+
+        $data = $request->except('_token');
+        $ending = Ending::create($data);
+
+        DB::commit();
+
+        return redirect()->route("admin.endings")->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editEnding($id)
+    {
+        $endings = Ending::findOrFail($id);
+        $programs = Program::all();
+        $tests = Test::all();
+
+        return view('dashboard.ending.edit', compact("programs", "tests"))->with("endings", $endings);
+    }
+    public function updateEnding(Request $request, $id)
+    {
+
+        $endings = Ending::findOrFail($id);
+        $data = $request->except('_token');
+        $endings->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deleteEnding(Request $request, $id)
+    {
+        try {
+            $ending = Ending::findOrFail($id);
+            $ending->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End Benchmarks
 
 
 
