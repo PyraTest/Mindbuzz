@@ -9,8 +9,10 @@ class QuestionBank extends Model
 {
     use HasFactory;
 
-    
-    public function test(){
-        return $this->hasMany(Question::class , 'test_id');
+    protected $guarded = [];
+
+    public function test()
+    {
+        return $this->hasMany(Question::class, 'test_id');
     }
 }

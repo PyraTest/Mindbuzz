@@ -134,5 +134,13 @@ Route::group([
             Route::patch('/update/{id}', 'DashboardController@updateBeginning')->name('admin.update_beginning');
             Route::delete('/delete/{id}', 'DashboardController@deleteBeginning')->name('admin.delete_beginning');
         });
+        Route::group(['prefix' => 'revision'], function () {
+            Route::get('/', 'DashboardController@getRevisionQuestion')->name('admin.revision-question');
+            Route::get('/create', 'DashboardController@createRevisionQuestion')->name('admin.create_revision_question');
+            Route::post('/store', 'DashboardController@addRevisionQuestion')->name('admin.add_revision_question');
+            Route::get('/edit/{id}', 'DashboardController@editRevisionQuestion')->name('admin.edit_revision_question');
+            Route::patch('/update/{id}', 'DashboardController@updateRevisionQuestion')->name('admin.update_revision_question');
+            Route::delete('/delete/{id}', 'DashboardController@deleteRevisionQuestion')->name('admin.delete_revision_question');
+        });
     });
 });
