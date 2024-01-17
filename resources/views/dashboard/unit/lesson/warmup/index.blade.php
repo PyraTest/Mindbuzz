@@ -86,9 +86,8 @@ $active_links = ['users', 'showusers'];
                                     <div class="card-body card-dashboard">
 
 
-
                                         <div>
-                                            <a style="float:right;" href="{{ route('admin.create_unit_lesson', $id) }}"
+                                            <a style="float:right;" href="{{ route('admin.create_warmup') }}"
                                                 class="btn-lg btn-success  ">{{__('admin.add')}}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
@@ -96,18 +95,22 @@ $active_links = ['users', 'showusers'];
                                                     <tr>
                                                         <th>#</th>
                                                         <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
-                                                        
+                                                        <th>{{ __('admin.doc') }} </th>
+                                                        <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.video') }} </th>
 
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($lessons as $index => $lesson)
+                                                    @foreach ($warmups as $index => $warmup)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $lesson->name }}</td>
-                                                            <td class="text-info">{{ $lesson->number }}</td>
+                                                            <td class="text-info">{{ $warmup->name  }}</td>
+                                                            <td class="text-info"><a href="{{$warmup->doc}}" download >{{ __('admin.download') }}</a></td>
+                                                            <td class="text-info">{{ $warmup->test_id }}</td>
+                                                            <td class="text-info"> <a href="{{ $warmup->video }}" target="_blank">{{ $warmup->video }}</a></td>
 
                                                             <!--<td class="text-info"></td>-->
 
@@ -153,9 +156,9 @@ $active_links = ['users', 'showusers'];
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
+                                        {{-- <div class="justify-content-center d-flex">
                                             {!! $lessons->appends(Request::except('page'))->render() !!}
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

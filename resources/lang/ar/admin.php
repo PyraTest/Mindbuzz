@@ -33,6 +33,7 @@ return [
 'video' => 'فيديو',
 'msg' => 'الرساله',
 'author' => 'الكاتب',
+'warmup' => 'احماء', 
     'test' => ' الأختبار',
     'questions' => ' الاسئلة',
     'benchmark' => 'المعيار',

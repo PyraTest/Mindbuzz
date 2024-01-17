@@ -47,7 +47,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.store_unit_lesson') }}" method="post"
+                                        <form class="form" action="{{ route('admin.store_warmup') }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
 
@@ -60,6 +60,16 @@ $active_links = ['sub_services', 'addsub_services'];
 
 
 
+                                                    {{-- <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.name') }}</label>
+                                                            <input type="text" name="name" class="form-control"
+                                                                required>
+                                                            @error('name')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.name') }}</label>
@@ -72,38 +82,41 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.numbers') }}</label>
-                                                            <input type="text" name="number" class="form-control"
+                                                            <label>{{ __('admin.doc') }}</label>
+                                                            <input type="file" name="doc" class="form-control"
                                                                 required>
-                                                            @error('number')
+                                                            @error('doc')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.units') }}</label>
-                                                            <select name="unit_id" id="" class="form-control">
-                                                                @foreach ($units as $unit)
-                                                                <option value="{{$unit->id}}">{{$unit->name}}</option>
-
-                                                                @endforeach
-                                                            </select>
-                                                            @error('unit_id')
+                                                            <label>{{ __('admin.video') }}</label>
+                                                            <input type="text" name="video" class="form-control"
+                                                                required>
+                                                            @error('video')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.warmup') }}</label>
-                                                            <select name="warmup_id" id="" class="form-control">
-                                                                @foreach ($warmups as $warmup)
-                                                                <option value="{{$warmup->id}}">{{$warmup->name}}</option>
-
-                                                                @endforeach
+                                                            <label>{{ __('admin.tests') }}</label>
+                                                            <select name="test_id" id="" class="form-control">
+                                                                @foreach ($tests as $test)
+                                                                <option value="{{$test->id}}">
+                                                                @if ($test->type === \App\Models\Test::TYPE_TEST)
+                                                                    Test
+                                                                @elseif ($test->type === \App\Models\Test::TYPE_QUIZ)
+                                                                    Quiz
+                                                                @elseif ($test->type === \App\Models\Test::TYPE_HOMEWORK)
+                                                                    Homework
+                                                                @endif
+                                                            </option>
+                                                            @endforeach
                                                             </select>
-                                                            @error('warmup_id')
+                                                            @error('test_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>

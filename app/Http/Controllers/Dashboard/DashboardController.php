@@ -18,8 +18,11 @@ use App\Models\School;
 use App\Models\Course;
 use App\Models\Ending;
 use App\Models\Stage;
+use App\Models\Warmup;
 use App\Models\Privacy;
 use App\Models\Question;
+use App\Models\WarmupTest;
+use App\Models\WarmupVideos;
 use App\Models\Test;
 use App\Models\Unit;
 use App\Models\UnitBeginning;
@@ -124,6 +127,13 @@ class DashboardController extends Controller
         $tests = Test::all();
         return view('dashboard.unit.beginning.create',compact(['tests','id']));
     }
+    public function createUnitLesson($id)
+    {
+        $lessons = Lesson::all();
+        $units = Unit::all();
+        $warmups = Warmup::all();
+        return view('dashboard.unit.lesson.create',compact(['lessons','units','id','warmups']));
+    }
     public function storeUnitBeginning(Request $request)
     {
         // |mimes:mp4,mov,avi,wmv,avchd,webm,flv
@@ -185,6 +195,65 @@ class DashboardController extends Controller
     //  Units
 
     //  Tests
+    public function getWarmups()
+    {
+        $warmups = Warmup::join('warmup_videos','warmups.id','warmup_videos.warmup_id')
+        ->join('warmup_tests','warmups.id','warmup_tests.warmup_id')
+        ->join('tests','warmup_tests.test_id','tests.id')
+        ->select('*','warmups.id as id')
+        ->get();
+        return view('dashboard.unit.lesson.warmup.index',compact(["warmups"]));
+    }
+    public function createWarmup()
+    {
+        $tests = Test::all();
+        return view('dashboard.unit.lesson.warmup.create',compact(['tests']));
+    }
+    public function storeUnitLesson(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'number' => 'required',
+            'unit_id' => 'required',
+            'warmup_id' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+        Lesson::create($data);
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+
+    }
+    public function addWarmup(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'doc' => 'required|mimes:doc,pdf,docx,ppt,pptx,txt',
+            'test_id' => 'required',
+            'video' => 'required',
+        ]);
+        $warmup = new Warmup();
+        $warmup->name = $request->name;
+        $warmup->doc = $this->upploadImage($request->doc, 'uploads/documents');
+        // $warmup->doc = $request->doc;
+        $warmup->save();
+
+        $warmuptest = new WarmupTest;
+        $warmuptest->warmup_id = $warmup->id;
+        $warmuptest->test_id = $request->test_id;
+        $warmuptest->save();
+
+        $warmup_video = new WarmupVideos;
+        $warmup_video->video = $request->video;
+        $warmup_video->warmup_id = $warmup->id;
+        $warmup_video->save();
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
+
+
     public function getTests()
     {
         $tests = Test::paginate(3);
