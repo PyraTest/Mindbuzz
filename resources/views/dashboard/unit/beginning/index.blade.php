@@ -51,7 +51,7 @@ $active_links = ['users', 'showusers'];
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/sidebar.main') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin.users') }}
+                                <li class="breadcrumb-item active"> {{ __('admin.begin') }}
                                 </li>
                             </ol>
                         </div>
@@ -66,7 +66,7 @@ $active_links = ['users', 'showusers'];
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h3 class="card-title">{{ __('admin.users') }}</h3>
+                                    <h3 class="card-title">{{ __('admin.begin') }}</h3>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -88,6 +88,8 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
+                                            <a style="float:right;" href="{{ route('admin.create_unit_begin', $id) }}"
+                                                class="btn-lg btn-success  ">{{__('admin.add')}}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
@@ -103,18 +105,21 @@ $active_links = ['users', 'showusers'];
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($units as $index => $unit)
+                                                    @foreach ($beginnings as $index => $beginning)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $unit->name }}</td>
-                                                            <td class="text-info">{{ $unit->number }}</td>
-                                                            <td class="text-info">{{ $unit->program->name }}</td>
+                                                            <td class="text-info"> <a href="{{ $beginning->video }}" target="_blank">{{ $beginning->video }}</a></td>
+                                                            <td class="text-info">{{ $beginning->video_author }}</td>
+                                                            <td class="text-info">{{ $beginning->video_message }}</td>
+                                                            {{-- <td class="text-info">{{ $beginning->doc }}</td> --}}
+                                                            <td class="text-info"><a href="{{$beginning->doc}}" download >{{ __('admin.download') }}</a></td>
+                                                            <td class="text-info"><a href="{{$beginning->test}}" download >{{ __('admin.download') }}</a></td>
 
                                                             <!--<td class="text-info"></td>-->
 
 
 
-                                                            <td>
+                                                            {{-- <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
                                                                   
@@ -127,8 +132,8 @@ $active_links = ['users', 'showusers'];
                                                                             class="ft-delete"></i></a>
 
                                                                 </div>
-                                                            </td>
-                                                            <td>
+                                                            </td> --}}
+                                                            {{-- <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
                                                                   
@@ -146,7 +151,7 @@ $active_links = ['users', 'showusers'];
                                                                     
 
                                                                 </div>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                     @endforeach
 
@@ -155,7 +160,7 @@ $active_links = ['users', 'showusers'];
                                         </div>
 
                                         <div class="justify-content-center d-flex">
-                                            {!! $units->appends(Request::except('page'))->render() !!}
+                                            {!! $beginnings->appends(Request::except('page'))->render() !!}
                                         </div>
                                     </div>
                                 </div>

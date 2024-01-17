@@ -103,18 +103,18 @@ $active_links = ['users', 'showusers'];
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($units as $index => $unit)
+                                                    @foreach ($lessons as $index => $lesson)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $unit->name }}</td>
-                                                            <td class="text-info">{{ $unit->number }}</td>
-                                                            <td class="text-info">{{ $unit->program->name }}</td>
+                                                            <td class="text-info">{{ $lesson->name }}</td>
+                                                            <td class="text-info">{{ $lesson->number }}</td>
+                                                            <td class="text-info">{{ $lesson->program->name }}</td>
 
                                                             <!--<td class="text-info"></td>-->
 
 
 
-                                                            <td>
+                                                            {{-- <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
                                                                   
@@ -146,7 +146,7 @@ $active_links = ['users', 'showusers'];
                                                                     
 
                                                                 </div>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                     @endforeach
 
@@ -155,7 +155,7 @@ $active_links = ['users', 'showusers'];
                                         </div>
 
                                         <div class="justify-content-center d-flex">
-                                            {!! $units->appends(Request::except('page'))->render() !!}
+                                            {!! $lessons->appends(Request::except('page'))->render() !!}
                                         </div>
                                     </div>
                                 </div>

@@ -103,17 +103,17 @@ $active_links = ['users', 'showusers'];
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($units as $index => $unit)
+                                                    @foreach ($checkpoints as $index => $checkpoint)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $unit->name }}</td>
-                                                            <td class="text-info">{{ $unit->number }}</td>
-                                                            <td class="text-info">{{ $unit->program->name }}</td>
+                                                            <td class="text-info">{{ $checkpoint->name }}</td>
+                                                            <td class="text-info">{{ $checkpoint->number }}</td>
+                                                            <td class="text-info">{{ $checkpoint->program->name }}</td>
 
                                                             <!--<td class="text-info"></td>-->
 
 
-
+{{-- 
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
@@ -146,7 +146,7 @@ $active_links = ['users', 'showusers'];
                                                                     
 
                                                                 </div>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                     @endforeach
 
@@ -155,7 +155,7 @@ $active_links = ['users', 'showusers'];
                                         </div>
 
                                         <div class="justify-content-center d-flex">
-                                            {!! $units->appends(Request::except('page'))->render() !!}
+                                            {!! $checkpoints->appends(Request::except('page'))->render() !!}
                                         </div>
                                     </div>
                                 </div>

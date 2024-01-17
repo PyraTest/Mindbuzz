@@ -23,6 +23,10 @@ use App\Models\Privacy;
 use App\Models\Question;
 use App\Models\Test;
 use App\Models\Unit;
+use App\Models\UnitBeginning;
+use App\Models\UnitEnding;
+use App\Models\Lesson;
+use App\Models\UnitCheckpoint;
 use App\Traits\backendTraits;
 use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -78,16 +82,69 @@ class DashboardController extends Controller
     {
         return view('dashboard.stage.create');
     }
-    //  Units
+//  Units Start
     public function getUnits()
     {
         $units = Unit::paginate(3);
         return view('dashboard.unit.index', compact(['units']));
     }
+
+    public function getUnitBeginning($id)
+    {
+        $beginnings = UnitBeginning::where('unit_id',$id)->paginate(3);
+        return view('dashboard.unit.beginning.index', compact(['beginnings','id']));
+    }
+
+    public function getUnitLessons($id)
+    {
+        $lessons = Lesson::where('unit_id',$id)->paginate(3);
+        return view('dashboard.unit.lesson.index', compact(['lessons','id']));
+    }
+
+    public function getUnitCheckpoint($id)
+    {
+        $checkpoints = UnitCheckpoint::where('unit_id',$id)->paginate(3);
+        return view('dashboard.unit.checkpoint.index', compact(['checkpoints','id']));
+    }
+
+    public function getUnitEnding($id)
+    {
+        $endings = UnitEnding::where('unit_id',$id)->paginate(3);
+        return view('dashboard.unit.ending.index', compact(['endings','id']));
+    }
+// Unit end
+
+
     public function createUnit()
     {
         $programs = Program::all();
         return view('dashboard.unit.create')->with("programs", $programs);
+    }
+    public function createUnitBeginning($id)
+    {
+        $tests = Test::all();
+        return view('dashboard.unit.beginning.create',compact(['tests','id']));
+    }
+    public function storeUnitBeginning(Request $request)
+    {
+        // |mimes:mp4,mov,avi,wmv,avchd,webm,flv
+        $rules = [];
+        $request->validate([
+            'test_id' => 'required',
+            'video' => 'required',
+            'doc' => 'required|mimes:doc,pdf,docx,ppt,pptx,txt',
+            'test' => 'required|mimes:doc,pdf,docx,ppt,pptx,txt',
+        ]);
+
+        $data = $request->except('_token','doc','test');
+        $beginning = UnitBeginning::create($data);
+
+        $beginning->doc = $this->upploadImage($request->doc, 'uploads/documents');
+        $beginning->test = $this->upploadImage($request->test, 'uploads/assignments');
+            $beginning->update();
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
     }
     public function editUnit($id)
     {
