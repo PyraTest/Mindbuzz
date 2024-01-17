@@ -38,7 +38,11 @@ return [
     'questions' => ' الاسئلة',
     'benchmark' => 'المعيار',
     'ending' => ' النهاية',
-
+    'beginning' => ' البداية',
+    'video_author' => ' مؤلف الفيديو',
+    'video' => ' فيديو',
+    'video_message' => ' رسالة فيديو',
+    'documentation' => ' مستندات',
     'stages' => 'مراحل',
     'courses' => 'المواد',
     'programs' => 'البرامج',
@@ -46,6 +50,7 @@ return [
     'add_question' => 'اضافه سؤال',
     'add_benchmark' => 'اضافه معيار',
     'add_ending' => 'اضافة نهاية',
+    'add_beginning' => 'اضافة بداية',
 
     'next'  => 'التالي',
     'empty'  => 'تفريغ',

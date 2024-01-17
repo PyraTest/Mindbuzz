@@ -9,6 +9,7 @@ use DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\Advertisment;
+use App\Models\Beginning;
 use App\Models\Benchmark;
 use App\Models\SalonReserve;
 use App\Models\Transaction;
@@ -158,7 +159,8 @@ class DashboardController extends Controller
     public function editUnit($id)
     {
         $units = Unit::findOrFail($id);
-        return view('dashboard.unit.edit')->with("units", $units);
+        $programs = Program::all();
+        return view('dashboard.unit.edit', compact("programs"))->with("units", $units);
     }
     public function updateUnit(Request $request, $id)
     {
@@ -447,7 +449,8 @@ class DashboardController extends Controller
     }
 
     // End Benchmarks
-    //  Benchmarks
+
+    //  endings
     public function getEndings()
     {
         $endings = Ending::paginate(3);
@@ -508,8 +511,100 @@ class DashboardController extends Controller
         }
     }
 
-    // End Benchmarks
+    // End endings
 
+
+    //  beginnings
+    public function getBeginnings()
+    {
+        $beginnings = Beginning::paginate(3);
+        return view('dashboard.beginning.index')->with("beginnings", $beginnings);
+    }
+    public function createBeginning()
+    {
+        $programs = Program::all();
+        $tests = Test::all();
+        return view('dashboard.beginning.create', compact("tests", "programs"));
+    }
+    public function addBeginning(Request $request)
+    {
+
+
+        $data = $request->except('_token');
+        if ($request->hasFile('doc')) {
+            $documentationFile = $request->file('doc');
+            $documentationFileName = time() . "-" . "documentation" . '.' . $documentationFile->getClientOriginalExtension();
+            $documentationFile->move(public_path('assets/upload/documentation_files'), $documentationFileName);
+        }
+        if ($request->hasFile('test')) {
+            $testFile = $request->file('test');
+            $testFileName = time() . "-" . "test" . '.' . $testFile->getClientOriginalExtension();
+            $testFile->move(public_path('assets/upload/test_files'), $testFileName);
+        }
+        $data['doc'] = $documentationFileName;
+        $data['test'] = $testFileName;
+
+        $beginning = Beginning::create($data);
+
+        DB::commit();
+
+        return redirect()->route("admin.beginnings")->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editBeginning($id)
+    {
+        $beginnings = Beginning::findOrFail($id);
+        $programs = Program::all();
+        $tests = Test::all();
+
+        return view('dashboard.beginning.edit', compact("programs", "tests"))->with("beginnings", $beginnings);
+    }
+    public function updateBeginning(Request $request, $id)
+    {
+
+        $beginnings = Beginning::findOrFail($id);
+        $data = $request->except('_token');
+
+        $documentationFileName = null;
+        $testFileName = null;
+
+        if ($request->hasFile('doc')) {
+            $documentationFile = $request->file('doc');
+            $documentationFileName = time() . "-" . "documentation" . '.' . $documentationFile->getClientOriginalExtension();
+            $documentationFile->move(public_path('assets/upload/documentation_files'), $documentationFileName);
+            $data['doc'] = $documentationFileName;
+        }
+        if ($request->hasFile('test')) {
+            $testFile = $request->file('test');
+            $testFileName = time() . "-" . "test" . '.' . $testFile->getClientOriginalExtension();
+            $testFile->move(public_path('assets/upload/test_files'), $testFileName);
+            $data['test'] = $testFileName;
+        }
+        $beginnings->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deleteBeginning(Request $request, $id)
+    {
+        try {
+            $beginning = Beginning::findOrFail($id);
+            $beginning->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End beginnings
 
 
     public function addSchool(Request $request)
