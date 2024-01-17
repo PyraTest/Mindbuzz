@@ -56,7 +56,8 @@ return [
     'programs' => 'Programs',
     'add_program' => 'Add Program',
     'add_question' => 'Add question',
-
+'warmup' => 'Warmup',
+'add_warmup' => 'Add Warmup',
     'schools' => 'Schools',
     'ad_count' => 'Advertisment Count',
     'field_created_success' => ':name created successfully',

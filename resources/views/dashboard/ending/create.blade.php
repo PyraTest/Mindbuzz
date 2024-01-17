@@ -79,9 +79,9 @@ $active_links = ['sub_services', 'addsub_services'];
                                                                 @foreach ($tests as $test)
                                                                     <option value="{{ $test->id }}">
                                                                         @if ($test->type == 0)
-                                                                            test
+                                                                            Test
                                                                         @elseif ($test->type == 1)
-                                                                            quiz
+                                                                            Quiz
                                                                         @else
                                                                             Homework
                                                                         @endif

@@ -277,6 +277,30 @@
                 </ul>
             </li>
             {{-- End revision-question --}}
+                       {{-- Start warmup --}}
+                       <li class="nav-item  <?php if ($active_links[0] == 'users') {
+                        echo 'open';
+                    } ?> "><a href="">
+                            <i class="la la-group"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">{{ __('admin.warmup') }}</span>
+                            {{-- <span class="badge badge badge-success badge-pill float-right mr-2">Placeholder
+                            </span> --}}
+                        </a>
+                        <ul class="menu-content">
+                            <li class="<?php if ($active_links[1] === 'showusers') {
+                                echo 'active';
+                            } ?> "><a class="menu-item" href="{{ route('admin.warmup') }}"
+                                    data-i18n="nav.dash.ecommerce"> {{ __('admin.show_all') }} </a>
+                            </li>
+
+                            <li class="<?php if ($active_links[1] === 'addcities') {
+                                echo 'active';
+                            } ?>"><a class="menu-item" href="{{ route('admin.create_warmup') }}"
+                                    data-i18n="nav.dash.crypto">{{ __('admin.add_warmup') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- End warmup --}}
         </ul>
     </div>
 </div>

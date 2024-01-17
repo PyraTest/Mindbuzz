@@ -89,6 +89,8 @@ Route::group([
             Route::get('/create_begin/{id}', 'DashboardController@createUnitBeginning')->name('admin.create_unit_begin');
             Route::post('/store_begin', 'DashboardController@storeUnitBeginning')->name('admin.store_unit_begin');
             Route::get('/lessons/{id}', 'DashboardController@getUnitLessons')->name('admin.unit_lessons');
+            Route::get('/create_lesson/{id}', 'DashboardController@createUnitLesson')->name('admin.create_unit_lesson');
+            Route::post('/store_lesson', 'DashboardController@storeUnitLesson')->name('admin.store_unit_lesson');
             Route::get('/checkpoints/{id}', 'DashboardController@getUnitCheckpoint')->name('admin.unit_checkpoint');
             Route::get('/end/{id}', 'DashboardController@getUnitEnding')->name('admin.unit_end');
             // Journey End
@@ -141,6 +143,12 @@ Route::group([
             Route::get('/edit/{id}', 'DashboardController@editRevisionQuestion')->name('admin.edit_revision_question');
             Route::patch('/update/{id}', 'DashboardController@updateRevisionQuestion')->name('admin.update_revision_question');
             Route::delete('/delete/{id}', 'DashboardController@deleteRevisionQuestion')->name('admin.delete_revision_question');
+        });
+
+        Route::group(['prefix' => 'warmups'], function () {
+            Route::get('/', 'DashboardController@getWarmups')->name('admin.warmup');
+            Route::get('/create', 'DashboardController@createWarmup')->name('admin.create_warmup');
+            Route::post('/store', 'DashboardController@addWarmup')->name('admin.store_warmup');
         });
     });
 });
