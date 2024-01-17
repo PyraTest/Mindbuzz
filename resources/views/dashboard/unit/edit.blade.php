@@ -85,11 +85,11 @@ $active_links = ['sub_services', 'addsub_services'];
                                                         <div class="form-group">
                                                             <label>{{ __('admin.programs') }}</label>
                                                             <select name="program_id" id="" class="form-control">
-                                                                {{-- @foreach ($units as $unit) --}}
-                                                                <option
-                                                                    value="{{ $units->program_id }}"{{ $units->program_id == $units->program->id ? 'selected' : '' }}>
-                                                                    {{ $units->program->name }}</option>
-                                                                {{-- @endforeach --}}
+                                                                @foreach ($programs as $program)
+                                                                    <option
+                                                                        value="{{ $program->id }}"{{ $units->program_id == $program->id ? 'selected' : '' }}>
+                                                                        {{ $program->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                             @error('program_id')
                                                                 <span class="text-danger">{{ $message }}</span>

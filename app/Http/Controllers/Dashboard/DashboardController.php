@@ -92,7 +92,8 @@ class DashboardController extends Controller
     public function editUnit($id)
     {
         $units = Unit::findOrFail($id);
-        return view('dashboard.unit.edit')->with("units", $units);
+        $programs = Program::all();
+        return view('dashboard.unit.edit', compact("programs"))->with("units", $units);
     }
     public function updateUnit(Request $request, $id)
     {
