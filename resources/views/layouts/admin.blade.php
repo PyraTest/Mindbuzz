@@ -187,13 +187,11 @@
             function updateSelectOptions() {
                 $.ajax({
                     type: 'GET',
-                    url: "{{ route('get-question-banks') }}", // Replace with the route to fetch question banks
+                    url: "{{ route('get-question-banks') }}",
                     dataType: 'json',
                     success: function(questionBanks) {
-                        // Clear existing options
                         $('#bankSelect').empty();
 
-                        // Add updated options
                         $.each(questionBanks, function(index, questionBank) {
                             $('#bankSelect').append($('<option>', {
                                 value: questionBank.id,

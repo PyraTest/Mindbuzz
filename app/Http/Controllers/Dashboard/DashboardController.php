@@ -634,7 +634,6 @@ class DashboardController extends Controller
 
 
         $data = $request->except('_token');
-        // $data["bank_id"] = $bankId;
         $revisionQuestion = RevisionQuestionsBank::create($data);
 
 
