@@ -8,7 +8,6 @@
     <meta name="description" content="Steera.">
     <meta name="keywords" content="Wassal">
     <meta charset="utf-8">
-
     <meta name="author" content="PIXINVENT">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
@@ -98,7 +97,6 @@
     @include('dashboard.includes.footer')
 
 
-
     <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
@@ -160,8 +158,56 @@
 
 
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#addQuestionBankBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('create-question-bank') }}",
+                    dataType: 'json',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log('New question bank created with ID: ' + response.id);
+                        if (response.success) {
+                            $('#successMessage').html(response.success).show();
+                        }
+                        updateSelectOptions();
+                    },
+                    error: function(error) {
+                        console.log('Error creating question bank: ' + error.responseJSON
+                            .message);
+                    }
+                });
+            });
 
+            function updateSelectOptions() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('get-question-banks') }}", // Replace with the route to fetch question banks
+                    dataType: 'json',
+                    success: function(questionBanks) {
+                        // Clear existing options
+                        $('#bankSelect').empty();
+
+                        // Add updated options
+                        $.each(questionBanks, function(index, questionBank) {
+                            $('#bankSelect').append($('<option>', {
+                                value: questionBank.id,
+                                text: questionBank.id
+                            }));
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Error fetching question banks: ' + error.responseJSON.message);
+                    }
+                });
+            }
+        });
+    </script>
 
     <script>
         $('.delete').click(function(e) {

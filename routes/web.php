@@ -143,6 +143,8 @@ Route::group([
             Route::get('/edit/{id}', 'DashboardController@editRevisionQuestion')->name('admin.edit_revision_question');
             Route::patch('/update/{id}', 'DashboardController@updateRevisionQuestion')->name('admin.update_revision_question');
             Route::delete('/delete/{id}', 'DashboardController@deleteRevisionQuestion')->name('admin.delete_revision_question');
+            Route::post('/create-question-bank', 'DashboardController@createQuestionBank')->name('create-question-bank');
+            Route::get('/get-question-banks', 'DashboardController@getQuestionBanks')->name('get-question-banks');
         });
 
         Route::group(['prefix' => 'warmups'], function () {

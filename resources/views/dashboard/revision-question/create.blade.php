@@ -46,6 +46,11 @@ $active_links = ['sub_services', 'addsub_services'];
 
 
                                 <div class="card-content collapse show">
+                                    <div class="col-12 mb-4">
+                                        <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                                        <button id="addQuestionBankBtn" class="btn btn-success btn-question">Add question
+                                            bank</button>
+                                    </div>
                                     <div class="card-body">
                                         <form class="form" action="{{ route('admin.add_revision_question') }}"
                                             method="post" enctype="multipart/form-data">
@@ -57,6 +62,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات سؤال المراجعة </h4>
 
                                                 <div class="row">
+
 
 
 
@@ -92,8 +98,14 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="hidden" name="bank_id" class="form-control"
-                                                                required>
+                                                            <label>{{ __('admin.bank') }}</label>
+
+                                                            <select name="bank_id" id="bankSelect" class="form-control">
+                                                                @foreach ($questionBanks as $questionBank)
+                                                                    <option value="{{ $questionBank->id }}">
+                                                                        {{ $questionBank->id }}</option>
+                                                                @endforeach
+                                                            </select>
                                                             @error('bank_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -131,5 +143,6 @@ $active_links = ['sub_services', 'addsub_services'];
 @stop
 
 @section('script')
+
 
 @stop

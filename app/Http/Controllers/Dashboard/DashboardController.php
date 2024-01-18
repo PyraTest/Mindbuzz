@@ -135,7 +135,7 @@ class DashboardController extends Controller
         $lessons = Lesson::all();
         $units = Unit::all();
         $warmups = Warmup::all();
-        return view('dashboard.unit.lesson.create',compact(['lessons','units','id','warmups']));
+        return view('dashboard.unit.lesson.create', compact(['lessons', 'units', 'id', 'warmups']));
     }
     public function storeUnitBeginning(Request $request)
     {
@@ -201,19 +201,20 @@ class DashboardController extends Controller
     //  Tests
     public function getWarmups()
     {
-        $warmups = Warmup::join('warmup_videos','warmups.id','warmup_videos.warmup_id')
-        ->join('warmup_tests','warmups.id','warmup_tests.warmup_id')
-        ->join('tests','warmup_tests.test_id','tests.id')
-        ->select('*','warmups.id as id')
-        ->get();
-        return view('dashboard.unit.lesson.warmup.index',compact(["warmups"]));
+        $warmups = Warmup::join('warmup_videos', 'warmups.id', 'warmup_videos.warmup_id')
+            ->join('warmup_tests', 'warmups.id', 'warmup_tests.warmup_id')
+            ->join('tests', 'warmup_tests.test_id', 'tests.id')
+            ->select('*', 'warmups.id as id')
+            ->get();
+        return view('dashboard.unit.lesson.warmup.index', compact(["warmups"]));
     }
     public function createWarmup()
     {
         $tests = Test::all();
-        return view('dashboard.unit.lesson.warmup.create',compact(['tests']));
+        return view('dashboard.unit.lesson.warmup.create', compact(['tests']));
     }
-    public function storeUnitLesson(Request $request){
+    public function storeUnitLesson(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'number' => 'required',
@@ -226,7 +227,6 @@ class DashboardController extends Controller
         DB::commit();
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-
     }
     public function addWarmup(Request $request)
     {
@@ -619,26 +619,40 @@ class DashboardController extends Controller
     }
     public function createRevisionQuestion()
     {
-        return view('dashboard.revision-question.create');
+        $questionBanks = QuestionBank::all();
+        return view('dashboard.revision-question.create', compact("questionBanks"));
     }
     public function addRevisionQuestion(Request $request)
     {
-        $bankId = +1;
-        while (QuestionBank::where('id', $bankId)->exists()) {
-            // If it exists, increment and check again
-            $bankId++;
-        }
-        $Id = QuestionBank::create(['id' => $bankId]);
+        // $bankId = +1;
+        // while (QuestionBank::where('id', $bankId)->exists()) {
+        //     // If it exists, increment and check again
+        //     $bankId++;
+        // }
+        // $Id = QuestionBank::create(['id' => $bankId]);
 
 
 
         $data = $request->except('_token');
-        $data["bank_id"] = $bankId;
+        // $data["bank_id"] = $bankId;
         $revisionQuestion = RevisionQuestionsBank::create($data);
 
 
         DB::commit();
         return redirect()->route("admin.revision-question")->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function createQuestionBank(Request $request)
+    {
+        $questionBank = new QuestionBank();
+        $questionBank->save();
+
+        return response()->json(['id' => $questionBank->id, 'success' => __('admin/forms.added_successfully')]);
+    }
+    public function getQuestionBanks()
+    {
+        $questionBanks = QuestionBank::all();
+
+        return response()->json($questionBanks);
     }
 
     public function editRevisionQuestion($id)
