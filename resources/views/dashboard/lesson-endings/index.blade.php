@@ -88,82 +88,60 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
-                                            <a style="float:right;" href="{{ route('admin.create_unit_lesson', $id) }}"
-                                                class="btn-lg btn-success  ">{{ __('admin.add') }}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
-                                                        <th>{{ __('admin.journey') }}</th>
+                                                        <th>{{ __('admin.lessons') }} </th>
+                                                        <th>{{ __('admin.tests') }} </th>
+                                                        <th>{{ __('admin.homework') }} </th>
+                                                        <th>{{ __('admin.video') }} </th>
 
-
+                                                        <th>{{ __('admin/forms.operations') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($lessons as $index => $lesson)
+                                                    @foreach ($lessonEndings as $index => $lessonEnding)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $lesson->name }}</td>
-                                                            <td class="text-info">{{ $lesson->number }}</td>
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.presentation') }}</a>
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.warmup') }}</a>
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.end') }}</a>
-
-
-
-
-                                                                </div>
+                                                            <td class="text-info">{{ $lessonEnding->lesson->name }}</td>
+                                                            <td class="text-info">
+                                                                @if ($lessonEnding->test->type == 0)
+                                                                    Test
+                                                                @elseif ($lessonEnding->test->type == 1)
+                                                                    Quiz
+                                                                @else
+                                                                    Homework
+                                                                @endif
                                                             </td>
+                                                            <td class="text-info">{{ $lessonEnding->homework_id }}</td>
+                                                            <td class="text-info">
+                                                                <a href="{{ $lessonEnding->video }}"
+                                                                    target="_blank">{{ $lessonEnding->video }}</a>
+                                                            </td>
+
+
                                                             <!--<td class="text-info"></td>-->
 
 
 
-                                                            {{-- <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="{{ route('admin.edit_unit', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
-                                                                    <a href="{{ route('admin.delete_unit', $unit->id) }}"
-                                                                        class="delete btn btn-danger box-shadow-3 mr-1"
-                                                                        data-id="{{ $unit->id }}"><i
-                                                                            class="ft-delete"></i></a>
-
-                                                                </div>
-                                                            </td>
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
 
-                                                                    <a href="{{ route('admin.unit_begin', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.begin')}}</a>
+                                                                    <a href="{{ route('admin.edit_lesson_ending', $lessonEnding->id) }}"
+                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
+                                                                            class="ft-edit"></i></a>
 
-                                                                    <a href="{{ route('admin.unit_lessons', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.lessons')}}</a>
-
-                                                                    <a href="{{ route('admin.unit_checkpoint', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.checkpoint')}}</a>
-
-                                                                    <a href="{{ route('admin.unit_end', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.end')}}</a>
-
+                                                                    <a href="{{ route('admin.delete_lesson_ending', $lessonEnding->id) }}"
+                                                                        class="delete btn btn-danger box-shadow-3 mr-1"
+                                                                        data-id="{{ $lessonEnding->id }}"><i
+                                                                            class="ft-delete"></i></a>
 
                                                                 </div>
-                                                            </td> --}}
+                                                            </td>
                                                         </tr>
                                                     @endforeach
 
@@ -172,7 +150,7 @@ $active_links = ['users', 'showusers'];
                                         </div>
 
                                         <div class="justify-content-center d-flex">
-                                            {!! $lessons->appends(Request::except('page'))->render() !!}
+                                            {!! $lessonEndings->appends(Request::except('page'))->render() !!}
                                         </div>
                                     </div>
                                 </div>

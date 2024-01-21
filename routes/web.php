@@ -146,6 +146,22 @@ Route::group([
             Route::post('/create-question-bank', 'DashboardController@createQuestionBank')->name('create-question-bank');
             Route::get('/get-question-banks', 'DashboardController@getQuestionBanks')->name('get-question-banks');
         });
+        Route::group(['prefix' => 'presentations'], function () {
+            Route::get('/', 'DashboardController@getPresentations')->name('admin.presentations');
+            Route::get('/create', 'DashboardController@createPresentation')->name('admin.create_presentation');
+            Route::post('/store', 'DashboardController@addPresentation')->name('admin.add_presentation');
+            Route::get('/edit/{id}', 'DashboardController@editPresentation')->name('admin.edit_presentation');
+            Route::patch('/update/{id}', 'DashboardController@updatePresentation')->name('admin.update_presentation');
+            Route::delete('/delete/{id}', 'DashboardController@deletePresentation')->name('admin.delete_presentation');
+        });
+        Route::group(['prefix' => 'lesson-endings'], function () {
+            Route::get('/', 'DashboardController@getLessonEndings')->name('admin.lesson-endings');
+            Route::get('/create', 'DashboardController@createLessonEnding')->name('admin.create_lesson_ending');
+            Route::post('/store', 'DashboardController@addLessonEnding')->name('admin.add_lesson_ending');
+            Route::get('/edit/{id}', 'DashboardController@editLessonEnding')->name('admin.edit_lesson_ending');
+            Route::patch('/update/{id}', 'DashboardController@updateLessonEnding')->name('admin.update_lesson_ending');
+            Route::delete('/delete/{id}', 'DashboardController@deleteLessonEnding')->name('admin.delete_lesson_ending');
+        });
 
         Route::group(['prefix' => 'warmups'], function () {
             Route::get('/', 'DashboardController@getWarmups')->name('admin.warmup');

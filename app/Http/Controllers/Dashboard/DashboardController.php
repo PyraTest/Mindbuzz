@@ -31,6 +31,8 @@ use App\Models\Unit;
 use App\Models\UnitBeginning;
 use App\Models\UnitEnding;
 use App\Models\Lesson;
+use App\Models\LessonEnding;
+use App\Models\Presentation;
 use App\Models\UnitCheckpoint;
 use App\Traits\backendTraits;
 use App\Traits\HelpersTrait;
@@ -105,6 +107,7 @@ class DashboardController extends Controller
         $lessons = Lesson::where('unit_id', $id)->paginate(3);
         return view('dashboard.unit.lesson.index', compact(['lessons', 'id']));
     }
+
 
     public function getUnitCheckpoint($id)
     {
@@ -691,6 +694,134 @@ class DashboardController extends Controller
     }
 
     // End revision Question
+
+
+
+    //  Presentations
+    public function getPresentations()
+    {
+        $presentations = Presentation::paginate(3);
+        return view('dashboard.presentation.index')->with("presentations", $presentations);
+    }
+    public function createPresentation()
+    {
+        $lessons = Lesson::all();
+        return view('dashboard.presentation.create', compact("lessons"));
+    }
+    public function addPresentation(Request $request)
+    {
+
+
+        $data = $request->except('_token');
+        $presentations = Presentation::create($data);
+
+        DB::commit();
+
+        return redirect()->route("admin.presentations")->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editPresentation($id)
+    {
+        $presentations = Presentation::findOrFail($id);
+        $lessons = Lesson::all();
+
+        return view('dashboard.presentation.edit', compact("lessons"))->with("presentations", $presentations);
+    }
+    public function updatePresentation(Request $request, $id)
+    {
+
+        $presentations = Presentation::findOrFail($id);
+        $data = $request->except('_token');
+        $presentations->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deletePresentation(Request $request, $id)
+    {
+        try {
+            $presentation = Presentation::findOrFail($id);
+            $presentation->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End Presentations
+
+
+
+
+    //  lesson Endings
+    public function getLessonEndings()
+    {
+        $lessonEndings = LessonEnding::paginate(3);
+        return view('dashboard.lesson-endings.index')->with("lessonEndings", $lessonEndings);
+    }
+    public function createLessonEnding()
+    {
+        $lessons = Lesson::all();
+        $tests = Test::all();
+        $homeworks = Test::where("type", 2)->get();
+        return view('dashboard.lesson-endings.create', compact(["lessons", 'tests', 'homeworks']));
+    }
+    public function addLessonEnding(Request $request)
+    {
+        $data = $request->except('_token');
+        $lessonEndings = LessonEnding::create($data);
+
+        DB::commit();
+
+        return redirect()->route("admin.lesson-endings")->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function editLessonEnding($id)
+    {
+        $lessonEndings = LessonEnding::findOrFail($id);
+        $lessons = Lesson::all();
+        $tests = Test::all();
+        $homeworks = Test::where("type", 2)->get();
+        return view('dashboard.lesson-endings.edit', compact(["lessons", "tests", "homeworks"]))->with("lessonEndings", $lessonEndings);
+    }
+    public function updateLessonEnding(Request $request, $id)
+    {
+
+        $lessonEndings = LessonEnding::findOrFail($id);
+        $data = $request->except('_token');
+        $lessonEndings->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+    public function deleteLessonEnding(Request $request, $id)
+    {
+        try {
+            $lessonEndings = LessonEnding::findOrFail($id);
+            $lessonEndings->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+    }
+
+    // End lesson Endings
 
 
 

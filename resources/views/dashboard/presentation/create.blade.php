@@ -47,14 +47,14 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.store_unit_lesson') }}" method="post"
+                                        <form class="form" action="{{ route('admin.add_presentation') }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
 
                                             <div class="form-body">
 
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المادة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات العرض </h4>
 
                                                 <div class="row">
 
@@ -62,49 +62,43 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.name') }}</label>
-                                                            <input type="text" name="name" class="form-control"
-                                                                required>
-                                                            @error('name')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.numbers') }}</label>
-                                                            <input type="text" name="number" class="form-control"
-                                                                required>
-                                                            @error('number')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.units') }}</label>
-                                                            <select name="unit_id" id="" class="form-control">
-
-                                                                @foreach ($units as $unit)
-                                                                    <option value="{{ $unit->id }}">{{ $unit->name }}
+                                                            <label>{{ __('admin.lessons') }}</label>
+                                                            <select name="lesson_id" id="" class="form-control">
+                                                                @foreach ($lessons as $lesson)
+                                                                    <option value="{{ $lesson->id }}">
+                                                                        {{ $lesson->name }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('unit_id')
+                                                            @error('lesson_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.warmup') }}</label>
-                                                            <select name="warmup_id" id="" class="form-control">
-                                                                @foreach ($warmups as $warmup)
-                                                                    <option value="{{ $warmup->id }}">
-                                                                        {{ $warmup->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('warmup_id')
+                                                            <label>{{ __('admin.video') }}</label>
+                                                            <input type="text" name="video" class="form-control"
+                                                                required>
+                                                            @error('video')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.ppt') }}</label>
+                                                            <input type="text" name="ppt" class="form-control">
+                                                            @error('ppt')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.etool') }}</label>
+                                                            <input type="text" name="etool" class="form-control">
+                                                            @error('etool')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
