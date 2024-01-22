@@ -30,6 +30,7 @@ use App\Models\Test;
 use App\Models\Unit;
 use App\Models\UnitBeginning;
 use App\Models\UnitEnding;
+use App\Models\Choices;
 use App\Models\Lesson;
 use App\Models\LessonEnding;
 use App\Models\Presentation;
@@ -347,8 +348,47 @@ class DashboardController extends Controller
     public function addQuestion(Request $request)
     {
 
-        $data = $request->except('_token');
+        $data = $request->except(['_token','choice_ans','choice']);
         $question = Question::create($data);
+        if($request->type == 1){
+            foreach($request->choice as $index => $choice){
+                $new_choice = new Choices();
+                $new_choice->question_id = $question->id;
+                $new_choice->choice = $choice;
+                
+                
+                switch($request->choice_ans){
+                    case 'a':
+                        if($index == 0){
+                            $new_choice->answer_flag = 1;
+                        }else
+                        $new_choice->answer_flag = 0;
+                        break;
+                    case 'b':
+                        if($index == 1){
+                            $new_choice->answer_flag = 1;
+                        }else
+                        $new_choice->answer_flag = 0;
+                        break;
+                    case 'c':
+                        if($index == 2){
+                            $new_choice->answer_flag = 1;
+                        }else
+                        $new_choice->answer_flag = 0;
+                        break;
+                    case 'd':
+                        if($index == 3){
+                            $new_choice->answer_flag = 1;
+                        }else
+                        $new_choice->answer_flag = 0;
+                        break;
+
+                }
+
+                $new_choice->save();
+            }
+        }
+        
 
         DB::commit();
 

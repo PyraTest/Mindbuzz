@@ -9,8 +9,8 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="#">
                         {{--  <img class="brand-logo" alt="modern admin logo" src="{{getSettings('logo')->image_path}}">  --}}
-                        <img class="brand-logo" alt="wassal logo"
-                            src="{{asset('assets/front/images/logo-light.png')}}">
+                        <img class="brand-logo" alt=" logo"
+                            src="{{asset('assets/front/images/logo.png')}}">
                         <h3 class="brand-text">@lang('admin.app_name')</h3>
                     </a>
                 </li>

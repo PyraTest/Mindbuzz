@@ -80,10 +80,33 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" id="ans">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.answer') }}</label>
-                                                            <textarea name="answer" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                            <textarea name="answer" class="form-control" id="answer" cols="30" rows="10"></textarea>
+                                                            @error('answer')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" id="ans_choice" >
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.answer') }}</label>
+                                                            <select name="choice_ans" class="form-control" >
+                                                                
+                                                                <option value="a">
+                                                                    A
+                                                                </option>
+                                                                <option value="b">
+                                                                    B 
+                                                                </option>
+                                                                <option value="c">
+                                                                    C
+                                                                </option>
+                                                                <option value="d">
+                                                                    D
+                                                                </option>
+                                                        </select>
                                                             @error('answer')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -111,6 +134,89 @@ $active_links = ['sub_services', 'addsub_services'];
                                                         </div>
                                                     </div>
 
+
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.type') }}</label>
+                                                            <select name="type" id="type_id" class="form-control" >
+                                                                
+                                                                    <option value="0">
+                                                                        Complete question
+                                                                    </option>
+                                                                    <option value="1">
+                                                                        Choices 
+                                                                    </option>
+                                                                    <option value="2">
+                                                                        True / False
+                                                                    </option>
+                                                            </select>
+                                                            @error('type_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="choices" id="choices" style="width:100%">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.choice1') }}</label>
+                                                            <input type="text" id="a" name="choice[]" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.choice2') }}</label>
+                                                            <input type="text" id="b"  name="choice[]" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.choice3') }}</label>
+                                                            <input type="text" id="c"  name="choice[]" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.choice4') }}</label>
+                                                            <input type="text" id="d"  name="choice[]" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="complete" id="complete" style="width:100%">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.first_part') }}</label>
+                                                            <input type="text" name="first_part" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.second_part') }}</label>
+                                                            <input type="text" name="second_part" class="form-control"
+                                                                >
+                                                                
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                                 </div>
 
 

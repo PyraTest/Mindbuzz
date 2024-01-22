@@ -20,7 +20,7 @@
         rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin//plugins/animate/animate.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin//plugins/animate/animate.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/' . getFolder() . '/vendors.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/weather-icons/climacons.min.css') }}">
@@ -42,7 +42,7 @@
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/' . getFolder() . '/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/' . getFolder() . '/custom-rtl.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/' . getFolder() . '/custom-rtl.css') }}"> --}}
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css"
@@ -125,17 +125,18 @@
     <script src="{{ asset('assets/admin/js/scripts/pages/chat-application.js') }}" type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN MODERN JS-->
+    <script src="{{ asset('assets/admin/js/scripts.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/core/app-menu.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/core/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/scripts/customizer.js') }}" type="text/javascript"></script>
     <!-- END MODERN JS-->
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}" type="text/javascript"></script> --}}
 
 
-    <script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js') }}" type="text/javascript">
-    </script>
-    <script src="{{ asset('assets/admin/js/scripts/extensions/date-time-dropper.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js') }}" type="text/javascript"> --}}
+    {{-- </script> --}}
+    {{-- <script src="{{ asset('assets/admin/js/scripts/extensions/date-time-dropper.js') }}" type="text/javascript"></script> --}}
     <!-- END PAGE LEVEL JS-->
 
     <script src="{{ asset('assets/admin/js/scripts/forms/checkbox-radio.js') }}" type="text/javascript"></script>
@@ -315,7 +316,7 @@
 
 
 
-    <script>
+    {{-- <script>
         $('#meridians1').timeDropper({
             meridians: true,
             setCurrentTime: false
@@ -372,7 +373,7 @@
             meridians: true,
             setCurrentTime: false
         });
-    </script>
+    </script> --}}
 
     <script>
         // Preparing AJAX
@@ -385,14 +386,14 @@
 
     @yield('script')
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#example').dataTable({
                 /* Disable initial sort */
                 "order": []
             });
         })
-    </script>
+    </script> --}}
 
 
 </body>

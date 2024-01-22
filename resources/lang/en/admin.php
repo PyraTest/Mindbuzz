@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'app_name' => 'Wassal',
+    'app_name' => 'Mindbuzz',
     'home' => 'Home',
     'roles' => 'Roles',
     'role' => 'Role',
@@ -49,6 +49,12 @@ return [
     'video_author' => '  Author',
     'video' => ' video',
     'revision_question' => ' Revision question',
+    'choice1' => 'First Choice (A)',
+    'choice2' => 'Second Choice (B)',
+    'choice3' => 'Third Choice (C)',
+    'choice4' => 'Fourth Choice (D)',
+    'first_part' => 'First Part',
+    'second_part' => 'Second Part',
     'presentation' => ' Presentation',
     'lessonEndings' => ' Lesson endings',
     'video_message' => '  Message',
