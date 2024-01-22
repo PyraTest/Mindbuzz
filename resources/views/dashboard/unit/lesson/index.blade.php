@@ -113,13 +113,13 @@ $active_links = ['users', 'showusers'];
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
 
-                                                                    <a href="#"
+                                                                    <a href="{{route("admin.lesson_presentaion",$lesson->id)}}"
                                                                         class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.presentation') }}</a>
 
-                                                                    <a href="#"
+                                                                    <a href="{{route("admin.lesson_warmup" , $lesson->id)}}"
                                                                         class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.warmup') }}</a>
 
-                                                                    <a href="#"
+                                                                    <a href="{{route("admin.lesson_ending" , $lesson->id)}}"
                                                                         class="btn btn-info box-shadow-3 mr-1 ">{{ __('admin.end') }}</a>
 
 

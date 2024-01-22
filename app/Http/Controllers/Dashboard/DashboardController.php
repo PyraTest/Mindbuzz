@@ -108,6 +108,22 @@ class DashboardController extends Controller
         $lessons = Lesson::where('unit_id', $id)->paginate(3);
         return view('dashboard.unit.lesson.index', compact(['lessons', 'id']));
     }
+    public function getPresentation($id)
+    {
+        $presentations = Presentation::where('lesson_id', $id)->get();
+        return view('dashboard.unit.lesson.presentation.index', compact(['presentations', 'id']));
+    }
+    public function getLessonWarmup($id)
+    {
+        $lesson = Lesson::with('warmup')->find($id);
+        $warmups = Warmup::where('id', $lesson->warmup_id)->get();
+        return view('dashboard.unit.lesson.lesson-warmup.index', compact(['warmups', 'id']));
+    }
+    public function getEndOfLesson($id)
+    {
+        $lessonEndings = LessonEnding::where('lesson_id', $id)->get();
+        return view('dashboard.unit.lesson.lesson-ending.index', compact(['lessonEndings', 'id']));
+    }
 
 
     public function getUnitCheckpoint($id)
@@ -206,7 +222,8 @@ class DashboardController extends Controller
     public function getWarmups()
     {
         $warmups = Warmup::join('warmup_videos', 'warmups.id', 'warmup_videos.warmup_id')
-            ->join('warmup_tests', 'warmups.id', 'warmup_tests.warmup_id')
+            ->join('warmup_tests', 'warmups.id', 'warm
+            up_tests.warmup_id')
             ->join('tests', 'warmup_tests.test_id', 'tests.id')
             ->select('*', 'warmups.id as id')
             ->get();
@@ -651,9 +668,6 @@ class DashboardController extends Controller
 
     // End beginnings
 
-
-
-
     //  Revision questions
     public function getRevisionQuestion()
     {
@@ -735,8 +749,6 @@ class DashboardController extends Controller
 
     // End revision Question
 
-
-
     //  Presentations
     public function getPresentations()
     {
@@ -797,9 +809,6 @@ class DashboardController extends Controller
     }
 
     // End Presentations
-
-
-
 
     //  lesson Endings
     public function getLessonEndings()
@@ -863,13 +872,6 @@ class DashboardController extends Controller
 
     // End lesson Endings
 
-
-
-
-
-
-
-
     public function addSchool(Request $request)
     {
 
@@ -924,6 +926,7 @@ class DashboardController extends Controller
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
     }
+
     // Add unit
     public function addUnit(Request $request)
     {
