@@ -93,6 +93,10 @@ Route::group([
             Route::post('/store_lesson', 'DashboardController@storeUnitLesson')->name('admin.store_unit_lesson');
             Route::get('/checkpoints/{id}', 'DashboardController@getUnitCheckpoint')->name('admin.unit_checkpoint');
             Route::get('/end/{id}', 'DashboardController@getUnitEnding')->name('admin.unit_end');
+            Route::get('/lesson/presentations/{id}', 'DashboardController@getPresentation')->name('admin.lesson_presentaion');
+            Route::get('/lesson/warmups/{id}', 'DashboardController@getLessonWarmup')->name('admin.lesson_warmup');
+            Route::get('/lesson/lesson_ending/{id}', 'DashboardController@getEndOfLesson')->name('admin.lesson_ending');
+
             // Journey End
         });
 
