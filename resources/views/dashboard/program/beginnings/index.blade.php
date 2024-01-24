@@ -51,7 +51,7 @@ $active_links = ['users', 'showusers'];
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/sidebar.main') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin.programs') }}
+                                <li class="breadcrumb-item active"> {{ __('admin.users') }}
                                 </li>
                             </ol>
                         </div>
@@ -66,7 +66,7 @@ $active_links = ['users', 'showusers'];
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h3 class="card-title">{{ __('admin.programs') }}</h3>
+                                    <h3 class="card-title">{{ __('admin.users') }}</h3>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -89,53 +89,49 @@ $active_links = ['users', 'showusers'];
 
                                         <div>
                                             <table
-                                                class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
+                                                class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical table-responsive">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.courses') }} </th>
-                                                        <th>{{ __('admin.stages') }}</th>
-                                                        <th>{{ __('admin.schools') }}</th>
-                                                        {{--  <th>{{ __('admin.balance') }}</th>  --}}
-                                                        {{-- <th>{{ __('admin.icon') }}</th> --}}
-                                                        <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.views') }}</th>
+                                                        <th>{{ __('admin.video') }} </th>
+                                                        <th>{{ __('admin.video_author') }} </th>
+                                                        <th>{{ __('admin.video_message') }} </th>
+                                                        <th>{{ __('admin.documentation') }} </th>
+                                                        <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.programs') }} </th>
+                                                        <th>{{ __('admin.test') }} </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($programs as $index => $program)
+                                                    @foreach ($beginnings as $index => $beginning)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $program->name }}</td>
-                                                            <td class="text-info">{{ $program->course->name }}</td>
-                                                            <td class="text-info">{{ $program->stage->name }}</td>
-                                                            <td class="text-info">{{ $program->school->name }}</td>
-
-                                                            <!--<td class="text-info"></td>-->
-
-
-
-
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
-
-                                                                    <a href="#"
-                                                                        class="delete btn btn-danger box-shadow-3 mr-1 "><i
-                                                                            class="ft-delete"></i></a>
-
-                                                                </div>
+                                                            <td class="text-info"><a href="{{ $beginning->video }}"
+                                                                    target="_blank">{{ $beginning->video }}</a>
                                                             </td>
-                                                            <td class="text-info"><a
-                                                                    href="{{ route('admin.show_program', $program->id) }}"
-                                                                    class="btn btn-primary">View</a></td>
-
+                                                            <td class="text-info">{{ $beginning->video_author }}</td>
+                                                            <td class="text-info">{{ $beginning->video_message }}</td>
+                                                            <td class="text-info ">
+                                                                <a href="{{ asset('assets/upload/documentation_files') }}/{{ $beginning->doc }}"
+                                                                    target="_blank" class="text-decoration-underline">doumentation file</a>
+                                                            </td>
+                                                            <td class="text-info">
+                                                                <a href="{{ asset('assets/upload/test_files') }}/{{ $beginning->test }}"
+                                                                    target="_blank">Test file</a>
+                                                            </td>
+                                                            <td class="text-info">{{ $beginning->program->name }}</td>
+                                                            {{-- <td class="text-info">{{ $beginning->test_id }}</td> --}}
+                                                            <td class="text-info">
+                                                                @if ($beginning->test_id == 0)
+                                                                    Test
+                                                                @elseif ($beginning->test_id == 1)
+                                                                    Quiz
+                                                                @elseif ($beginning->test_id == 2)
+                                                                    Homework
+                                                                @endif
+                                                            </td>
+                                                           
                                                         </tr>
                                                     @endforeach
 
@@ -143,9 +139,7 @@ $active_links = ['users', 'showusers'];
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
-                                            {!! $programs->appends(Request::except('page'))->render() !!}
-                                        </div>
+                            
                                     </div>
                                 </div>
                             </div>

@@ -51,7 +51,7 @@ $active_links = ['users', 'showusers'];
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/sidebar.main') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin.programs') }}
+                                <li class="breadcrumb-item active"> {{ __('admin.users') }}
                                 </li>
                             </ol>
                         </div>
@@ -66,7 +66,7 @@ $active_links = ['users', 'showusers'];
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h3 class="card-title">{{ __('admin.programs') }}</h3>
+                                    <h3 class="card-title">{{ __('admin.users') }}</h3>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -93,49 +93,30 @@ $active_links = ['users', 'showusers'];
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.courses') }} </th>
-                                                        <th>{{ __('admin.stages') }}</th>
-                                                        <th>{{ __('admin.schools') }}</th>
-                                                        {{--  <th>{{ __('admin.balance') }}</th>  --}}
-                                                        {{-- <th>{{ __('admin.icon') }}</th> --}}
-                                                        <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.views') }}</th>
+                                                        <th>{{ __('admin.programs') }} </th>
+                                                        <th>{{ __('admin.test') }} </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($programs as $index => $program)
+                                                    @foreach ($endings as $index => $ending)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $program->name }}</td>
-                                                            <td class="text-info">{{ $program->course->name }}</td>
-                                                            <td class="text-info">{{ $program->stage->name }}</td>
-                                                            <td class="text-info">{{ $program->school->name }}</td>
+                                                            <td class="text-info">{{ $ending->program->name }}</td>
+                                                            <td class="text-info">
+                                                                @if ($ending->test->type == 0)
+                                                                    Test
+                                                                @elseif ($ending->test->type == 1)
+                                                                    Quiz
+                                                                @elseif ($ending->test->type == 2)
+                                                                    Homework
+                                                                @endif
+                                                            </td>
 
                                                             <!--<td class="text-info"></td>-->
 
 
-
-
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
-
-                                                                    <a href="#"
-                                                                        class="delete btn btn-danger box-shadow-3 mr-1 "><i
-                                                                            class="ft-delete"></i></a>
-
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-info"><a
-                                                                    href="{{ route('admin.show_program', $program->id) }}"
-                                                                    class="btn btn-primary">View</a></td>
-
+                                                         
                                                         </tr>
                                                     @endforeach
 
@@ -143,9 +124,6 @@ $active_links = ['users', 'showusers'];
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
-                                            {!! $programs->appends(Request::except('page'))->render() !!}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
