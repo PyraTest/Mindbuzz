@@ -100,6 +100,36 @@ class DashboardController extends Controller
         $schools = School::all();
         return view('dashboard.program.create', compact(['courses', 'stages', 'schools']));
     }
+    public function showProgram($id)
+    {
+        $programs = Program::find($id);
+        // $units = Unit::where("program_id", $id)->get();
+        return view('dashboard.program.show', compact('programs'));
+    }
+    public function showProgramUnits($id)
+    {
+        $units = Unit::where("program_id", $id)->get();
+        // dd($units);
+        return view('dashboard.program.units.index', compact(['units']));
+    }
+    public function showProgramBenchmarks($id)
+    {
+        $benchmarks = Benchmark::where("program_id", $id)->get();
+        // dd($units);
+        return view('dashboard.program.benchmarks.index', compact(['benchmarks']));
+    }
+    public function showProgramBeginnings($id)
+    {
+        $beginnings = Beginning::where("program_id", $id)->get();
+        // dd($units);
+        return view('dashboard.program.beginnings.index', compact(['beginnings' , 'id']));
+    }
+    public function showProgramEndings($id)
+    {
+        $endings = Ending::where("program_id", $id)->get();
+        // dd($units);
+        return view('dashboard.program.endings.index', compact(['endings' , 'id']));
+    }
     public function createSchool()
     {
         return view('dashboard.school.create');
@@ -112,6 +142,7 @@ class DashboardController extends Controller
     {
         return view('dashboard.stage.create');
     }
+
     //  Units Start
     public function getUnits()
     {
@@ -386,47 +417,46 @@ class DashboardController extends Controller
     public function addQuestion(Request $request)
     {
 
-        $data = $request->except(['_token','choice_ans','choice']);
+        $data = $request->except(['_token', 'choice_ans', 'choice']);
         $question = Question::create($data);
-        if($request->type == 1){
-            foreach($request->choice as $index => $choice){
+        if ($request->type == 1) {
+            foreach ($request->choice as $index => $choice) {
                 $new_choice = new Choices();
                 $new_choice->question_id = $question->id;
                 $new_choice->choice = $choice;
-                
-                
-                switch($request->choice_ans){
+
+
+                switch ($request->choice_ans) {
                     case 'a':
-                        if($index == 0){
+                        if ($index == 0) {
                             $new_choice->answer_flag = 1;
-                        }else
-                        $new_choice->answer_flag = 0;
+                        } else
+                            $new_choice->answer_flag = 0;
                         break;
                     case 'b':
-                        if($index == 1){
+                        if ($index == 1) {
                             $new_choice->answer_flag = 1;
-                        }else
-                        $new_choice->answer_flag = 0;
+                        } else
+                            $new_choice->answer_flag = 0;
                         break;
                     case 'c':
-                        if($index == 2){
+                        if ($index == 2) {
                             $new_choice->answer_flag = 1;
-                        }else
-                        $new_choice->answer_flag = 0;
+                        } else
+                            $new_choice->answer_flag = 0;
                         break;
                     case 'd':
-                        if($index == 3){
+                        if ($index == 3) {
                             $new_choice->answer_flag = 1;
-                        }else
-                        $new_choice->answer_flag = 0;
+                        } else
+                            $new_choice->answer_flag = 0;
                         break;
-
                 }
 
                 $new_choice->save();
             }
         }
-        
+
 
         DB::commit();
 

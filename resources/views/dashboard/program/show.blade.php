@@ -1,5 +1,5 @@
 <?php
-$active_links = ['program' , 'showusers'];
+$active_links = ['users', 'showusers'];
 ?>
 
 @extends('layouts.admin')
@@ -92,60 +92,32 @@ $active_links = ['program' , 'showusers'];
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.courses') }} </th>
-                                                        <th>{{ __('admin.stages') }}</th>
-                                                        <th>{{ __('admin.schools') }}</th>
-                                                        {{--  <th>{{ __('admin.balance') }}</th>  --}}
-                                                        {{-- <th>{{ __('admin.icon') }}</th> --}}
-                                                        <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.views') }}</th>
+                                                        <th>All</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('admin.show_program_beginnings', $programs->id) }}"
+                                                                class="btn btn-info">Beginnings</a>
+                                                            <a href="{{ route('admin.show_program_units', $programs->id) }}"
+                                                                class="btn btn-info">Unists</a>
+                                                            <a href="{{ route('admin.show_program_benchmarks', $programs->id) }}"
+                                                                class="btn btn-info">Benchmarks</a>
+                                                            <a href="{{ route('admin.show_program_endings', $programs->id) }}"
+                                                                class="btn btn-info">End of year</a>
+                                                        </td>
+                                                    </tr>
 
-                                                    @foreach ($programs as $index => $program)
-                                                        <tr>
-                                                            <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $program->name }}</td>
-                                                            <td class="text-info">{{ $program->course->name }}</td>
-                                                            <td class="text-info">{{ $program->stage->name }}</td>
-                                                            <td class="text-info">{{ $program->school->name }}</td>
-
-                                                            <!--<td class="text-info"></td>-->
-
-
-
-
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="#"
-                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
-
-                                                                    <a href="#"
-                                                                        class="delete btn btn-danger box-shadow-3 mr-1 "><i
-                                                                            class="ft-delete"></i></a>
-
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-info"><a
-                                                                    href="{{ route('admin.show_program', $program->id) }}"
-                                                                    class="btn btn-primary">View</a></td>
-
-                                                        </tr>
-                                                    @endforeach
 
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
+                                        {{-- <div class="justify-content-center d-flex">
                                             {!! $programs->appends(Request::except('page'))->render() !!}
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

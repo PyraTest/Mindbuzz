@@ -59,6 +59,11 @@ Route::group([
             Route::get('/', 'DashboardController@getPrograms')->name('admin.programs');
             Route::get('/create', 'DashboardController@createProgram')->name('admin.create_program');
             Route::post('/store', 'DashboardController@addProgram')->name('admin.add_program');
+            Route::get("/show/program/{id}", 'DashboardController@showProgram')->name('admin.show_program');
+            Route::get("/show/program/units/{id}", 'DashboardController@showProgramUnits')->name('admin.show_program_units');
+            Route::get("/show/program/benchmarks/{id}", 'DashboardController@showProgramBenchmarks')->name('admin.show_program_benchmarks');
+            Route::get("/show/program/beginnings/{id}", 'DashboardController@showProgramBeginnings')->name('admin.show_program_beginnings');
+            Route::get("/show/program/endings/{id}", 'DashboardController@showProgramEndings')->name('admin.show_program_endings');
         });
         Route::group(['prefix' => 'schools'], function () {
             Route::get('/', 'DashboardController@getSchools')->name('admin.schools');
