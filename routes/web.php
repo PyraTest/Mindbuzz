@@ -172,5 +172,11 @@ Route::group([
             Route::get('/create', 'DashboardController@createWarmup')->name('admin.create_warmup');
             Route::post('/store', 'DashboardController@addWarmup')->name('admin.store_warmup');
         });
+        Route::group(['prefix' => 'games'], function () {
+            Route::get('/', 'DashboardController@getGames')->name('admin.games');
+            Route::get('/create', 'DashboardController@createGame')->name('admin.create_game');
+            Route::post('/store', 'DashboardController@storeGame')->name('admin.store_game');
+            Route::post('/show/{id}', 'DashboardController@getGame')->name('admin.show_game');
+        });
     });
 });

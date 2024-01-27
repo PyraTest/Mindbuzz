@@ -35,6 +35,8 @@ use App\Models\Lesson;
 use App\Models\LessonEnding;
 use App\Models\Presentation;
 use App\Models\UnitCheckpoint;
+use App\Models\Game;
+use App\Models\GameType;
 use App\Traits\backendTraits;
 use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -48,19 +50,39 @@ class DashboardController extends Controller
         $schools = School::all();
         return view('dashboard.index', compact(['schools']));
     }
+    public function getGames(){
+        $games = Game::all();
+        return view('dashboard.games.index', compact(['games'])); 
+    }
+    public function getGame($id){
+        $game = Game::find($id);
+        return view('dashboard.games.show', compact(['game'])); 
+    }
 
+    public function createGame()
+    {
+        $lessons = Lesson::all();
+        $types = GameType::all();
+
+        return view('dashboard.games.create', compact(['lessons','types']));
+    }
+
+    public function storeGame(Request $request)
+    {
+
+        $data = $request->except('_token');
+        $program = Game::create($data);
+ 
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
     public function addProgram(Request $request)
     {
 
         $data = $request->except('_token');
         $program = Program::create($data);
-
-        // save photo category
-        // if ($request->hasFile('icon')) {
-        //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
-        //     $city->save();
-        // } // end of upload photo
-
+ 
         DB::commit();
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
@@ -222,8 +244,7 @@ class DashboardController extends Controller
     public function getWarmups()
     {
         $warmups = Warmup::join('warmup_videos', 'warmups.id', 'warmup_videos.warmup_id')
-            ->join('warmup_tests', 'warmups.id', 'warm
-            up_tests.warmup_id')
+            ->join('warmup_tests', 'warmups.id', 'warmup_tests.warmup_id')
             ->join('tests', 'warmup_tests.test_id', 'tests.id')
             ->select('*', 'warmups.id as id')
             ->get();

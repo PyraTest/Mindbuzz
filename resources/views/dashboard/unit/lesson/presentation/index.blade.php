@@ -1,5 +1,5 @@
 <?php
-$active_links = ['users', 'showusers'];
+$active_links = ['presentation', 'showusers'];
 ?>
 
 @extends('layouts.admin')

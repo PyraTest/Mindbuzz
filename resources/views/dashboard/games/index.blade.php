@@ -1,5 +1,5 @@
 <?php
-$active_links = ['stages' , 'showusers'];
+$active_links = ['courses' , 'showusers'];
 ?>
 
 @extends('layouts.admin')
@@ -99,25 +99,25 @@ $active_links = ['stages' , 'showusers'];
                                         </thead>
                                         <tbody>
 
-                                            @foreach($stages as $index => $stage)
+                                            @foreach($games as $index => $game)
                                             
                                                 <tr>
                                                     <td class="text-info">{{$index + 1}}</td>
-                                                    <td class="text-info">{{$stage->name}}</td>
+                                                    <td class="text-info">{{$game->name}}</td>
                                                     
                                                     <!--<td class="text-info"></td>-->
                                                     
                                                     
-                              
+{{--                               
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                            {{--  @if($user->type == '1')
+                                                             @if($user->type == '1')
                                                                 <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
                                                                         class="btn btn-outline-danger box-shadow-3 mr-1 ">@lang('admin.inactive')</a>
                                                             @else
                                                                 <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
                                                                         class="btn btn-outline-primary box-shadow-3 mr-1 ">@lang('admin.active')</a>
-                                                            @endif  --}}
+                                                            @endif 
                                                             <a href="#"
                                                                 class="btn btn-info box-shadow-3 mr-1 "><i class="ft-edit"></i></a>
 
@@ -125,7 +125,7 @@ $active_links = ['stages' , 'showusers'];
                                                                 class="delete btn btn-danger box-shadow-3 mr-1 "><i class="ft-delete"></i></a>
 
                                                         </div>
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                             @endforeach
 
@@ -133,9 +133,9 @@ $active_links = ['stages' , 'showusers'];
                                     </table>
                                     </div>
 
-                                    <div class="justify-content-center d-flex">
-                                        {!! $stages->appends(Request::except('page'))->render() !!}
-                                    </div>
+                                    {{-- <div class="justify-content-center d-flex">
+                                        {!! $games->appends(Request::except('page'))->render() !!}
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
