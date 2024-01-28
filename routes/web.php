@@ -62,10 +62,12 @@ Route::group([
             Route::get("/show/program/{id}", 'DashboardController@showProgram')->name('admin.show_program');
             Route::get("/show/program/units/{id}", 'DashboardController@showProgramUnits')->name('admin.show_program_units');
             Route::get("/show/program/view-unit/{id}", 'DashboardController@showProgramViewUnit')->name('admin.show_program_view_unit');
-            Route::get("/show/program/benchmarks/{id}", 'DashboardController@showProgramBenchmarks')->name('admin.show_program_benchmarks');
             Route::get("/show/program/beginnings/{id}", 'DashboardController@showProgramBeginnings')->name('admin.show_program_beginnings');
-            Route::get("/show/program/view-bigenning/{id}", 'DashboardController@showProgramViewBeginning')->name('admin.show_program_view_beginning');
+            Route::get("/show/program/view-beginning/{id}", 'DashboardController@showProgramViewBeginning')->name('admin.show_program_view_beginning');
+            Route::get("/show/program/benchmarks/{id}", 'DashboardController@showProgramBenchmarks')->name('admin.show_program_benchmarks');
+            Route::get("/show/program/view-benchmark/{id}", 'DashboardController@showProgramViewBenchmark')->name('admin.show_program_view_benchmark');
             Route::get("/show/program/endings/{id}", 'DashboardController@showProgramEndings')->name('admin.show_program_endings');
+            Route::get("/show/program/view-ending/{id}", 'DashboardController@showProgramViewEnding')->name('admin.show_program_view_ending');
         });
         Route::group(['prefix' => 'schools'], function () {
             Route::get('/', 'DashboardController@getSchools')->name('admin.schools');

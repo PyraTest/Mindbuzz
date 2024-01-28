@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->text('course');
             $table->bigInteger('school_id')->nullable()->unsigned();
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->bigInteger('course_id')->nullable()->unsigned();

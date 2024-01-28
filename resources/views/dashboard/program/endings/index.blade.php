@@ -95,6 +95,8 @@ $active_links = ['users', 'showusers'];
                                                         <th>#</th>
                                                         <th>{{ __('admin.programs') }} </th>
                                                         <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.views') }} </th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -111,6 +113,12 @@ $active_links = ['users', 'showusers'];
                                                                 @elseif ($ending->test->type == 2)
                                                                     Homework
                                                                 @endif
+                                                            </td>
+                                                            <td class="text-info">
+                                                                <a href="{{ route('admin.show_program_view_ending', $ending->id) }}"
+                                                                    class="btn-info btn   ">
+                                                                    <i class="fa-solid fa-eye"></i>
+                                                                </a>
                                                             </td>
 
                                                             <!--<td class="text-info"></td>-->

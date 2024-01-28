@@ -51,7 +51,7 @@ $active_links = ['users', 'showusers'];
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/sidebar.main') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin.users') }}
+                                <li class="breadcrumb-item active"> {{ __('admin.begin') }}
                                 </li>
                             </ol>
                         </div>
@@ -66,7 +66,7 @@ $active_links = ['users', 'showusers'];
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h3 class="card-title">{{ __('admin.users') }}</h3>
+                                    <h3 class="card-title">{{ __('admin.begin') }}</h3>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -88,39 +88,39 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
+                                            <a style="float:right;" href="{{ route('admin.create_ending', $id) }}"
+                                                class="btn-lg btn-success  ">{{ __('admin.add') }}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
                                                         <th>{{ __('admin.programs') }} </th>
+                                                        <th>{{ __('admin.test') }} </th>
 
-                                                        <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.journey') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td class="text-info">{{ $endings->id }}</td>
+                                                        <td class="text-info">{{ $endings->program->name }}</td>
+                                                        <td class="text-info">
+                                                            @if ($endings->test->type == 0)
+                                                                Test
+                                                            @elseif ($endings->test->type == 1)
+                                                                Quiz
+                                                            @elseif ($endings->test->type == 2)
+                                                                Homework
+                                                            @endif
+                                                        </td>
 
-                                                    @foreach ($endings as $index => $ending)
-                                                        <tr>
-                                                            <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $ending->name }}</td>
-                                                            <td class="text-info">{{ $ending->number }}</td>
-                                                            <td class="text-info">{{ $ending->program->name }}</td>
-
-                                                          
-                                                        </tr>
-                                                    @endforeach
+                                                    </tr>
 
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
-                                            {!! $endings->appends(Request::except('page'))->render() !!}
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

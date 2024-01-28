@@ -60,6 +60,12 @@
         href="{{ asset('assets/admin/vendors/css/extensions/timedropper.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css') }}">
+
+    {{-- Image uploader --}}
+    <link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css">
+    {{-- Image uploader --}}
+
+
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -146,8 +152,6 @@
 
 
 
-
-
     {{--
     <script src="{{asset('assets/admin/js/scripts/charts/google/line/line.js')}}"></script>
     <script src="{{asset('assets/admin/js/scripts/charts/google/line/line-interval.js')}}"></script>
@@ -161,6 +165,12 @@
 
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    {{-- Image uploader --}}
+
+    <script type="text/javascript" src="http://example.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://example.com/image-uploader.min.js"></script>
+
+    {{-- Image uploader --}}
 
     <script>
         $(document).ready(function() {
@@ -206,6 +216,11 @@
                     }
                 });
             }
+            $('#letter_images').imageUploader({
+                // preloaded: photos,
+                // imagesInputName: 'photos',
+                label: 'Drag & Drop images here or click to browse'
+            });
         });
     </script>
 

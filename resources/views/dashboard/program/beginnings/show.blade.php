@@ -88,7 +88,7 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
-                                            <a style="float:right;" href="{{ route('admin.create_unit_begin', $id) }}"
+                                            <a style="float:right;" href="{{ route('admin.create_beginning', $id) }}"
                                                 class="btn-lg btn-success  ">{{__('admin.add')}}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">

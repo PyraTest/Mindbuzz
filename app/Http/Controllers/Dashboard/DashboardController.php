@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
+use App\Models\GameLetter;
 use App\Models\QuestionBank;
 use App\Models\RevisionQuestionsBank;
 use Illuminate\Http\Request;
@@ -50,13 +51,16 @@ class DashboardController extends Controller
         $schools = School::all();
         return view('dashboard.index', compact(['schools']));
     }
-    public function getGames(){
+    // Start Game
+    public function getGames()
+    {
         $games = Game::all();
-        return view('dashboard.games.index', compact(['games'])); 
+        return view('dashboard.games.index', compact(['games']));
     }
-    public function getGame($id){
+    public function getGame($id)
+    {
         $game = Game::find($id);
-        return view('dashboard.games.show', compact(['game'])); 
+        return view('dashboard.games.show', compact(['game']));
     }
 
     public function createGame()
@@ -64,25 +68,47 @@ class DashboardController extends Controller
         $lessons = Lesson::all();
         $types = GameType::all();
 
-        return view('dashboard.games.create', compact(['lessons','types']));
+        return view('dashboard.games.create', compact(['lessons', 'types']));
     }
 
     public function storeGame(Request $request)
     {
 
-        $data = $request->except('_token');
-        $program = Game::create($data);
- 
+        $data = $request->except('_token' , 'letter');
+
+        $game = Game::create($data);
+        $letters = $request->letter;
+        $arr =[];
+        foreach ($letters as $letter) {
+            $i =0 ;
+            while($i<$request->num_of_letter_repeat){
+                array_push($arr,$letter);
+                $i++;
+                $newGameLetter = new GameLetter();
+                $newGameLetter->game_id = $game->id;
+                $newGameLetter->letter = $letter;
+                $newGameLetter->save();
+            }
+
+        }
+        
+
         DB::commit();
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
     }
+
+
+    // End Game
+
+
+    // Program journy
     public function addProgram(Request $request)
     {
 
         $data = $request->except('_token');
         $program = Program::create($data);
- 
+
         DB::commit();
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
@@ -127,19 +153,32 @@ class DashboardController extends Controller
     {
         $beginnings = Beginning::where("program_id", $id)->get();
         // dd($units);
-        return view('dashboard.program.beginnings.index', compact(['beginnings' , 'id']));
+        return view('dashboard.program.beginnings.index', compact(['beginnings', 'id']));
     }
     public function showProgramViewBeginning($id)
     {
         $beginnings = Beginning::findOrFail($id);
-        return view('dashboard.program.beginnings.show', compact(['beginnings' , 'id']));
+        return view('dashboard.program.beginnings.show', compact(['beginnings', 'id']));
+    }
+    public function showProgramViewBenchmark($id)
+    {
+        $benchmarks = Benchmark::findOrFail($id);
+        return view('dashboard.program.benchmarks.show', compact(['benchmarks', 'id']));
+    }
+    public function showProgramViewEnding($id)
+    {
+        $endings = Ending::findOrFail($id);
+        return view('dashboard.program.endings.show', compact(['endings', 'id']));
     }
     public function showProgramEndings($id)
     {
         $endings = Ending::where("program_id", $id)->get();
         // dd($units);
-        return view('dashboard.program.endings.index', compact(['endings' , 'id']));
+        return view('dashboard.program.endings.index', compact(['endings', 'id']));
     }
+
+    // End Program journy
+
 
     public function createSchool()
     {

@@ -96,6 +96,8 @@ $active_links = ['users', 'showusers'];
                                                         <th>{{ __('admin.numbers') }} </th>
                                                         <th>{{ __('admin.programs') }} </th>
                                                         <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.views') }} </th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -113,6 +115,12 @@ $active_links = ['users', 'showusers'];
                                                                 @elseif ($benchmark->test->type == 2)
                                                                     Homework
                                                                 @endif
+                                                            </td>
+                                                            <td class="text-info">
+                                                                <a href="{{ route('admin.show_program_view_benchmark', $benchmark->id) }}"
+                                                                    class="btn-info btn   ">
+                                                                    <i class="fa-solid fa-eye"></i>
+                                                                </a>
                                                             </td>
 
                                                             <!--<td class="text-info"></td>-->
