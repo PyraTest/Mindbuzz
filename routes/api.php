@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::group(['namespace' => 'Api', 'prefix' => 'game'], function () {
+    Route::get('/get_games_by_type/{id}', 'GameController@getGamesByType');
+    Route::get('/game_info/{id}', 'GameController@indexGame');
+    Route::post('/attempt', 'GameController@attempt');
+    // Route::post('/login', 'AuthController@login');
+    // Route::post('/salon-login', 'AuthController@salonLogin');
+
 });

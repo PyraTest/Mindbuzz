@@ -163,37 +163,12 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             <label>{{ __('admin.choice1') }}</label>
                                                             <input type="text" id="a" name="choice[]" class="form-control"
                                                                 >
+                                                                <button class="btn-lg btn-primary">+</button>
                                                                 
                                                             
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.choice2') }}</label>
-                                                            <input type="text" id="b"  name="choice[]" class="form-control"
-                                                                >
-                                                                
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.choice3') }}</label>
-                                                            <input type="text" id="c"  name="choice[]" class="form-control"
-                                                                >
-                                                                
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.choice4') }}</label>
-                                                            <input type="text" id="d"  name="choice[]" class="form-control"
-                                                                >
-                                                                
-                                                            
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
 
                                                 <div class="complete" id="complete" style="width:100%">
