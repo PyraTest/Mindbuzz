@@ -89,7 +89,7 @@ $active_links = ['users', 'showusers'];
 
                                         <div>
                                             <table
-                                                class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical table-responsive">
+                                                class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -100,6 +100,7 @@ $active_links = ['users', 'showusers'];
                                                         <th>{{ __('admin.test') }} </th>
                                                         <th>{{ __('admin.programs') }} </th>
                                                         <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.views') }} </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -114,7 +115,8 @@ $active_links = ['users', 'showusers'];
                                                             <td class="text-info">{{ $beginning->video_message }}</td>
                                                             <td class="text-info ">
                                                                 <a href="{{ asset('assets/upload/documentation_files') }}/{{ $beginning->doc }}"
-                                                                    target="_blank" class="text-decoration-underline">doumentation file</a>
+                                                                    target="_blank"
+                                                                    class="text-decoration-underline">doumentation file</a>
                                                             </td>
                                                             <td class="text-info">
                                                                 <a href="{{ asset('assets/upload/test_files') }}/{{ $beginning->test }}"
@@ -131,7 +133,12 @@ $active_links = ['users', 'showusers'];
                                                                     Homework
                                                                 @endif
                                                             </td>
-                                                           
+                                                            <td class="text-info">
+                                                                <a href="{{ route('admin.show_program_view_beginning', $beginning->id) }}"
+                                                                    class="btn-info btn   ">
+                                                                    <i class="fa-solid fa-eye"></i>
+                                                                </a>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
 
@@ -139,7 +146,7 @@ $active_links = ['users', 'showusers'];
                                             </table>
                                         </div>
 
-                            
+
                                     </div>
                                 </div>
                             </div>

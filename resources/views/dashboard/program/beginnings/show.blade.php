@@ -51,7 +51,7 @@ $active_links = ['users', 'showusers'];
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/sidebar.main') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin.users') }}
+                                <li class="breadcrumb-item active"> {{ __('admin.begin') }}
                                 </li>
                             </ol>
                         </div>
@@ -66,7 +66,7 @@ $active_links = ['users', 'showusers'];
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h3 class="card-title">{{ __('admin.users') }}</h3>
+                                    <h3 class="card-title">{{ __('admin.begin') }}</h3>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -88,43 +88,42 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
+                                            <a style="float:right;" href="{{ route('admin.create_unit_begin', $id) }}"
+                                                class="btn-lg btn-success  ">{{__('admin.add')}}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
-                                                        <th>{{ __('admin.programs') }} </th>
+                                                        <th>{{ __('admin.video') }} </th>
+                                                        <th>{{ __('admin.video_author') }} </th>
+                                                        <th>{{ __('admin.message') }} </th>
+                                                        <th>{{ __('admin.doc') }} </th>
+                                                        <th>{{ __('admin.tests') }} </th>
 
-                                                        <th>{{ __('admin.views') }} </th>
+                                                        {{-- <th>{{ __('admin/forms.operations') }}</th> --}}
+                                                        {{-- <th>{{ __('admin.journey') }}</th> --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($units as $index => $unit)
                                                         <tr>
-                                                            <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $unit->name }}</td>
-                                                            <td class="text-info">{{ $unit->number }}</td>
-                                                            <td class="text-info">{{ $unit->program->name }}</td>
+                                                            <td class="text-info">{{ $beginnings->id }}</td>
+                                                            <td class="text-info"> <a href="{{ $beginnings->video }}" target="_blank">{{ $beginnings->video }}</a></td>
+                                                            <td class="text-info">{{ $beginnings->video_author }}</td>
+                                                            <td class="text-info">{{ $beginnings->video_message }}</td>
+                                                            {{-- <td class="text-info">{{ $beginning->doc }}</td> --}}
+                                                            <td class="text-info"><a href="{{$beginnings->doc}}" download >{{ __('admin.download') }}</a></td>
+                                                            <td class="text-info"><a href="{{$beginnings->test}}" download >{{ __('admin.download') }}</a></td>
+
                                                            
-                                                            <td class="text-info">
-                                                                <a href="{{ route('admin.show_program_view_unit', $unit->id) }}"
-                                                                    class="btn-info btn   ">
-                                                                    <i class="fa-solid fa-eye"></i>
-                                                                </a>
-                                                            </td>
-
-
-
                                                         </tr>
-                                                    @endforeach
 
                                                 </tbody>
                                             </table>
                                         </div>
 
+                                      
                                     </div>
                                 </div>
                             </div>

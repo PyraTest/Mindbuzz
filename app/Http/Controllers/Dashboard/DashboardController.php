@@ -87,9 +87,14 @@ class DashboardController extends Controller
     public function showProgramUnits($id)
     {
         $units = Unit::where("program_id", $id)->get();
-        // dd($units);
         return view('dashboard.program.units.index', compact(['units']));
     }
+    public function showProgramViewUnit($id)
+    {
+        $units = Unit::findOrFail($id);
+        return view('dashboard.program.units.show', compact(['units']));
+    }
+
     public function showProgramBenchmarks($id)
     {
         $benchmarks = Benchmark::where("program_id", $id)->get();
@@ -102,12 +107,18 @@ class DashboardController extends Controller
         // dd($units);
         return view('dashboard.program.beginnings.index', compact(['beginnings' , 'id']));
     }
+    public function showProgramViewBeginning($id)
+    {
+        $beginnings = Beginning::findOrFail($id);
+        return view('dashboard.program.beginnings.show', compact(['beginnings' , 'id']));
+    }
     public function showProgramEndings($id)
     {
         $endings = Ending::where("program_id", $id)->get();
         // dd($units);
         return view('dashboard.program.endings.index', compact(['endings' , 'id']));
     }
+
     public function createSchool()
     {
         return view('dashboard.school.create');

@@ -62,6 +62,7 @@
         href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- END Page Level CSS-->
 
 
