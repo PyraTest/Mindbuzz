@@ -118,9 +118,9 @@ Route::group([
             Route::post('/store_checkpoint', 'DashboardController@storeUnitCheckpoint')->name('admin.store_unit_checkpoint');
             Route::get('/show_checkpoint/{id}', 'DashboardController@showUnitCheckpoint')->name('admin.show_view_checkpoint');
 
-            Route::get('/edit/{id}', 'DashboardController@editUnitCheckpoint')->name('admin.edit_unit_checkpoint');
-            Route::patch('/update/{id}', 'DashboardController@updateUnitCheckpoint')->name('admin.update_unit_checkpoint');
-            Route::delete('/delete/{id}', 'DashboardController@deleteUnitCheckpoint')->name('admin.delete_unit_checkpoint');
+            Route::get('/edit/checkpoint/{id}', 'DashboardController@editUnitCheckpoint')->name('admin.edit_unit_checkpoint');
+            Route::patch('/update/checkpoint/{id}', 'DashboardController@updateUnitCheckpoint')->name('admin.update_unit_checkpoint');
+            Route::delete('/delete/checkpoint/{id}', 'DashboardController@deleteUnitCheckpoint')->name('admin.delete_unit_checkpoint');
 
             // Journey End
         });
