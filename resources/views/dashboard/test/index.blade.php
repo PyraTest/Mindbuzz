@@ -93,6 +93,7 @@ $active_links = ['tests', 'showusers'];
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
+                                                        <th>{{ __('admin.name') }} </th>
                                                         <th>{{ __('admin.type') }} </th>
 
 
@@ -104,6 +105,7 @@ $active_links = ['tests', 'showusers'];
                                                     @foreach ($tests as $index => $test)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
+                                                            <td class="text-info">{{ $test->name }}</td>
                                                             <td class="text-info">
                                                                 @if ($test->type === \App\Models\Test::TYPE_TEST)
                                                                     Test
@@ -117,26 +119,15 @@ $active_links = ['tests', 'showusers'];
 
                                                             <!--<td class="text-info"></td>-->
 
-
-
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
-                                                                    {{--  @if ($user->type == '1')
-                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
-                                                                        class="btn btn-outline-danger box-shadow-3 mr-1 ">@lang('admin.inactive')</a>
-                                                            @else
-                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
-                                                                        class="btn btn-outline-primary box-shadow-3 mr-1 ">@lang('admin.active')</a>
-                                                            @endif  --}}
+                                                                  
                                                                     <a href="{{ route('admin.edit_test', $test->id) }}"
                                                                         class="btn btn-info box-shadow-3 mr-1 "><i
                                                                             class="ft-edit"></i></a>
 
-                                                                    {{-- <a href="{{ route('admin.delete_test', $unit->id) }}"
-                                                                class="delete btn btn-danger box-shadow-3 mr-1 "><i
-                                                                    class="ft-delete"></i></a> --}}
-
+                                                        
                                                                     <a href="{{ route('admin.delete_test', $test->id) }}"
                                                                         class="delete btn btn-danger box-shadow-3 mr-1"
                                                                         data-id="{{ $test->id }}"><i

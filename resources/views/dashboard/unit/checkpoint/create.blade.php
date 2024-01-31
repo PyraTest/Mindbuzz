@@ -7,23 +7,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
     <div class="app-content content">
         <div class="content-wrapper">
-            {{-- <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">{{__('admin/sidebar.main')}} </a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="{{route('admin.sub_services')}}">
-                                    {{__('admin.sub_services')}} </a>
-                            </li>
-                            <li class="breadcrumb-item active"> {{__('admin.add_sub_services')}}
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+
             <div class="content-body">
                 <!-- Basic form layout section start -->
                 <section id="basic-form-layouts">
@@ -47,8 +31,8 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.add_unit') }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.store_unit_checkpoint') }}"
+                                            method="post" enctype="multipart/form-data">
                                             @csrf
 
                                             <div class="form-body">
@@ -62,31 +46,47 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.name') }}</label>
-                                                            <input type="text" name="name" class="form-control"
-                                                                required>
-                                                            @error('name')
+                                                            <label>{{ __('admin.units') }}</label>
+                                                            <select name="unit_id" id="" class="form-control">
+                                                                @foreach ($units as $unit)
+                                                                    <option value="{{ $unit->id }}">{{ $unit->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('unit_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.numbers') }}</label>
-                                                            <input type="text" name="number" class="form-control"
-                                                                required>
-                                                            @error('number')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.programs') }}</label>
-                                                            <select name="program_id" id="" class="form-control">
-                                                                @foreach ($programs as $program)
-                                                                <option value="{{$program->id}}">{{$program->name}}</option>
+                                                            <label>{{ __('admin.tests') }}</label>
+                                                            <select name="test_id" id="" class="form-control">
+                                                                @foreach ($tests as $test)
+                                                                    <option value="{{ $test->id }}">
+                                                                        @if ($test->type == 0)
+                                                                            Test
+                                                                        @elseif ($test->type == 1)
+                                                                            Quiz
+                                                                        @elseif ($test->type == 2)
+                                                                            Homework
+                                                                        @endif
 
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('test_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.bank') }}</label>
+                                                            <select name="bank_id" id="" class="form-control">
+                                                                @foreach ($banks as $bank)
+                                                                    <option value="{{ $bank->id }}">
+                                                                        {{ $bank->id }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('program_id')

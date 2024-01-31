@@ -61,9 +61,7 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css') }}">
 
-    {{-- Image uploader --}}
-    <link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css">
-    {{-- Image uploader --}}
+
 
 
     <link rel="stylesheet" type="text/css"
@@ -165,36 +163,11 @@
 
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    {{-- Image uploader --}}
-
-    <script type="text/javascript" src="http://example.com/jquery.min.js"></script>
-    <script type="text/javascript" src="http://example.com/image-uploader.min.js"></script>
-
-    {{-- Image uploader --}}
+   
 
     <script>
         $(document).ready(function() {
-            $('#addQuestionBankBtn').click(function() {
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('create-question-bank') }}",
-                    dataType: 'json',
-                    data: {
-                        '_token': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        console.log('New question bank created with ID: ' + response.id);
-                        if (response.success) {
-                            $('#successMessage').html(response.success).show();
-                        }
-                        updateSelectOptions();
-                    },
-                    error: function(error) {
-                        console.log('Error creating question bank: ' + error.responseJSON
-                            .message);
-                    }
-                });
-            });
+            
 
             function updateSelectOptions() {
                 $.ajax({
@@ -216,11 +189,7 @@
                     }
                 });
             }
-            $('#letter_images').imageUploader({
-                // preloaded: photos,
-                // imagesInputName: 'photos',
-                label: 'Drag & Drop images here or click to browse'
-            });
+
         });
     </script>
 

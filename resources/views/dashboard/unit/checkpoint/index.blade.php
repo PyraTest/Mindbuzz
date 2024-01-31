@@ -88,17 +88,20 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
+                                            <a style="float:right;" href="{{ route('admin.create_unit_checkpoint', $id) }}"
+                                                class="btn-lg btn-success  ">{{ __('admin.add') }}</a>
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
-                                                        <th>{{ __('admin.programs') }} </th>
-
+                                                        <th>{{ __('admin.units') }} </th>
+                                                        <th>{{ __('admin.tests') }} </th>
+                                                        <th>{{ __('admin.bank') }} </th>
                                                         <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.journey') }}</th>
+                                                        <th>{{ __('admin.views') }} </th>
+
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -106,47 +109,34 @@ $active_links = ['users', 'showusers'];
                                                     @foreach ($checkpoints as $index => $checkpoint)
                                                         <tr>
                                                             <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $checkpoint->name }}</td>
-                                                            <td class="text-info">{{ $checkpoint->number }}</td>
-                                                            <td class="text-info">{{ $checkpoint->program->name }}</td>
+                                                            <td class="text-info">{{ $checkpoint->unit->name }}</td>
+                                                            <td class="text-info">
 
-                                                            <!--<td class="text-info"></td>-->
-
-
-{{-- 
+                                                                {{ $checkpoint->test->type == 0 ? 'Test' : ($checkpoint->test->type == 1 ? 'Quiz' : 'Homework') }}
+                                                            </td>
+                                                            <td class="text-info">{{ $checkpoint->bank_id }}</td>
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
-                                                                  
-                                                                    <a href="{{ route('admin.edit_unit', $unit->id) }}"
+
+                                                                    <a href="{{ route('admin.edit_unit_checkpoint', $checkpoint->id) }}"
                                                                         class="btn btn-info box-shadow-3 mr-1 "><i
                                                                             class="ft-edit"></i></a>
-                                                                    <a href="{{ route('admin.delete_unit', $unit->id) }}"
+                                                                    <a href="{{ route('admin.delete_unit_checkpoint', $checkpoint->id) }}"
                                                                         class="delete btn btn-danger box-shadow-3 mr-1"
-                                                                        data-id="{{ $unit->id }}"><i
+                                                                        data-id="{{ $checkpoint->id }}"><i
                                                                             class="ft-delete"></i></a>
 
                                                                 </div>
                                                             </td>
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-                                                                  
-                                                                    <a href="{{ route('admin.unit_begin', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.begin')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_lessons', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.lessons')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_checkpoint', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.checkpoint')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_end', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.end')}}</a>
-                                                                    
+                                                            <td class="text-info">
+                                                                <a href="{{ route('admin.show_view_checkpoint', $checkpoint->id) }}"
+                                                                    class="btn-info btn   ">
+                                                                    <i class="fa-solid fa-eye"></i>
+                                                                </a>
+                                                            </td>
 
-                                                                </div>
-                                                            </td> --}}
+
                                                         </tr>
                                                     @endforeach
 

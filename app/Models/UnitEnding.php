@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UnitEnding extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function unit(){
         return $this->belongsTo(Unit::class , 'unit_id');

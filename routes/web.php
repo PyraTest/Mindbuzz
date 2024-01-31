@@ -102,14 +102,30 @@ Route::group([
             Route::get('/begin/{id}', 'DashboardController@getUnitBeginning')->name('admin.unit_begin');
             Route::get('/create_begin/{id}', 'DashboardController@createUnitBeginning')->name('admin.create_unit_begin');
             Route::post('/store_begin', 'DashboardController@storeUnitBeginning')->name('admin.store_unit_begin');
+            Route::get("/show/view-beginning/{id}", 'DashboardController@showUnitViewBeginning')->name('admin.show_unit_view_beginning');
+
             Route::get('/lessons/{id}', 'DashboardController@getUnitLessons')->name('admin.unit_lessons');
             Route::get('/create_lesson/{id}', 'DashboardController@createUnitLesson')->name('admin.create_unit_lesson');
             Route::post('/store_lesson', 'DashboardController@storeUnitLesson')->name('admin.store_unit_lesson');
             Route::get('/checkpoints/{id}', 'DashboardController@getUnitCheckpoint')->name('admin.unit_checkpoint');
             Route::get('/end/{id}', 'DashboardController@getUnitEnding')->name('admin.unit_end');
+            Route::get('/create_ending/{id}', 'DashboardController@createUnitEnding')->name('admin.create_unit_end');
+            Route::post('/store_ending', 'DashboardController@storeUnitEnding')->name('admin.store_unit_end');
+            Route::get('/show_ending/{id}', 'DashboardController@showUnitEnding')->name('admin.show_view_ending');
             Route::get('/lesson/presentations/{id}', 'DashboardController@getPresentation')->name('admin.lesson_presentaion');
             Route::get('/lesson/warmups/{id}', 'DashboardController@getLessonWarmup')->name('admin.lesson_warmup');
             Route::get('/lesson/lesson_ending/{id}', 'DashboardController@getEndOfLesson')->name('admin.lesson_ending');
+
+
+
+
+            Route::get('/create_checkpoint/{id}', 'DashboardController@createUnitCheckpoint')->name('admin.create_unit_checkpoint');
+            Route::post('/store_checkpoint', 'DashboardController@storeUnitCheckpoint')->name('admin.store_unit_checkpoint');
+            Route::get('/show_checkpoint/{id}', 'DashboardController@showUnitCheckpoint')->name('admin.show_view_checkpoint');
+
+            Route::get('/edit/{id}', 'DashboardController@editUnitCheckpoint')->name('admin.edit_unit_checkpoint');
+            Route::patch('/update/{id}', 'DashboardController@updateUnitCheckpoint')->name('admin.update_unit_checkpoint');
+            Route::delete('/delete/{id}', 'DashboardController@deleteUnitCheckpoint')->name('admin.delete_unit_checkpoint');
 
             // Journey End
         });
@@ -161,7 +177,7 @@ Route::group([
             Route::get('/edit/{id}', 'DashboardController@editRevisionQuestion')->name('admin.edit_revision_question');
             Route::patch('/update/{id}', 'DashboardController@updateRevisionQuestion')->name('admin.update_revision_question');
             Route::delete('/delete/{id}', 'DashboardController@deleteRevisionQuestion')->name('admin.delete_revision_question');
-            Route::post('/create-question-bank', 'DashboardController@createQuestionBank')->name('create-question-bank');
+            Route::post('/add-question-bank', 'DashboardController@createQuestionBank')->name('admin.add_question_bank');
             Route::get('/get-question-banks', 'DashboardController@getQuestionBanks')->name('get-question-banks');
         });
         Route::group(['prefix' => 'presentations'], function () {

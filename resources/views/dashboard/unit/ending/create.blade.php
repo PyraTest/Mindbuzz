@@ -47,8 +47,8 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.add_unit') }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form class="form" action="{{ route('admin.store_unit_end') }}" method="post"
+                                            >
                                             @csrf
 
                                             <div class="form-body">
@@ -62,34 +62,64 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>{{ __('admin.name') }}</label>
-                                                            <input type="text" name="name" class="form-control"
-                                                                required>
-                                                            @error('name')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.numbers') }}</label>
-                                                            <input type="text" name="number" class="form-control"
-                                                                required>
-                                                            @error('number')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.programs') }}</label>
-                                                            <select name="program_id" id="" class="form-control">
-                                                                @foreach ($programs as $program)
-                                                                <option value="{{$program->id}}">{{$program->name}}</option>
-
+                                                            <label>{{ __('admin.warmup') }}</label>
+                                                            <select name="warmup_id" class="form-control" id="">
+                                                                @foreach ($warmups as $warmup)
+                                                                    <option value="{{ $warmup->id }}">{{ $warmup->name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('program_id')
+                                                            @error('warmup_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.units') }}</label>
+                                                            <select name="unit_id" class="form-control" id="">
+                                                                @foreach ($units as $unit)
+                                                                    <option value="{{ $unit->id }}">{{ $unit->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('unit_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.test') }}</label>
+                                                            <select name="test_id" id="" class="form-control">
+                                                                @foreach ($tests as $test)
+                                                                    <option value="{{ $test->id }}">
+                                                                        @if ($test->type == 0)
+                                                                            Test
+                                                                        @elseif ($test->type == 1)
+                                                                            Quiz
+                                                                        @elseif ($test->type == 2)
+                                                                            Homework
+                                                                        @endif
+
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('test_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.bank') }}</label>
+                                                            <select name="bank_id" id="" class="form-control">
+                                                                @foreach ($banks as $bank)
+                                                                    <option value="{{ $bank->id }}">
+                                                                        {{ $bank->id }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('bank_id')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
