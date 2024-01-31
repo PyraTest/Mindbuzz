@@ -403,6 +403,75 @@ class DashboardController extends Controller
         return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
     }
 
+    public function deleteCourse(Request $request, $id)
+    {
+        try {
+            $course = Course::findOrFail($id);
+            $course->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+        // $units = Unit::findOrFail($id);
+        // $units->delete();
+        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+    }
+    public function deleteStage(Request $request, $id)
+    {
+        try {
+        $stage = Stage::findOrFail($id);
+            $stage->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+        // $units = Unit::findOrFail($id);
+        // $units->delete();
+        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+    }
+    public function deleteProgram(Request $request, $id)
+    {
+        try {
+        $program = Program::findOrFail($id);
+            $program->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+        // $units = Unit::findOrFail($id);
+        // $units->delete();
+        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+    }
     public function deleteUnit(Request $request, $id)
     {
         try {

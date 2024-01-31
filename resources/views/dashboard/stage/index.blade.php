@@ -118,10 +118,10 @@ $active_links = ['stages' , 'showusers'];
                                                                 <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
                                                                         class="btn btn-outline-primary box-shadow-3 mr-1 ">@lang('admin.active')</a>
                                                             @endif  --}}
-                                                            <a href="#"
-                                                                class="btn btn-info box-shadow-3 mr-1 "><i class="ft-edit"></i></a>
+                                                            {{-- <a href="#"
+                                                                class="btn btn-info box-shadow-3 mr-1 "><i class="ft-edit"></i></a> --}}
 
-                                                            <a href="#"
+                                                            <a href="{{ route('admin.delete_stage', $stage->id) }}"
                                                                 class="delete btn btn-danger box-shadow-3 mr-1 "><i class="ft-delete"></i></a>
 
                                                         </div>

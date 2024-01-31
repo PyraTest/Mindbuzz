@@ -68,6 +68,8 @@ Route::group([
             Route::get("/show/program/view-benchmark/{id}", 'DashboardController@showProgramViewBenchmark')->name('admin.show_program_view_benchmark');
             Route::get("/show/program/endings/{id}", 'DashboardController@showProgramEndings')->name('admin.show_program_endings');
             Route::get("/show/program/view-ending/{id}", 'DashboardController@showProgramViewEnding')->name('admin.show_program_view_ending');
+            Route::delete('/delete/{id}', 'DashboardController@deleteProgram')->name('admin.delete_program');
+        
         });
         Route::group(['prefix' => 'schools'], function () {
             Route::get('/', 'DashboardController@getSchools')->name('admin.schools');
@@ -78,11 +80,14 @@ Route::group([
             Route::get('/', 'DashboardController@getCourses')->name('admin.courses');
             Route::get('/create', 'DashboardController@createCourse')->name('admin.create_course');
             Route::post('/store', 'DashboardController@addCourse')->name('admin.add_course');
+            Route::delete('/delete/{id}', 'DashboardController@deleteCourse')->name('admin.delete_course');
         });
         Route::group(['prefix' => 'stages'], function () {
             Route::get('/', 'DashboardController@getStages')->name('admin.stages');
             Route::get('/create', 'DashboardController@createStage')->name('admin.create_stage');
             Route::post('/store', 'DashboardController@addStage')->name('admin.add_stage');
+            Route::delete('/delete/{id}', 'DashboardController@deleteStage')->name('admin.delete_stage');
+
         });
         Route::group(['prefix' => 'units'], function () {
             Route::get('/', 'DashboardController@getUnits')->name('admin.units');
