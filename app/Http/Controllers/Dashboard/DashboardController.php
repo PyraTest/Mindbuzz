@@ -429,7 +429,7 @@ class DashboardController extends Controller
     public function deleteStage(Request $request, $id)
     {
         try {
-        $stage = Stage::findOrFail($id);
+            $stage = Stage::findOrFail($id);
             $stage->delete();
 
             if ($request->ajax()) {
@@ -452,7 +452,7 @@ class DashboardController extends Controller
     public function deleteProgram(Request $request, $id)
     {
         try {
-        $program = Program::findOrFail($id);
+            $program = Program::findOrFail($id);
             $program->delete();
 
             if ($request->ajax()) {
@@ -1210,8 +1210,12 @@ class DashboardController extends Controller
 
         $rules = [];
 
-
+        $number = +1;
+        while (Unit::where('number', $number)->exists()) {
+            $number++;
+        }
         $data = $request->except('_token');
+        $data["number"] = $number;
         $unit = Unit::create($data);
         DB::commit();
 

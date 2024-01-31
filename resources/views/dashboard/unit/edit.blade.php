@@ -71,7 +71,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.numbers') }}</label>
                                                             <input type="text" name="number" class="form-control"
@@ -80,7 +80,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.programs') }}</label>
