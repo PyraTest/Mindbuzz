@@ -110,43 +110,7 @@ $active_links = ['users', 'showusers'];
                                                             <td class="text-info">{{ $ending->number }}</td>
                                                             <td class="text-info">{{ $ending->program->name }}</td>
 
-                                                            <!--<td class="text-info"></td>-->
-
-
-
-                                                            {{-- <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-                                                                  
-                                                                    <a href="{{ route('admin.edit_unit', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
-                                                                    <a href="{{ route('admin.delete_unit', $unit->id) }}"
-                                                                        class="delete btn btn-danger box-shadow-3 mr-1"
-                                                                        data-id="{{ $unit->id }}"><i
-                                                                            class="ft-delete"></i></a>
-
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-                                                                  
-                                                                    <a href="{{ route('admin.unit_begin', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.begin')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_lessons', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.lessons')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_checkpoint', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.checkpoint')}}</a>
-                                                                    
-                                                                    <a href="{{ route('admin.unit_end', $unit->id) }}"
-                                                                        class="btn btn-info box-shadow-3 mr-1 ">{{__('admin.end')}}</a>
-                                                                    
-
-                                                                </div>
-                                                            </td> --}}
+                                                          
                                                         </tr>
                                                     @endforeach
 

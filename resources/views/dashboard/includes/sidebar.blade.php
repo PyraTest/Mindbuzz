@@ -101,7 +101,7 @@
                     </li>
 
                     <li class=" "><a class="menu-item" href="{{ route('admin.create_course') }}"
-                            data-i18n="nav.dash.crypto">{{ __('admin.add_school') }}</a>
+                            data-i18n="nav.dash.crypto">{{ __('admin.add_course') }}</a>
                     </li>
                 </ul>
             </li>

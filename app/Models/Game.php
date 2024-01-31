@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function gameImages()
     {
@@ -23,7 +24,10 @@ class Game extends Model
     }
     public function gameTypes()
     {
-        return $this->hasMany(GameType::class, 'game_id');
+        return $this->belongsTo(GameType::class, 'game_type_id');
     }
-
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class);
+    }
 }

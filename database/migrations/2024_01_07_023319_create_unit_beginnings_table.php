@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('unit_beginnings', function (Blueprint $table) {
             $table->id();
- 
+
             $table->bigInteger('unit_id')->nullable()->unsigned();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->bigInteger('test_id')->nullable()->unsigned();
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
-            $table->text('video');
+            $table->text('video')->nullable();
             $table->text('video_author');
             $table->text('video_message');
-            $table->text('doc');
+            $table->text('doc')->nullable();
             $table->text('test')->nullable();
- 
+
             $table->timestamps();
         });
     }

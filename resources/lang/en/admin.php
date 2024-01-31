@@ -172,6 +172,7 @@ return [
     'settings' => 'Settings',
     'notifications' => 'Notifications',
     'customers' => 'Customers',
+    'letters'=> 'Letters',
     'admins' => 'Admins',
     'cannot_delete_parent_cata' => 'You cannot delete main category',
     'added'   => 'The data was saved successfully',

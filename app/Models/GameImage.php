@@ -14,4 +14,5 @@ class GameImage extends Model
         return ($val !== null) ? asset('uploads/games/' . $val) : "";
     }
     
+    protected $guarded = [];
 }

@@ -92,40 +92,50 @@ $active_links = ['courses' , 'showusers'];
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('admin.name') }} </th>
-                                            
+                                            <th>{{ __('admin.lessons') }} </th>
+                                            <th>{{ __('admin.game_type') }} </th>
+                                            <th>{{ __('admin.audio') }} </th>
+                                            <th>{{ __('admin.num_letter') }} </th>
+                                            <th>{{ __('admin.num_letter_repeat') }} </th>
+                                            <th>{{ __('admin.num_trial') }} </th>
                                             <th>{{ __('admin/forms.operations') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
                                             @foreach($games as $index => $game)
-                                            
                                                 <tr>
                                                     <td class="text-info">{{$index + 1}}</td>
-                                                    <td class="text-info">{{$game->name}}</td>
-                                                    
-                                                    <!--<td class="text-info"></td>-->
-                                                    
-                                                    
-{{--                               
-                                                    <td>
-                                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                                             @if($user->type == '1')
-                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
-                                                                        class="btn btn-outline-danger box-shadow-3 mr-1 ">@lang('admin.inactive')</a>
-                                                            @else
-                                                                <a href="{{route('admin.users.active', ['id'=> $user->id])}}"
-                                                                        class="btn btn-outline-primary box-shadow-3 mr-1 ">@lang('admin.active')</a>
-                                                            @endif 
-                                                            <a href="#"
-                                                                class="btn btn-info box-shadow-3 mr-1 "><i class="ft-edit"></i></a>
+                                                    <td class="text-info">{{$game->lesson->name}}</td>
+                                                    <td class="text-info">{{$game->gameTypes->name}}</td>
 
-                                                            <a href="#"
-                                                                class="delete btn btn-danger box-shadow-3 mr-1 "><i class="ft-delete"></i></a>
+                                                    <td class="text-info">
+                                                        @if ($game->audio_flag == 0)
+                                                            off
+                                                            @else
+                                                            on
+                                                        @endif
+                                                    
+                                                    </td>
+                                                    <td class="text-info">{{$game->num_of_letters}}</td>
+                                                    <td class="text-info">{{$game->num_of_letter_repeat}}</td>
+                                                    <td class="text-info">{{$game->num_of_trials}}</td>
+         
+                                                    <td>
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Basic example">
+                                                           
+                                                            <a href="{{ route('admin.edit_ending', $game->id) }}"
+                                                                class="btn btn-info box-shadow-3 mr-1 "><i
+                                                                    class="ft-edit"></i></a>
+
+                                                            <a href="{{ route('admin.delete_ending', $game->id) }}"
+                                                                class="delete btn btn-danger box-shadow-3 mr-1"
+                                                                data-id="{{ $game->id }}"><i
+                                                                    class="ft-delete"></i></a>
 
                                                         </div>
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

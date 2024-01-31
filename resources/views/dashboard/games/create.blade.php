@@ -1,13 +1,13 @@
 <?php
-$active_links = ['sub_services' , 'addsub_services'];
+$active_links = ['sub_services', 'addsub_services'];
 ?>
 
 @extends('layouts.admin')
 @section('content')
 
-<div class="app-content content">
-    <div class="content-wrapper">
-        {{-- <div class="content-header row">
+    <div class="app-content content">
+        <div class="content-wrapper">
+            {{-- <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -24,112 +24,143 @@ $active_links = ['sub_services' , 'addsub_services'];
                 </div>
             </div>
         </div> --}}
-        <div class="content-body">
-            <!-- Basic form layout section start -->
-            <section id="basic-form-layouts">
-                <div class="row match-height">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                    </ul>
+            <div class="content-body">
+                <!-- Basic form layout section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            @include('dashboard.includes.alerts.success')
-                            @include('dashboard.includes.alerts.errors')
+                                @include('dashboard.includes.alerts.success')
+                                @include('dashboard.includes.alerts.errors')
 
 
-                            <div class="card-content collapse show">
-                                <div class="card-body">
-                                    <form class="form" action="{{route('admin.add_course')}}" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <form class="form" action="{{ route('admin.store_game') }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
 
-                                        <div class="form-body">
+                                            <div class="form-body">
 
 
-                                            <h4 class="form-section"><i class="ft-home"></i> بيانات المدرسه </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات اللعبة </h4>
 
-                                            <div class="row">
-                                               
+                                                <div class="row">
 
-                            
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.lessons') }}</label>
-                                                        <select name="lesson_id" class="form-control" id="">
-                                                            @foreach ($lessons as $lesson)
-                                                                <option value="{{ $lesson->id }}">{{ $lesson->name }}
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.lessons') }}</label>
+                                                            <select name="lesson_id" class="form-control" id="">
+                                                                @foreach ($lessons as $lesson)
+                                                                    <option value="{{ $lesson->id }}">{{ $lesson->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('lesson_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.game_type_id') }}</label>
+                                                            <select name="game_type_id" class="form-control" id="gameType"
+                                                                onchange="displayLetters()">
+                                                                <option value="" disabled selected>Select game type
                                                                 </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('lesson_id')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                                @foreach ($types as $type)
+                                                                    <option value="{{ $type->id }}">{{ $type->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('game_type_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.letters_num') }}</label>
+                                                            <input type="text" name="num_of_letters" id="num_of_letters"
+                                                                class="form-control" required>
+                                                            <label>{{ __('admin.num_of_letters_repeat') }}</label>
+                                                            <input type="text" name="num_of_letter_repeat"
+                                                                id="num_of_letters_repeat" class="form-control" required>
+                                                            @error('num_of_letters')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 hidden" id="letters">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.letters') }}</label>
+                                                            <input type="text" name="letter[]" id="letterOne"
+                                                                class="form-control mb-2" placeholder="First Letter">
+                                                            <div class="input-images-2" id="letter_images" style="padding-top: .5rem;"></div>
+                                                            <input type="text" name="letter[]" id="letterTwo"
+                                                                class="form-control mb-2" placeholder="Second Letter">
+                                                            <input type="text" name="letter[]" id="letterThree"
+                                                                class="form-control mb-2" placeholder="Third Letter">
+                                                            <input type="text" name="letter[]" id="letterFour"
+                                                                class="form-control mb-2" placeholder="Fourth Letter">
+
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.game_type_id') }}</label>
-                                                        <select name="game_type_id" class="form-control" id="">
-                                                            @foreach ($types as $type)
-                                                                <option value="{{ $type->id }}">{{ $type->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('game_type_id')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('admin.letters_num') }}</label>
-                                                        <input type="text" name="num_of_letters" id="num_of_letters" class="form-control" required>
-                                                        <label>{{ __('admin.num_of_letters_repeat') }}</label>
-                                                        <input type="text" name="num_of_letters_repeat" id="num_of_letters_repeat" class="form-control" required>
-                                                        @error('num_of_letters')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
+
 
                                             </div>
 
 
-                                        </div>
+                                            <div class="form-actions">
+                                                <button type="button" class="btn btn-warning mr-1"
+                                                    onclick="history.back();">
+                                                    <i class="ft-x"></i> تراجع
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> اضافة
+                                                </button>
+                                            </div>
+                                        </form>
 
-
-                                        <div class="form-actions">
-                                            <button type="button" class="btn btn-warning mr-1"
-                                                onclick="history.back();">
-                                                <i class="ft-x"></i> تراجع
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> تحديث
-                                            </button>
-                                        </div>
-                                    </form>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- // Basic form layout section end -->
+                </section>
+                <!-- // Basic form layout section end -->
+            </div>
         </div>
     </div>
-</div>
 
 @stop
 
 @section('script')
+    <script>
+        function displayLetters() {
+            $("#letters").removeClass("hidden");
+        }
+    </script>
+    <script>
+    
 
+    </script>
 @stop
