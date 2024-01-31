@@ -21,10 +21,23 @@ class GameController extends Controller
     }
     public function indexGame($id){
         $game_test = Game::where('id',$id)->first();
-        $game = Game::where('id',$id);
-        switch ($game_test->game_type_id == 1){
+        $game = Game::where('games.id',$id)->join('game_types','games.game_type_id','game_types.id')->where('game_types.id',$id);
+        switch ($game_test->game_type_id){
             case 1:
                 $game->with(['gameLetters' => function($q) {
+                    $q->inRandomOrder();
+                }]);
+                $data['game_letters'] = GameLetter::where('game_id',$id)->select('letter')->groupBy('letter')->inRandomOrder()->get();
+                break;
+                
+            case 2:
+                $game->with(['gameLetters' => function($q) {
+                    $q->inRandomOrder();
+                }]);
+                $data['game_letters'] = GameLetter::where('game_id',$id)->select('letter')->groupBy('letter')->inRandomOrder()->get();
+                break;
+            case 3:
+                $game->with('gameImages')->with(['gameLetters' => function($q) {
                     $q->inRandomOrder();
                 }]);
                 $data['game_letters'] = GameLetter::where('game_id',$id)->select('letter')->groupBy('letter')->inRandomOrder()->get();

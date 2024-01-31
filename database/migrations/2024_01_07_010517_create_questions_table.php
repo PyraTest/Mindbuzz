@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->text('question');
-            $table->text('answer');
-            $table->integer('time');
-            $table->integer('difficulty');
+            $table->integer('number')->nullable();
+            $table->text('question')->nullable();
+            $table->text('answer')->nullable();
+            $table->integer('time')->nullable();
+            $table->integer('difficulty')->nullable();
             $table->bigInteger('test_id')->nullable()->unsigned();
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->timestamps();
