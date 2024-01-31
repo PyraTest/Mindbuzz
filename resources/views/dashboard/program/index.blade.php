@@ -122,11 +122,11 @@ $active_links = ['program' , 'showusers'];
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
 
-                                                                    <a href="#"
+                                                                    {{-- <a href="#"
                                                                         class="btn btn-info box-shadow-3 mr-1 "><i
-                                                                            class="ft-edit"></i></a>
+                                                                            class="ft-edit"></i></a> --}}
 
-                                                                    <a href="#"
+                                                                    <a href="{{ route('admin.delete_program', $program->id) }}"
                                                                         class="delete btn btn-danger box-shadow-3 mr-1 "><i
                                                                             class="ft-delete"></i></a>
 
