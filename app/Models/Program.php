@@ -22,7 +22,7 @@ class Program extends Model
         return $this->belongsTo(Stage::class , 'stage_id');
     }
     public function course(){
-        return $this->belongsTo(Course::class , 'stage_id');
+        return $this->belongsTo(Course::class , 'course_id');
     }
 
 }
