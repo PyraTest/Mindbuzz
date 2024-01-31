@@ -48,8 +48,25 @@ $active_links = ['sub_services', 'addsub_services'];
                                 <div class="card-content collapse show">
                                     <div class="col-12 mb-4">
                                         <div id="successMessage" class="alert alert-success" style="display: none;"></div>
-                                        <button id="addQuestionBankBtn" class="btn btn-success btn-question">Add question
-                                            bank</button>
+                                        <form class="form" action="{{ route('admin.add_question_bank') }}"
+                                            method="post">
+                                            @csrf
+                                            <div class="form-body">
+                                                <h4 class="form-section"><i class="ft-home"></i>اسم بنك الاسئلة </h4>
+                                                <div class="row">
+                                                    <div class="col-10">
+                                                        <input type="text" name="name" class="form-control" placeholder="Type name question bank" required>
+
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <button type="submit" class="btn btn-success w-100">Add</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        <hr>
+
                                     </div>
                                     <div class="card-body">
                                         <form class="form" action="{{ route('admin.add_revision_question') }}"
@@ -66,7 +83,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
 
 
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.numbers') }}</label>
                                                             <input type="text" name="number" class="form-control"
@@ -75,7 +92,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.question') }}</label>
@@ -103,7 +120,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             <select name="bank_id" id="bankSelect" class="form-control">
                                                                 @foreach ($questionBanks as $questionBank)
                                                                     <option value="{{ $questionBank->id }}">
-                                                                        {{ $questionBank->id }}</option>
+                                                                        {{ $questionBank->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('bank_id')

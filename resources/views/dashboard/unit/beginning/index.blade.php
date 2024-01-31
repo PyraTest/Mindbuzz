@@ -95,12 +95,13 @@ $active_links = ['users', 'showusers'];
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.name') }} </th>
-                                                        <th>{{ __('admin.numbers') }} </th>
-                                                        <th>{{ __('admin.programs') }} </th>
+                                                        <th>{{ __('admin.video') }} </th>
+                                                        <th>{{ __('admin.video_author') }} </th>
+                                                        <th>{{ __('admin.video_message') }} </th>
 
-                                                        <th>{{ __('admin/forms.operations') }}</th>
-                                                        <th>{{ __('admin.journey') }}</th>
+                                                        <th>{{ __('admin.doc') }}</th>
+                                                        <th>{{ __('admin.assignment') }}</th>
+                                                        <th>{{ __('admin.views') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -114,7 +115,12 @@ $active_links = ['users', 'showusers'];
                                                             {{-- <td class="text-info">{{ $beginning->doc }}</td> --}}
                                                             <td class="text-info"><a href="{{$beginning->doc}}" download >{{ __('admin.download') }}</a></td>
                                                             <td class="text-info"><a href="{{$beginning->test}}" download >{{ __('admin.download') }}</a></td>
-
+                                                            <td class="text-info">
+                                                                <a href="{{route("admin.show_unit_view_beginning" , $beginning->id)}}"
+                                                                    class="btn-info btn   ">
+                                                                    <i class="fa-solid fa-eye"></i>
+                                                                </a>
+                                                            </td>
                                                             <!--<td class="text-info"></td>-->
 
 

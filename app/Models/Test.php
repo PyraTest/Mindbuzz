@@ -11,7 +11,7 @@ class Test extends Model
     const TYPE_TEST = 0;
     const TYPE_QUIZ = 1;
     const TYPE_HOMEWORK = 2;
-    protected $fillable = ['type'];
+    protected $fillable = ['type' , 'name'];
     public static function getTypeLabels()
     {
         return [

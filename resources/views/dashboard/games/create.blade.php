@@ -3,6 +3,10 @@ $active_links = ['sub_services', 'addsub_services'];
 ?>
 
 @extends('layouts.admin')
+@section('style')
+    <link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css">
+
+@stop
 @section('content')
 
     <div class="app-content content">
@@ -110,15 +114,186 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <div class="col-md-6 hidden" id="letters">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.letters') }}</label>
+                                                            <div class="border p-2 mb-3">
+                                                                <label>Letter one</label>
                                                             <input type="text" name="letter[]" id="letterOne"
                                                                 class="form-control mb-2" placeholder="First Letter">
-                                                            <div class="input-images-2" id="letter_images" style="padding-top: .5rem;"></div>
+                                                            <div class="row  imageWord" >
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word" class="form-control mb-2">
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word" class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word" class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word" class="form-control mb-2">
+
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="border p-2 mb-3">
+                                                                <label>Letter two</label>
+
                                                             <input type="text" name="letter[]" id="letterTwo"
                                                                 class="form-control mb-2" placeholder="Second Letter">
+                                                            <div class="row  imageWord" >
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="border p-2 mb-3">
+                                                                <label>Letter three</label>
                                                             <input type="text" name="letter[]" id="letterThree"
                                                                 class="form-control mb-2" placeholder="Third Letter">
-                                                            <input type="text" name="letter[]" id="letterFour"
-                                                                class="form-control mb-2" placeholder="Fourth Letter">
+                                                            <div class="row  imageWord" >
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input type="file" class="form-control mb-2"
+                                                                        name="image[]">
+                                                                    <label>{{ __('admin.word') }}</label>
+
+                                                                    <input type="text" name="word[]"
+                                                                        placeholder="Enter Word"
+                                                                        class="form-control mb-2">
+
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="border p-2 ">
+                                                                <label>Letter four</label>
+
+                                                                <input type="text" name="letter[]" id="letterFour"
+                                                                    class="form-control mb-2" placeholder="Fourth Letter">
+                                                                <div class="row  imageWord" >
+                                                                    <div class="col-3">
+                                                                        <input type="file" class="form-control mb-2"
+                                                                            name="image[]">
+                                                                        <label>{{ __('admin.word') }}</label>
+                                                                        <input type="text" name="word[]"
+                                                                            placeholder="Enter Word"
+                                                                            class="form-control mb-2">
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="file" class="form-control mb-2"
+                                                                            name="image[]">
+                                                                        <label>{{ __('admin.word') }}</label>
+
+                                                                        <input type="text" name="word[]"
+                                                                            placeholder="Enter Word"
+                                                                            class="form-control mb-2">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="file" class="form-control mb-2"
+                                                                            name="image[]">
+                                                                        <label>{{ __('admin.word') }}</label>
+
+                                                                        <input type="text" name="word[]"
+                                                                            placeholder="Enter Word"
+                                                                            class="form-control mb-2">
+
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <input type="file" class="form-control mb-2"
+                                                                            name="image[]">
+                                                                        <label>{{ __('admin.word') }}</label>
+
+                                                                        <input type="text" name="word[]"
+                                                                            placeholder="Enter Word"
+                                                                            class="form-control mb-2">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
 
 
                                                         </div>
@@ -154,13 +329,13 @@ $active_links = ['sub_services', 'addsub_services'];
 @stop
 
 @section('script')
+
     <script>
         function displayLetters() {
             $("#letters").removeClass("hidden");
         }
-    </script>
-    <script>
-    
-
+        // function displayLetters() {
+        //     $(".imageWord").removeClass("hidden");
+        // }
     </script>
 @stop

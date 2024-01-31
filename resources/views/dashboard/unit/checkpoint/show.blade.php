@@ -88,55 +88,36 @@ $active_links = ['users', 'showusers'];
 
 
                                         <div>
-                                            <a style="float:right;" href="{{ route('admin.create_unit_end', $id) }}"
-                                                class="btn-lg btn-success  ">{{ __('admin.add') }}</a>
+
                                             <table
                                                 class="table table-striped w-100 text-center display nowrap table-bordered scroll-vertical">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>{{ __('admin.warmup') }} </th>
                                                         <th>{{ __('admin.units') }} </th>
-                                                        <th>{{ __('admin.test') }} </th>
+                                                        <th>{{ __('admin.tests') }} </th>
+                                                        <th>{{ __('admin.bank') }} </th>
 
-                                                        <th>{{ __('admin.bank') }}</th>
-                                                        <th>{{ __('admin.views') }}</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($endings as $index => $ending)
-                                                        <tr>
-                                                            <td class="text-info">{{ $index + 1 }}</td>
-                                                            <td class="text-info">{{ $ending->warmup->name }}</td>
-                                                            <td class="text-info">{{ $ending->unit->name }}</td>
-                                                            <td class="text-info">
-                                                                @if ($ending->test_id == 0)
-                                                                    Test
-                                                                @elseif($ending->test_id == 1)
-                                                                    Quiz
-                                                                @else
-                                                                    Homework
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-info">{{ $ending->bank_id }}</td>
-                                                            <td class="text-info">
-                                                                <a href="{{ route('admin.show_view_ending', $ending->id) }}"
-                                                                    class="btn-info btn   ">
-                                                                    <i class="fa-solid fa-eye"></i>
-                                                                </a>
-                                                            </td>
+                                                    <tr>
+                                                        <td class="text-info">{{ $checkpoints->id }}</td>
+                                                        <td class="text-info">{{ $checkpoints->unit->name }}</td>
+                                                        <td class="text-info">{{ $checkpoints->test_id == 0 ? 'Test' : ($checkpoints->test_id == 1 ? 'Quiz' : 'Homework') }}
+                                                        </td>
+                                                        <td class="text-info">{{ $checkpoints->bank_id }}</td>
 
-                                                        </tr>
-                                                    @endforeach
+
+                                                    </tr>
 
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <div class="justify-content-center d-flex">
-                                            {!! $endings->appends(Request::except('page'))->render() !!}
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

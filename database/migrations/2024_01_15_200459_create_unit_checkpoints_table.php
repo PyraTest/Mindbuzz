@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('unit_checkpoints', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->integer('number')->nullable();
             $table->bigInteger('unit_id')->nullable()->unsigned();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->bigInteger('test_id')->nullable()->unsigned();

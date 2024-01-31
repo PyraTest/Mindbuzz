@@ -58,6 +58,16 @@ $active_links = ['sub_services', 'addsub_services'];
                                                 <h4 class="form-section"><i class="ft-home"></i> تعديل الاختبار </h4>
 
                                                 <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.test') }}</label>
+                                                            <input type="text" name="name" value="{{ $tests->name }}"
+                                                                class="form-control">
+                                                            @error('type')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">

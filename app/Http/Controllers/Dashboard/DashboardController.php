@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
+use App\Models\GameImage;
 use App\Models\GameLetter;
 use App\Models\QuestionBank;
 use App\Models\RevisionQuestionsBank;
@@ -74,24 +75,34 @@ class DashboardController extends Controller
     public function storeGame(Request $request)
     {
 
-        $data = $request->except('_token' , 'letter');
+        $data = $request->except('_token', 'letter', 'image', 'word');
 
         $game = Game::create($data);
         $letters = $request->letter;
-        $arr =[];
+        $arr = [];
         foreach ($letters as $letter) {
-            $i =0 ;
-            while($i<$request->num_of_letter_repeat){
-                array_push($arr,$letter);
+            $i = 0;
+            while ($i < $request->num_of_letter_repeat) {
+                array_push($arr, [
+                    'letter' => $letter, 'index' => $i
+                ]);
                 $i++;
                 $newGameLetter = new GameLetter();
                 $newGameLetter->game_id = $game->id;
                 $newGameLetter->letter = $letter;
                 $newGameLetter->save();
             }
-
         }
-        
+        if (isset($request->image)) {
+            foreach ($request->image as $index => $image) {
+                $gameImage = new GameImage();
+                $gameImage->game_id = $game->id;
+                // $gameImage->game_letter_id = $letters->id;
+                $gameImage->word = $request->word[$index];
+                $gameImage->image = $this->upploadImage($image, 'uploads/games/');
+                $gameImage->save();
+            }
+        }
 
         DB::commit();
 
@@ -146,13 +157,11 @@ class DashboardController extends Controller
     public function showProgramBenchmarks($id)
     {
         $benchmarks = Benchmark::where("program_id", $id)->get();
-        // dd($units);
         return view('dashboard.program.benchmarks.index', compact(['benchmarks']));
     }
     public function showProgramBeginnings($id)
     {
         $beginnings = Beginning::where("program_id", $id)->get();
-        // dd($units);
         return view('dashboard.program.beginnings.index', compact(['beginnings', 'id']));
     }
     public function showProgramViewBeginning($id)
@@ -229,17 +238,115 @@ class DashboardController extends Controller
     }
 
 
-    public function getUnitCheckpoint($id)
-    {
-        $checkpoints = UnitCheckpoint::where('unit_id', $id)->paginate(3);
-        return view('dashboard.unit.checkpoint.index', compact(['checkpoints', 'id']));
-    }
+
 
     public function getUnitEnding($id)
     {
         $endings = UnitEnding::where('unit_id', $id)->paginate(3);
         return view('dashboard.unit.ending.index', compact(['endings', 'id']));
     }
+    public function createUnitEnding($id)
+    {
+        $warmups = Warmup::get();
+        $tests = Test::get();
+        $units = Unit::get();
+        $banks = QuestionBank::get();
+        // $data = $request->except('_token');
+        // $endings = UnitEnding::create($data);
+        return view('dashboard.unit.ending.create', compact(['warmups', 'tests', 'units', 'banks', 'id']));
+    }
+    public function storeUnitEnding(Request $request)
+    {
+
+        $data = $request->except('_token');
+        $endings = UnitEnding::create($data);
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function showUnitEnding($id)
+    {
+        $endings = UnitEnding::findOrFail($id);
+        return view('dashboard.unit.ending.show', compact(['endings', 'id']));
+    }
+    public function showUnitViewBeginning($id)
+    {
+        $beginnings = UnitBeginning::findOrFail($id);
+        return view('dashboard.unit.beginning.show', compact(['beginnings', 'id']));
+    }
+
+
+    public function getUnitCheckpoint($id)
+    {
+        $checkpoints = UnitCheckpoint::where('unit_id', $id)->paginate(3);
+        return view('dashboard.unit.checkpoint.index', compact(['checkpoints', 'id']));
+    }
+
+
+
+    public function createUnitCheckpoint($id)
+    {
+        $units = Unit::get();
+        $tests = Test::get();
+        $banks = QuestionBank::get();
+
+        return view('dashboard.unit.checkpoint.create', compact(['tests', 'units', 'banks', 'id']));
+    }
+    public function storeUnitCheckpoint(Request $request)
+    {
+        // $number = +1;
+        $data = $request->except('_token');
+        $test = UnitCheckpoint::where("unit_id", $request->unit_id)->orderBy("number", "desc")->first();
+        $number = $test ? $test->number + 1 : 1;
+        $data['number'] = $number;
+        $checkpoint = UnitCheckpoint::create($data);
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
+    public function showUnitCheckpoint($id)
+    {
+        $checkpoints = UnitCheckpoint::findOrFail($id);
+        return view('dashboard.unit.checkpoint.show', compact(['checkpoints', 'id']));
+    }
+
+    public function editUnitCheckpoint($id)
+    {
+        $checkpoints = UnitCheckpoint::findOrFail($id);
+        $units = Unit::get();
+        $tests = Test::get();
+        $banks = QuestionBank::get();
+        return view('dashboard.unit.checkpoint.edit', compact(['units', 'tests', 'banks']))->with("checkpoints", $checkpoints);
+    }
+    public function updateUnitCheckpoint(Request $request, $id)
+    {
+        $checkpoints = UnitCheckpoint::findOrFail($id);
+        $data = $request->except('_token');
+        $checkpoints->update($data);
+
+        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+    }
+
+    public function deleteUnitCheckpoint(Request $request, $id)
+    {
+        try {
+            $checkpoints = UnitCheckpoint::findOrFail($id);
+            $checkpoints->delete();
+
+            if ($request->ajax()) {
+                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+            } else {
+                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+            }
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the record with the given ID does not exist
+            if ($request->ajax()) {
+                return response()->json(['error' => __('admin/forms.not_found')], 404);
+            } else {
+                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+            }
+        }
+        // $units = Unit::findOrFail($id);
+        // $units->delete();
+        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+    }
+
     // Unit end
 
 
@@ -396,6 +503,7 @@ class DashboardController extends Controller
         $rules = [];
         $request->validate([
             'type' => 'required|in:' . implode(',', [Test::TYPE_TEST, Test::TYPE_QUIZ, Test::TYPE_HOMEWORK]),
+            'name' => 'required',
         ]);
 
         $data = $request->except('_token');
@@ -782,28 +890,27 @@ class DashboardController extends Controller
     }
     public function addRevisionQuestion(Request $request)
     {
-        // $bankId = +1;
-        // while (QuestionBank::where('id', $bankId)->exists()) {
-        //     // If it exists, increment and check again
-        //     $bankId++;
-        // }
-        // $Id = QuestionBank::create(['id' => $bankId]);
+        $number = +1;
+        while (RevisionQuestionsBank::where('number', $number)->exists()) {
+            $number++;
+        }
 
 
 
         $data = $request->except('_token');
+        $data['number'] = $number;
         $revisionQuestion = RevisionQuestionsBank::create($data);
 
 
         DB::commit();
-        return redirect()->route("admin.revision-question")->with(['success' => __('admin/forms.added_successfully')]);
+        return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
     }
     public function createQuestionBank(Request $request)
     {
-        $questionBank = new QuestionBank();
-        $questionBank->save();
 
-        return response()->json(['id' => $questionBank->id, 'success' => __('admin/forms.added_successfully')]);
+        $data = $request->except('_token');
+        $questionBank = QuestionBank::create($data);
+        return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
     }
     public function getQuestionBanks()
     {

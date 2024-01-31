@@ -17,4 +17,18 @@ $(document).ready(function () {
             $("#choices").css("display", "block");
         }
     });
+    $(".imageWord").css("display", "none");
+    $("#gameType").on("change", function () {
+        if (this.value == 3) {
+            $(".imageWord").css("display", "flex");
+        } else if (this.value == 4) {
+            $(".imageWord").css("display", "flex");
+        } else if (this.value == 5) {
+            $(".imageWord").css("display", "flex");
+        } else if (this.value == 6) {
+            $(".imageWord").css("display", "flex");
+        } else {
+            $(".imageWord").css("display", "none");
+        }
+    });
 });
