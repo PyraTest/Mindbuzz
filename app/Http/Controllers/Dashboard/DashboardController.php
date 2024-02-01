@@ -55,7 +55,7 @@ class DashboardController extends Controller
     // Start Game
     public function getGames()
     {
-        $games = Game::all();
+        $games = Game::paginate(10);
         return view('dashboard.games.index', compact(['games']));
     }
     public function getGame($id)
@@ -516,12 +516,16 @@ class DashboardController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'number' => 'required',
             'unit_id' => 'required',
             'warmup_id' => 'required',
         ]);
+        $number = +1;
+        while (Lesson::where('number', $number)->exists()) {
+            $number++;
+        }
 
         $data = $request->except('_token');
+        $data['number'] = $number;
         Lesson::create($data);
         DB::commit();
 
@@ -643,8 +647,13 @@ class DashboardController extends Controller
     }
     public function addQuestion(Request $request)
     {
+        $number = +1;
+        while (Question::where('number', $number)->exists()) {
+            $number++;
+        }
 
         $data = $request->except(['_token', 'choice_ans', 'choice']);
+        $data['number'] = $number;
         $question = Question::create($data);
         if ($request->type == 1) {
             foreach ($request->choice as $index => $choice) {
@@ -742,8 +751,12 @@ class DashboardController extends Controller
     }
     public function addBenchmark(Request $request)
     {
-
+        $number = +1;
+        while (Benchmark::where('number', $number)->exists()) {
+            $number++;
+        }
         $data = $request->except('_token');
+        $data['number'] = $number;
         $benchmark = Benchmark::create($data);
 
         DB::commit();

@@ -61,16 +61,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
 
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.number') }}</label>
-                                                            <input type="text" name="number" class="form-control"
-                                                                required value="{{ $questions->number }}">
-                                                            @error('number')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
+                                                    
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">

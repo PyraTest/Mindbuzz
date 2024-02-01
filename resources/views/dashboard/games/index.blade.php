@@ -143,9 +143,9 @@ $active_links = ['courses' , 'showusers'];
                                     </table>
                                     </div>
 
-                                    {{-- <div class="justify-content-center d-flex">
+                                    <div class="justify-content-center d-flex">
                                         {!! $games->appends(Request::except('page'))->render() !!}
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
