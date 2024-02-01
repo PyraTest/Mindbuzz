@@ -108,23 +108,24 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.units') }}</label>
-                                                            {{-- <select class="js-select-unit form-control" id="unit"
-                                                                name="unit_id[]" multiple="multiple">
-
-                                                                @foreach ($units as $unit)
-                                                                    <option value="{{ $unit->id }}"
-                                                                        data-program="{{ $unit->program_id }}">
-                                                                        {{ $unit->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select> --}}
-                                                            <select id="unit" name="unit_id[]" class="js-select-unit form-control"></select>
-
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>{{ __('admin.units') }}</label>
+                                                                {{-- <select class="js-select-unit form-control" id="unit"
+                                                                    name="unit_id[]" multiple="multiple">
+    
+                                                                    @foreach ($units as $unit)
+                                                                        <option value="{{ $unit->id }}"
+                                                                            data-program="{{ $unit->program_id }}">
+                                                                            {{ $unit->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select> --}}
+                                                                <select id="unit" name="unit_id[]" class="js-select-unit form-control" multiple="multiple"></select>
+    
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                   
 
 
                                                 </div>
