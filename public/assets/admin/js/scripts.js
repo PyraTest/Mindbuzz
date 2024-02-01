@@ -31,4 +31,5 @@ $(document).ready(function () {
             $(".imageWord").css("display", "none");
         }
     });
+    $(".js-select-unit").select2();
 });

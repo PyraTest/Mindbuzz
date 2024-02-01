@@ -1,7 +1,9 @@
 <?php
 $active_links = ['sub_services', 'addsub_services'];
 ?>
+@section('style')
 
+@endsection
 @extends('layouts.admin')
 @section('content')
 
@@ -73,7 +75,8 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.programs') }}</label>
-                                                            <select name="program_id" class="form-control" id="">
+                                                            <select name="program_id" class="form-control" id="program">
+                                                                <option value="" selected disabled>Select program</option>
                                                                 @foreach ($programs as $program)
                                                                     <option value="{{ $program->id }}">{{ $program->name }}
                                                                     </option>
@@ -103,6 +106,23 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @error('answer')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{{ __('admin.units') }}</label>
+                                                            {{-- <select class="js-select-unit form-control" id="unit"
+                                                                name="unit_id[]" multiple="multiple">
+
+                                                                @foreach ($units as $unit)
+                                                                    <option value="{{ $unit->id }}"
+                                                                        data-program="{{ $unit->program_id }}">
+                                                                        {{ $unit->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select> --}}
+                                                            <select id="unit" name="unit_id[]" class="js-select-unit form-control"></select>
+
                                                         </div>
                                                     </div>
 
@@ -138,5 +158,37 @@ $active_links = ['sub_services', 'addsub_services'];
 @stop
 
 @section('script')
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+    <script>
+        $('#unit').hide();
+
+        // Fetch units based on the selected program
+        $('#program').on('change', function() {
+            var selectedProgram = $(this).val();
+
+            // Make an Ajax request to get units for the selected program
+            $.ajax({
+                url: 'post-units/' + selectedProgram,
+                type: 'GET',
+                success: function(data) {
+                    // Update unit options based on the Ajax response
+                    $('#unit').html('');
+                    $.each(data, function(index, unit) {
+                        $('#unit').append('<option value="' + unit.id + '">' + unit.name +
+                            '</option>');
+                    });
+
+                    // Show the updated unit dropdown
+                    $('#unit').show();
+
+                    // Update Select2 to reflect changes
+                    $('#unit').val('').trigger('change');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 
 @stop

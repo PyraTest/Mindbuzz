@@ -27,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/meteocons/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/morris.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/chartist.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css') }}"> --}}
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/charts/chartist-plugin-tooltip.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -60,7 +60,7 @@
         href="{{ asset('assets/admin/vendors/css/extensions/timedropper.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css') }}">
-
+ 
 
 
 
@@ -101,6 +101,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     @include('dashboard.includes.footer')
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
@@ -130,7 +131,10 @@
     <script src="{{ asset('assets/admin/js/scripts/pages/chat-application.js') }}" type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN MODERN JS-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/admin/js/scripts.js') }}" type="text/javascript"></script>
+    
     <script src="{{ asset('assets/admin/js/core/app-menu.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/core/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/scripts/customizer.js') }}" type="text/javascript"></script>
@@ -147,7 +151,9 @@
     <script src="{{ asset('assets/admin/js/scripts/forms/checkbox-radio.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}" type="text/javascript"></script>
-
+    {{--  Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{--  Select2 --}}
 
 
     {{--
@@ -162,12 +168,11 @@
 
 
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-   
+
 
     <script>
         $(document).ready(function() {
-            
+
 
             function updateSelectOptions() {
                 $.ajax({
@@ -240,60 +245,7 @@
             n.show();
         });
 
-        //delete using noty
-        // $('.delete').click(function(e) {
-
-        //     // console.log($(this).attr('href'));
-        //     var that = $(this)
-
-        //     e.preventDefault();
-
-        //     var n = new Noty({
-        //         text: "تأكيد الحذف",
-        //         layout: "{{ app()->getLocale() === 'ar' ? 'topLeft' : 'topRight' }}",
-        //         type: "warning",
-        //         timeout: 4000,
-        //         killer: true,
-        //         buttons: [
-        //             Noty.button("نعم", 'btn btn-success mr-2', function() {
-        //                 // console.log(that);
-        //                 // // that.closest('form').submit();
-        //                 // // console.log(that.closest('form'));
-        //                 window.location.href = that.attr('href');
-        //                 var url = that.attr('href');
-        //                 var id = that.data('id');
-
-        //                 // Send AJAX request to delete the unit
-        //                 $.ajax({
-        //                     url: url,
-        //                     type: 'DELETE',
-        //                     data: {
-        //                         id: id,
-        //                         _token: '{{ csrf_token() }}',
-        //                     },
-        //                     success: function(data) {
-        //                         // Handle success, e.g., show a success message
-        //                         console.log(data.success);
-
-        //                         // Reload the page after deletion
-        //                         location.reload();
-        //                     },
-        //                     error: function(error) {
-        //                         // Handle error, e.g., show an error message
-        //                         console.error(error.responseText);
-        //                     }
-        //                 });
-        //             }),
-
-        //             Noty.button("لا", 'btn btn-primary mr-2', function() {
-        //                 n.close();
-        //             })
-        //         ]
-        //     });
-
-        //     n.show();
-
-        // }); //end of delete using noty
+       
     </script>
 
     @include('partials._session')
@@ -368,6 +320,7 @@
             }
         }); // End of Preparing AJAX
     </script>
+
 
     @yield('script')
 
