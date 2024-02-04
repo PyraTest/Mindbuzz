@@ -56,6 +56,7 @@ return [
     'video_author' => '  Author',
     'video' => ' video',
     'revision_question' => ' Revision question',
+    'choices' => 'Choices',
     'choice1' => 'First Choice (A)',
     'choice2' => 'Second Choice (B)',
     'choice3' => 'Third Choice (C)',

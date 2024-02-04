@@ -83,20 +83,9 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <div class="col-md-6" id="ans_choice" >
                                                         <div class="form-group">
                                                             <label>{{ __('admin.answer') }}</label>
-                                                            <select name="choice_ans" class="form-control" >
+                                                        <select id="choice_ans" name="choice_ans" class="form-control" >
                                                                 
-                                                                <option value="a">
-                                                                    A
-                                                                </option>
-                                                                <option value="b">
-                                                                    B 
-                                                                </option>
-                                                                <option value="c">
-                                                                    C
-                                                                </option>
-                                                                <option value="d">
-                                                                    D
-                                                                </option>
+                                                                
                                                         </select>
                                                             @error('answer')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -150,14 +139,18 @@ $active_links = ['sub_services', 'addsub_services'];
 
                                                     <div class="choices" id="choices" style="width:100%">
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.choice1') }}</label>
-                                                            <input type="text" id="a" name="choice[]" class="form-control"
-                                                                >
-                                                                <button class="btn-lg btn-primary">+</button>
+                                                        <label>{{ __('admin.choices') }}</label>
+                                                        <div class="form-group row" id="choice_div">
+                                                            
+                                                            
+                                                            <input type="text" id="choices" name="choice[]" style="width:50%" class="form-control"
+                                                                > 
+                                                                <button id="add_to_select" class="btn btn-success" style="width:25%">ADD TO CHOICES</button>
+                                                                
                                                                 
                                                             
                                                         </div>
+                                                        <span id="add_choice" class="btn btn-primary">+</span>
                                                     </div>
                                                     
                                                 </div>

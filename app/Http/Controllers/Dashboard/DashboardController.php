@@ -4,21 +4,19 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
-use App\Models\GameImage;
-use App\Models\GameLetter;
+
+use App\Models\Program;
 use App\Models\QuestionBank;
 use App\Models\RevisionQuestionsBank;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Models\Advertisment;
 use App\Models\Beginning;
 use App\Models\Benchmark;
-use App\Models\SalonReserve;
-use App\Models\Transaction;
-use App\Models\Sliders;
-use App\Models\Program;
+
+
+
 use App\Models\School;
 use App\Models\Course;
 use App\Models\Ending;
@@ -37,8 +35,6 @@ use App\Models\Lesson;
 use App\Models\LessonEnding;
 use App\Models\Presentation;
 use App\Models\UnitCheckpoint;
-use App\Models\Game;
-use App\Models\GameType;
 use App\Traits\backendTraits;
 use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -52,141 +48,7 @@ class DashboardController extends Controller
         $schools = School::all();
         return view('dashboard.index', compact(['schools']));
     }
-    // Start Game
-    public function getGames()
-    {
-        $games = Game::paginate(10);
-        return view('dashboard.games.index', compact(['games']));
-    }
-    public function getGame($id)
-    {
-        $game = Game::find($id);
-        return view('dashboard.games.show', compact(['game']));
-    }
-
-    public function createGame()
-    {
-        $lessons = Lesson::all();
-        $types = GameType::all();
-
-        return view('dashboard.games.create', compact(['lessons', 'types']));
-    }
-
-    public function storeGame(Request $request)
-    {
-
-        $data = $request->except('_token', 'letter', 'image', 'word');
-
-        $game = Game::create($data);
-        $letters = $request->letter;
-        $arr = [];
-        foreach ($letters as $letter) {
-            $i = 0;
-            while ($i < $request->num_of_letter_repeat) {
-                array_push($arr, [
-                    'letter' => $letter, 'index' => $i
-                ]);
-                $i++;
-                $newGameLetter = new GameLetter();
-                $newGameLetter->game_id = $game->id;
-                $newGameLetter->letter = $letter;
-                $newGameLetter->save();
-            }
-        }
-        if (isset($request->image)) {
-            foreach ($request->image as $index => $image) {
-                $gameImage = new GameImage();
-                $gameImage->game_id = $game->id;
-                // $gameImage->game_letter_id = $letters->id;
-                $gameImage->word = $request->word[$index];
-                $gameImage->image = $this->upploadImage($image, 'uploads/games/');
-                $gameImage->save();
-            }
-        }
-
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-
-
-    // End Game
-
-
-    // Program journy
-    public function addProgram(Request $request)
-    {
-
-        $data = $request->except('_token');
-        $program = Program::create($data);
-
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-
-    public function getPrograms()
-    {
-        $programs = Program::with(['school', 'course', 'stage'])->paginate(3);
-        return view('dashboard.program.index', compact(['programs']));
-    }
-    public function createProgram()
-    {
-        $courses = Course::all();
-        $stages = Stage::all();
-        $schools = School::all();
-        return view('dashboard.program.create', compact(['courses', 'stages', 'schools']));
-    }
-    public function showProgram($id)
-    {
-        $programs = Program::find($id);
-        // $units = Unit::where("program_id", $id)->get();
-        return view('dashboard.program.show', compact('programs'));
-    }
-    public function showProgramUnits($id)
-    {
-        $units = Unit::where("program_id", $id)->get();
-        return view('dashboard.program.units.index', compact(['units']));
-    }
-    public function showProgramViewUnit($id)
-    {
-        $units = Unit::findOrFail($id);
-        return view('dashboard.program.units.show', compact(['units']));
-    }
-
-    public function showProgramBenchmarks($id)
-    {
-        $benchmarks = Benchmark::where("program_id", $id)->get();
-        return view('dashboard.program.benchmarks.index', compact(['benchmarks']));
-    }
-    public function showProgramBeginnings($id)
-    {
-        $beginnings = Beginning::where("program_id", $id)->get();
-        return view('dashboard.program.beginnings.index', compact(['beginnings', 'id']));
-    }
-    public function showProgramViewBeginning($id)
-    {
-        $beginnings = Beginning::findOrFail($id);
-        return view('dashboard.program.beginnings.show', compact(['beginnings', 'id']));
-    }
-    public function showProgramViewBenchmark($id)
-    {
-        $benchmarks = Benchmark::findOrFail($id);
-        return view('dashboard.program.benchmarks.show', compact(['benchmarks', 'id']));
-    }
-    public function showProgramViewEnding($id)
-    {
-        $endings = Ending::findOrFail($id);
-        return view('dashboard.program.endings.show', compact(['endings', 'id']));
-    }
-    public function showProgramEndings($id)
-    {
-        $endings = Ending::where("program_id", $id)->get();
-        // dd($units);
-        return view('dashboard.program.endings.index', compact(['endings', 'id']));
-    }
-
-    // End Program journy
+    
 
 
     public function createSchool()
@@ -202,206 +64,9 @@ class DashboardController extends Controller
         return view('dashboard.stage.create');
     }
 
-    //  Units Start
-    public function getUnits()
-    {
-        $units = Unit::paginate(3);
-        return view('dashboard.unit.index', compact(['units']));
-    }
+    
 
-    public function getUnitBeginning($id)
-    {
-        $beginnings = UnitBeginning::where('unit_id', $id)->paginate(3);
-        return view('dashboard.unit.beginning.index', compact(['beginnings', 'id']));
-    }
-
-    public function getUnitLessons($id)
-    {
-        $lessons = Lesson::where('unit_id', $id)->paginate(3);
-        return view('dashboard.unit.lesson.index', compact(['lessons', 'id']));
-    }
-    public function getPresentation($id)
-    {
-        $presentations = Presentation::where('lesson_id', $id)->get();
-        return view('dashboard.unit.lesson.presentation.index', compact(['presentations', 'id']));
-    }
-    public function getLessonWarmup($id)
-    {
-        $lesson = Lesson::with('warmup')->find($id);
-        $warmups = Warmup::where('id', $lesson->warmup_id)->get();
-        return view('dashboard.unit.lesson.lesson-warmup.index', compact(['warmups', 'id']));
-    }
-    public function getEndOfLesson($id)
-    {
-        $lessonEndings = LessonEnding::where('lesson_id', $id)->get();
-        return view('dashboard.unit.lesson.lesson-ending.index', compact(['lessonEndings', 'id']));
-    }
-
-
-
-
-    public function getUnitEnding($id)
-    {
-        $endings = UnitEnding::where('unit_id', $id)->paginate(3);
-        return view('dashboard.unit.ending.index', compact(['endings', 'id']));
-    }
-    public function createUnitEnding($id)
-    {
-        $warmups = Warmup::get();
-        $tests = Test::get();
-        $units = Unit::get();
-        $banks = QuestionBank::get();
-        // $data = $request->except('_token');
-        // $endings = UnitEnding::create($data);
-        return view('dashboard.unit.ending.create', compact(['warmups', 'tests', 'units', 'banks', 'id']));
-    }
-    public function storeUnitEnding(Request $request)
-    {
-
-        $data = $request->except('_token');
-        $endings = UnitEnding::create($data);
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function showUnitEnding($id)
-    {
-        $endings = UnitEnding::findOrFail($id);
-        return view('dashboard.unit.ending.show', compact(['endings', 'id']));
-    }
-    public function showUnitViewBeginning($id)
-    {
-        $beginnings = UnitBeginning::findOrFail($id);
-        return view('dashboard.unit.beginning.show', compact(['beginnings', 'id']));
-    }
-
-
-    public function getUnitCheckpoint($id)
-    {
-        $checkpoints = UnitCheckpoint::where('unit_id', $id)->paginate(3);
-        return view('dashboard.unit.checkpoint.index', compact(['checkpoints', 'id']));
-    }
-
-
-
-    public function createUnitCheckpoint($id)
-    {
-        $units = Unit::get();
-        $tests = Test::get();
-        $banks = QuestionBank::get();
-
-        return view('dashboard.unit.checkpoint.create', compact(['tests', 'units', 'banks', 'id']));
-    }
-    public function storeUnitCheckpoint(Request $request)
-    {
-        // $number = +1;
-        $data = $request->except('_token');
-        $test = UnitCheckpoint::where("unit_id", $request->unit_id)->orderBy("number", "desc")->first();
-        $number = $test ? $test->number + 1 : 1;
-        $data['number'] = $number;
-        $checkpoint = UnitCheckpoint::create($data);
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function showUnitCheckpoint($id)
-    {
-        $checkpoints = UnitCheckpoint::findOrFail($id);
-        return view('dashboard.unit.checkpoint.show', compact(['checkpoints', 'id']));
-    }
-
-    public function editUnitCheckpoint($id)
-    {
-        $checkpoints = UnitCheckpoint::findOrFail($id);
-        $units = Unit::get();
-        $tests = Test::get();
-        $banks = QuestionBank::get();
-        return view('dashboard.unit.checkpoint.edit', compact(['units', 'tests', 'banks']))->with("checkpoints", $checkpoints);
-    }
-    public function updateUnitCheckpoint(Request $request, $id)
-    {
-        $checkpoints = UnitCheckpoint::findOrFail($id);
-        $data = $request->except('_token');
-        $checkpoints->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
-
-    public function deleteUnitCheckpoint(Request $request, $id)
-    {
-        try {
-            $checkpoints = UnitCheckpoint::findOrFail($id);
-            $checkpoints->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-        // $units = Unit::findOrFail($id);
-        // $units->delete();
-        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-    }
-
-    // Unit end
-
-
-    public function createUnit()
-    {
-        $programs = Program::all();
-        return view('dashboard.unit.create')->with("programs", $programs);
-    }
-    public function createUnitBeginning($id)
-    {
-        $tests = Test::all();
-        return view('dashboard.unit.beginning.create', compact(['tests', 'id']));
-    }
-    public function createUnitLesson($id)
-    {
-        $lessons = Lesson::all();
-        $units = Unit::all();
-        $warmups = Warmup::all();
-        return view('dashboard.unit.lesson.create', compact(['lessons', 'units', 'id', 'warmups']));
-    }
-    public function storeUnitBeginning(Request $request)
-    {
-        // |mimes:mp4,mov,avi,wmv,avchd,webm,flv
-        $rules = [];
-        $request->validate([
-            'test_id' => 'required',
-            'video' => 'required',
-            'doc' => 'required|mimes:doc,pdf,docx,ppt,pptx,txt',
-            'test' => 'required|mimes:doc,pdf,docx,ppt,pptx,txt',
-        ]);
-
-        $data = $request->except('_token', 'doc', 'test');
-        $beginning = UnitBeginning::create($data);
-
-        $beginning->doc = $this->upploadImage($request->doc, 'uploads/documents');
-        $beginning->test = $this->upploadImage($request->test, 'uploads/assignments');
-        $beginning->update();
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function editUnit($id)
-    {
-        $units = Unit::findOrFail($id);
-        $programs = Program::all();
-        return view('dashboard.unit.edit', compact("programs"))->with("units", $units);
-    }
-    public function updateUnit(Request $request, $id)
-    {
-        $units = Unit::findOrFail($id);
-        $data = $request->except('_token');
-        $units->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
+    
 
     public function deleteCourse(Request $request, $id)
     {
@@ -449,52 +114,8 @@ class DashboardController extends Controller
         // $units->delete();
         // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
     }
-    public function deleteProgram(Request $request, $id)
-    {
-        try {
-            $program = Program::findOrFail($id);
-            $program->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-        // $units = Unit::findOrFail($id);
-        // $units->delete();
-        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-    }
-    public function deleteUnit(Request $request, $id)
-    {
-        try {
-            $unit = Unit::findOrFail($id);
-            $unit->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-        // $units = Unit::findOrFail($id);
-        // $units->delete();
-        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-    }
+    
+    
     //  Units
 
     //  Tests
@@ -512,25 +133,7 @@ class DashboardController extends Controller
         $tests = Test::all();
         return view('dashboard.unit.lesson.warmup.create', compact(['tests']));
     }
-    public function storeUnitLesson(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'unit_id' => 'required',
-            'warmup_id' => 'required',
-        ]);
-        $number = +1;
-        while (Lesson::where('number', $number)->exists()) {
-            $number++;
-        }
-
-        $data = $request->except('_token');
-        $data['number'] = $number;
-        Lesson::create($data);
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
+    
     public function addWarmup(Request $request)
     {
 
@@ -561,180 +164,11 @@ class DashboardController extends Controller
     }
 
 
-    public function getTests()
-    {
-        $tests = Test::paginate(3);
-        return view('dashboard.test.index')->with("tests", $tests);
-    }
-    public function createTest()
-    {
-        return view('dashboard.test.create');
-    }
-    public function addTest(Request $request)
-    {
-
-        $rules = [];
-        $request->validate([
-            'type' => 'required|in:' . implode(',', [Test::TYPE_TEST, Test::TYPE_QUIZ, Test::TYPE_HOMEWORK]),
-            'name' => 'required',
-        ]);
-
-        $data = $request->except('_token');
-        $test = Test::create($data);
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function editTest($id)
-    {
-        $tests = Test::find($id);
-
-        if (!$tests) {
-            return redirect()->route('tests')->with('error', 'Test not found');
-        }
-
-        $types = Test::distinct('type')->pluck('type');
-
-        return view('dashboard.test.edit', compact('tests', 'types'));
-    }
-    public function updateTest(Request $request, $id)
-    {
-
-        $tests = Test::findOrFail($id);
-        $data = $request->except('_token');
-        $tests->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
-    public function deleteTest(Request $request, $id)
-    {
-        try {
-            $test = Test::findOrFail($id);
-            $test->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-        // $units = Unit::findOrFail($id);
-        // $units->delete();
-        // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-    }
-
     //  End Tests
 
 
 
-    //  Questions
-    public function getQuestions()
-    {
-        $questions = Question::paginate(3);
-        return view('dashboard.question.index')->with("questions", $questions);
-    }
-    public function createQuestion()
-    {
-        $tests = Test::all();
-        return view('dashboard.question.create', compact("tests"));
-    }
-    public function addQuestion(Request $request)
-    {
-        $number = +1;
-        while (Question::where('number', $number)->exists()) {
-            $number++;
-        }
-
-        $data = $request->except(['_token', 'choice_ans', 'choice']);
-        $data['number'] = $number;
-        $question = Question::create($data);
-        if ($request->type == 1) {
-            foreach ($request->choice as $index => $choice) {
-                $new_choice = new Choices();
-                $new_choice->question_id = $question->id;
-                $new_choice->choice = $choice;
-
-
-                switch ($request->choice_ans) {
-                    case 'a':
-                        if ($index == 0) {
-                            $new_choice->answer_flag = 1;
-                        } else
-                            $new_choice->answer_flag = 0;
-                        break;
-                    case 'b':
-                        if ($index == 1) {
-                            $new_choice->answer_flag = 1;
-                        } else
-                            $new_choice->answer_flag = 0;
-                        break;
-                    case 'c':
-                        if ($index == 2) {
-                            $new_choice->answer_flag = 1;
-                        } else
-                            $new_choice->answer_flag = 0;
-                        break;
-                    case 'd':
-                        if ($index == 3) {
-                            $new_choice->answer_flag = 1;
-                        } else
-                            $new_choice->answer_flag = 0;
-                        break;
-                }
-
-                $new_choice->save();
-            }
-        }
-
-
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function editQuestion($id)
-    {
-        $questions = Question::findOrFail($id);
-        $tests = Test::all();
-        return view('dashboard.question.edit', compact("tests"))->with("questions", $questions);
-    }
-    public function updateQuestion(Request $request, $id)
-    {
-
-        $questions = Question::findOrFail($id);
-        $data = $request->except('_token');
-        $questions->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
-    public function deleteQuestion(Request $request, $id)
-    {
-        try {
-            $question = Question::findOrFail($id);
-            $question->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-    }
-
-    // End Questions
+    
 
 
     //  Benchmarks
@@ -959,85 +393,7 @@ class DashboardController extends Controller
 
     // End beginnings
 
-    //  Revision questions
-    public function getRevisionQuestion()
-    {
-        $revisionQuestions = RevisionQuestionsBank::paginate(3);
-        return view('dashboard.revision-question.index')->with("revisionQuestions", $revisionQuestions);
-    }
-    public function createRevisionQuestion()
-    {
-        $questionBanks = QuestionBank::all();
-        return view('dashboard.revision-question.create', compact("questionBanks"));
-    }
-    public function addRevisionQuestion(Request $request)
-    {
-        $number = +1;
-        while (RevisionQuestionsBank::where('number', $number)->exists()) {
-            $number++;
-        }
-
-
-
-        $data = $request->except('_token');
-        $data['number'] = $number;
-        $revisionQuestion = RevisionQuestionsBank::create($data);
-
-
-        DB::commit();
-        return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function createQuestionBank(Request $request)
-    {
-
-        $data = $request->except('_token');
-        $questionBank = QuestionBank::create($data);
-        return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function getQuestionBanks()
-    {
-        $questionBanks = QuestionBank::all();
-
-        return response()->json($questionBanks);
-    }
-
-    public function editRevisionQuestion($id)
-    {
-        $revisionQuestions = RevisionQuestionsBank::findOrFail($id);
-
-        return view('dashboard.revision-question.edit')->with("revisionQuestions", $revisionQuestions);
-    }
-    public function updateRevisionQuestion(Request $request, $id)
-    {
-
-        $revisionQuestions = RevisionQuestionsBank::findOrFail($id);
-        $data = $request->except('_token');
-        $revisionQuestions->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
-    public function deleteRevisionQuestion(Request $request, $id)
-    {
-        try {
-            $revisionQuestion = RevisionQuestionsBank::findOrFail($id);
-            $revisionQuestion->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-    }
-
-    // End revision Question
+   
 
     //  Presentations
     public function getPresentations()
@@ -1100,67 +456,7 @@ class DashboardController extends Controller
 
     // End Presentations
 
-    //  lesson Endings
-    public function getLessonEndings()
-    {
-        $lessonEndings = LessonEnding::paginate(3);
-        return view('dashboard.lesson-endings.index')->with("lessonEndings", $lessonEndings);
-    }
-    public function createLessonEnding()
-    {
-        $lessons = Lesson::all();
-        $tests = Test::all();
-        $homeworks = Test::where("type", 2)->get();
-        return view('dashboard.lesson-endings.create', compact(["lessons", 'tests', 'homeworks']));
-    }
-    public function addLessonEnding(Request $request)
-    {
-        $data = $request->except('_token');
-        $lessonEndings = LessonEnding::create($data);
-
-        DB::commit();
-
-        return redirect()->route("admin.lesson-endings")->with(['success' => __('admin/forms.added_successfully')]);
-    }
-    public function editLessonEnding($id)
-    {
-        $lessonEndings = LessonEnding::findOrFail($id);
-        $lessons = Lesson::all();
-        $tests = Test::all();
-        $homeworks = Test::where("type", 2)->get();
-        return view('dashboard.lesson-endings.edit', compact(["lessons", "tests", "homeworks"]))->with("lessonEndings", $lessonEndings);
-    }
-    public function updateLessonEnding(Request $request, $id)
-    {
-
-        $lessonEndings = LessonEnding::findOrFail($id);
-        $data = $request->except('_token');
-        $lessonEndings->update($data);
-
-        return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
-    }
-    public function deleteLessonEnding(Request $request, $id)
-    {
-        try {
-            $lessonEndings = LessonEnding::findOrFail($id);
-            $lessonEndings->delete();
-
-            if ($request->ajax()) {
-                return response()->json(['success' => __('admin/forms.deleted_successfully')]);
-            } else {
-                return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
-            }
-        } catch (ModelNotFoundException $e) {
-            // Handle the case where the record with the given ID does not exist
-            if ($request->ajax()) {
-                return response()->json(['error' => __('admin/forms.not_found')], 404);
-            } else {
-                return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
-            }
-        }
-    }
-
-    // End lesson Endings
+   
 
     public function addSchool(Request $request)
     {
@@ -1217,23 +513,7 @@ class DashboardController extends Controller
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
     }
 
-    // Add unit
-    public function addUnit(Request $request)
-    {
-
-        $rules = [];
-
-        $number = +1;
-        while (Unit::where('number', $number)->exists()) {
-            $number++;
-        }
-        $data = $request->except('_token');
-        $data["number"] = $number;
-        $unit = Unit::create($data);
-        DB::commit();
-
-        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-    }
+   
 
     public function getSchools()
     {
@@ -1271,5 +551,85 @@ class DashboardController extends Controller
             return redirect()->back()->with(['error' => __('admin/forms.wrong')]);
         }
     } // end of destroy
+
+//  Revision questions
+public function getRevisionQuestion()
+{
+    $revisionQuestions = RevisionQuestionsBank::paginate(3);
+    return view('dashboard.revision-question.index')->with("revisionQuestions", $revisionQuestions);
+}
+public function createRevisionQuestion()
+{
+    $questionBanks = QuestionBank::all();
+    return view('dashboard.revision-question.create', compact("questionBanks"));
+}
+public function addRevisionQuestion(Request $request)
+{
+    $number = +1;
+    while (RevisionQuestionsBank::where('number', $number)->exists()) {
+        $number++;
+    }
+
+
+
+    $data = $request->except('_token');
+    $data['number'] = $number;
+    $revisionQuestion = RevisionQuestionsBank::create($data);
+
+
+    DB::commit();
+    return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
+}
+public function createQuestionBank(Request $request)
+{
+
+    $data = $request->except('_token');
+    $questionBank = QuestionBank::create($data);
+    return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
+}
+public function getQuestionBanks()
+{
+    $questionBanks = QuestionBank::all();
+
+    return response()->json($questionBanks);
+}
+
+public function editRevisionQuestion($id)
+{
+    $revisionQuestions = RevisionQuestionsBank::findOrFail($id);
+
+    return view('dashboard.revision-question.edit')->with("revisionQuestions", $revisionQuestions);
+}
+public function updateRevisionQuestion(Request $request, $id)
+{
+
+    $revisionQuestions = RevisionQuestionsBank::findOrFail($id);
+    $data = $request->except('_token');
+    $revisionQuestions->update($data);
+
+    return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
+}
+public function deleteRevisionQuestion(Request $request, $id)
+{
+    try {
+        $revisionQuestion = RevisionQuestionsBank::findOrFail($id);
+        $revisionQuestion->delete();
+
+        if ($request->ajax()) {
+            return response()->json(['success' => __('admin/forms.deleted_successfully')]);
+        } else {
+            return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
+        }
+    } catch (ModelNotFoundException $e) {
+        // Handle the case where the record with the given ID does not exist
+        if ($request->ajax()) {
+            return response()->json(['error' => __('admin/forms.not_found')], 404);
+        } else {
+            return redirect()->back()->with(['error' => __('admin/forms.not_found')]);
+        }
+    }
+}
+
+// End revision Question
 
 }

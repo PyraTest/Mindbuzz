@@ -31,4 +31,20 @@ $(document).ready(function () {
             $(".imageWord").css("display", "none");
         }
     });
+
+    $("#add_choice").on("click", function () {
+        var i = 0;
+        var bar = $("#choice_div");
+        bar.clone().attr("name", "choices[]").insertAfter(bar);
+        console.log(bar.children()[0]);
+        bar.children()[0].prop("disabled", false);
+    });
+    $("#add_to_select").on("click", function () {
+        console.log($(this).parent().children());
+        var value = $(this).parent().children()[0].value;
+        $(this).prop("disabled", true);
+        $("#choice_ans").append(
+            "<option value=" + value + ">" + value + "</option>"
+        );
+    });
 });

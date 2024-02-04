@@ -56,19 +56,19 @@ Route::group([
 
 
         Route::group(['prefix' => 'program'], function () {
-            Route::get('/', 'DashboardController@getPrograms')->name('admin.programs');
-            Route::get('/create', 'DashboardController@createProgram')->name('admin.create_program');
-            Route::post('/store', 'DashboardController@addProgram')->name('admin.add_program');
-            Route::get("/show/program/{id}", 'DashboardController@showProgram')->name('admin.show_program');
-            Route::get("/show/program/units/{id}", 'DashboardController@showProgramUnits')->name('admin.show_program_units');
-            Route::get("/show/program/view-unit/{id}", 'DashboardController@showProgramViewUnit')->name('admin.show_program_view_unit');
-            Route::get("/show/program/beginnings/{id}", 'DashboardController@showProgramBeginnings')->name('admin.show_program_beginnings');
-            Route::get("/show/program/view-beginning/{id}", 'DashboardController@showProgramViewBeginning')->name('admin.show_program_view_beginning');
-            Route::get("/show/program/benchmarks/{id}", 'DashboardController@showProgramBenchmarks')->name('admin.show_program_benchmarks');
-            Route::get("/show/program/view-benchmark/{id}", 'DashboardController@showProgramViewBenchmark')->name('admin.show_program_view_benchmark');
-            Route::get("/show/program/endings/{id}", 'DashboardController@showProgramEndings')->name('admin.show_program_endings');
-            Route::get("/show/program/view-ending/{id}", 'DashboardController@showProgramViewEnding')->name('admin.show_program_view_ending');
-            Route::delete('/delete/{id}', 'DashboardController@deleteProgram')->name('admin.delete_program');
+            Route::get('/', 'ProgramController@getPrograms')->name('admin.programs');
+            Route::get('/create', 'ProgramController@createProgram')->name('admin.create_program');
+            Route::post('/store', 'ProgramController@addProgram')->name('admin.add_program');
+            Route::get("/show/program/{id}", 'ProgramController@showProgram')->name('admin.show_program');
+            Route::get("/show/program/units/{id}", 'ProgramController@showProgramUnits')->name('admin.show_program_units');
+            Route::get("/show/program/view-unit/{id}", 'ProgramController@showProgramViewUnit')->name('admin.show_program_view_unit');
+            Route::get("/show/program/beginnings/{id}", 'ProgramController@showProgramBeginnings')->name('admin.show_program_beginnings');
+            Route::get("/show/program/view-beginning/{id}", 'ProgramController@showProgramViewBeginning')->name('admin.show_program_view_beginning');
+            Route::get("/show/program/benchmarks/{id}", 'ProgramController@showProgramBenchmarks')->name('admin.show_program_benchmarks');
+            Route::get("/show/program/view-benchmark/{id}", 'ProgramController@showProgramViewBenchmark')->name('admin.show_program_view_benchmark');
+            Route::get("/show/program/endings/{id}", 'ProgramController@showProgramEndings')->name('admin.show_program_endings');
+            Route::get("/show/program/view-ending/{id}", 'ProgramController@showProgramViewEnding')->name('admin.show_program_view_ending');
+            Route::delete('/delete/{id}', 'ProgramController@deleteProgram')->name('admin.delete_program');
         
         });
         Route::group(['prefix' => 'schools'], function () {
@@ -90,61 +90,61 @@ Route::group([
 
         });
         Route::group(['prefix' => 'units'], function () {
-            Route::get('/', 'DashboardController@getUnits')->name('admin.units');
-            Route::get('/create', 'DashboardController@createUnit')->name('admin.create_unit');
-            Route::post('/store', 'DashboardController@addUnit')->name('admin.add_unit');
-            Route::get('/edit/{id}', 'DashboardController@editUnit')->name('admin.edit_unit');
-            Route::patch('/update/{id}', 'DashboardController@updateUnit')->name('admin.update_unit');
-            Route::delete('/delete/{id}', 'DashboardController@deleteUnit')->name('admin.delete_unit');
+            Route::get('/', 'UnitController@getUnits')->name('admin.units');
+            Route::get('/create', 'UnitController@createUnit')->name('admin.create_unit');
+            Route::post('/store', 'UnitController@addUnit')->name('admin.add_unit');
+            Route::get('/edit/{id}', 'UnitController@editUnit')->name('admin.edit_unit');
+            Route::patch('/update/{id}', 'UnitController@updateUnit')->name('admin.update_unit');
+            Route::delete('/delete/{id}', 'UnitController@deleteUnit')->name('admin.delete_unit');
 
 
             // Journey Start
-            Route::get('/begin/{id}', 'DashboardController@getUnitBeginning')->name('admin.unit_begin');
-            Route::get('/create_begin/{id}', 'DashboardController@createUnitBeginning')->name('admin.create_unit_begin');
-            Route::post('/store_begin', 'DashboardController@storeUnitBeginning')->name('admin.store_unit_begin');
-            Route::get("/show/view-beginning/{id}", 'DashboardController@showUnitViewBeginning')->name('admin.show_unit_view_beginning');
+            Route::get('/begin/{id}', 'UnitController@getUnitBeginning')->name('admin.unit_begin');
+            Route::get('/create_begin/{id}', 'UnitController@createUnitBeginning')->name('admin.create_unit_begin');
+            Route::post('/store_begin', 'UnitController@storeUnitBeginning')->name('admin.store_unit_begin');
+            Route::get("/show/view-beginning/{id}", 'UnitController@showUnitViewBeginning')->name('admin.show_unit_view_beginning');
 
-            Route::get('/lessons/{id}', 'DashboardController@getUnitLessons')->name('admin.unit_lessons');
-            Route::get('/create_lesson/{id}', 'DashboardController@createUnitLesson')->name('admin.create_unit_lesson');
-            Route::post('/store_lesson', 'DashboardController@storeUnitLesson')->name('admin.store_unit_lesson');
-            Route::get('/checkpoints/{id}', 'DashboardController@getUnitCheckpoint')->name('admin.unit_checkpoint');
-            Route::get('/end/{id}', 'DashboardController@getUnitEnding')->name('admin.unit_end');
-            Route::get('/create_ending/{id}', 'DashboardController@createUnitEnding')->name('admin.create_unit_end');
-            Route::post('/store_ending', 'DashboardController@storeUnitEnding')->name('admin.store_unit_end');
-            Route::get('/show_ending/{id}', 'DashboardController@showUnitEnding')->name('admin.show_view_ending');
-            Route::get('/lesson/presentations/{id}', 'DashboardController@getPresentation')->name('admin.lesson_presentaion');
-            Route::get('/lesson/warmups/{id}', 'DashboardController@getLessonWarmup')->name('admin.lesson_warmup');
-            Route::get('/lesson/lesson_ending/{id}', 'DashboardController@getEndOfLesson')->name('admin.lesson_ending');
-
-
+            Route::get('/lessons/{id}', 'UnitController@getUnitLessons')->name('admin.unit_lessons');
+            Route::get('/create_lesson/{id}', 'UnitController@createUnitLesson')->name('admin.create_unit_lesson');
+            Route::post('/store_lesson', 'UnitController@storeUnitLesson')->name('admin.store_unit_lesson');
+            Route::get('/checkpoints/{id}', 'UnitController@getUnitCheckpoint')->name('admin.unit_checkpoint');
+            Route::get('/end/{id}', 'UnitController@getUnitEnding')->name('admin.unit_end');
+            Route::get('/create_ending/{id}', 'UnitController@createUnitEnding')->name('admin.create_unit_end');
+            Route::post('/store_ending', 'UnitController@storeUnitEnding')->name('admin.store_unit_end');
+            Route::get('/show_ending/{id}', 'UnitController@showUnitEnding')->name('admin.show_view_ending');
+            Route::get('/lesson/presentations/{id}', 'UnitController@getPresentation')->name('admin.lesson_presentaion');
+            Route::get('/lesson/warmups/{id}', 'UnitController@getLessonWarmup')->name('admin.lesson_warmup');
+            Route::get('/lesson/lesson_ending/{id}', 'UnitController@getEndOfLesson')->name('admin.lesson_ending');
 
 
-            Route::get('/create_checkpoint/{id}', 'DashboardController@createUnitCheckpoint')->name('admin.create_unit_checkpoint');
-            Route::post('/store_checkpoint', 'DashboardController@storeUnitCheckpoint')->name('admin.store_unit_checkpoint');
-            Route::get('/show_checkpoint/{id}', 'DashboardController@showUnitCheckpoint')->name('admin.show_view_checkpoint');
 
-            Route::get('/edit/checkpoint/{id}', 'DashboardController@editUnitCheckpoint')->name('admin.edit_unit_checkpoint');
-            Route::patch('/update/checkpoint/{id}', 'DashboardController@updateUnitCheckpoint')->name('admin.update_unit_checkpoint');
-            Route::delete('/delete/checkpoint/{id}', 'DashboardController@deleteUnitCheckpoint')->name('admin.delete_unit_checkpoint');
+
+            Route::get('/create_checkpoint/{id}', 'UnitController@createUnitCheckpoint')->name('admin.create_unit_checkpoint');
+            Route::post('/store_checkpoint', 'UnitController@storeUnitCheckpoint')->name('admin.store_unit_checkpoint');
+            Route::get('/show_checkpoint/{id}', 'UnitController@showUnitCheckpoint')->name('admin.show_view_checkpoint');
+
+            Route::get('/edit/checkpoint/{id}', 'UnitController@editUnitCheckpoint')->name('admin.edit_unit_checkpoint');
+            Route::patch('/update/checkpoint/{id}', 'UnitController@updateUnitCheckpoint')->name('admin.update_unit_checkpoint');
+            Route::delete('/delete/checkpoint/{id}', 'UnitController@deleteUnitCheckpoint')->name('admin.delete_unit_checkpoint');
 
             // Journey End
         });
 
         Route::group(['prefix' => 'tests'], function () {
-            Route::get('/', 'DashboardController@getTests')->name('admin.tests');
-            Route::get('/create', 'DashboardController@createTest')->name('admin.create_test');
-            Route::post('/store', 'DashboardController@addTest')->name('admin.add_test');
-            Route::get('/edit/{id}', 'DashboardController@editTest')->name('admin.edit_test');
-            Route::patch('/update/{id}', 'DashboardController@updateTest')->name('admin.update_test');
-            Route::delete('/delete/{id}', 'DashboardController@deleteTest')->name('admin.delete_test');
+            Route::get('/', 'TestController@getTests')->name('admin.tests');
+            Route::get('/create', 'TestController@createTest')->name('admin.create_test');
+            Route::post('/store', 'TestController@addTest')->name('admin.add_test');
+            Route::get('/edit/{id}', 'TestController@editTest')->name('admin.edit_test');
+            Route::patch('/update/{id}', 'TestController@updateTest')->name('admin.update_test');
+            Route::delete('/delete/{id}', 'TestController@deleteTest')->name('admin.delete_test');
         });
         Route::group(['prefix' => 'questions'], function () {
-            Route::get('/', 'DashboardController@getQuestions')->name('admin.questions');
-            Route::get('/create', 'DashboardController@createQuestion')->name('admin.create_question');
-            Route::post('/store', 'DashboardController@addQuestion')->name('admin.add_question');
-            Route::get('/edit/{id}', 'DashboardController@editQuestion')->name('admin.edit_question');
-            Route::patch('/update/{id}', 'DashboardController@updateQuestion')->name('admin.update_question');
-            Route::delete('/delete/{id}', 'DashboardController@deleteQuestion')->name('admin.delete_question');
+            Route::get('/', 'QuestionController@getQuestions')->name('admin.questions');
+            Route::get('/create', 'QuestionController@createQuestion')->name('admin.create_question');
+            Route::post('/store', 'QuestionController@addQuestion')->name('admin.add_question');
+            Route::get('/edit/{id}', 'QuestionController@editQuestion')->name('admin.edit_question');
+            Route::patch('/update/{id}', 'QuestionController@updateQuestion')->name('admin.update_question');
+            Route::delete('/delete/{id}', 'QuestionController@deleteQuestion')->name('admin.delete_question');
         });
         Route::group(['prefix' => 'benchmarks'], function () {
             Route::get('/', 'DashboardController@getBenchmarks')->name('admin.benchmarks');
@@ -203,10 +203,10 @@ Route::group([
             Route::post('/store', 'DashboardController@addWarmup')->name('admin.store_warmup');
         });
         Route::group(['prefix' => 'games'], function () {
-            Route::get('/', 'DashboardController@getGames')->name('admin.games');
-            Route::get('/create', 'DashboardController@createGame')->name('admin.create_game');
-            Route::post('/store', 'DashboardController@storeGame')->name('admin.store_game');
-            Route::post('/show/{id}', 'DashboardController@getGame')->name('admin.show_game');
+            Route::get('/', 'GameController@getGames')->name('admin.games');
+            Route::get('/create', 'GameController@createGame')->name('admin.create_game');
+            Route::post('/store', 'GameController@storeGame')->name('admin.store_game');
+            Route::post('/show/{id}', 'GameController@getGame')->name('admin.show_game');
         });
     });
 });
