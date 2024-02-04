@@ -56,6 +56,7 @@ return [
     'video_author' => '  Author',
     'video' => ' video',
     'revision_question' => ' Revision question',
+    'choices' => 'Choices',
     'choice1' => 'First Choice (A)',
     'choice2' => 'Second Choice (B)',
     'choice3' => 'Third Choice (C)',
@@ -182,6 +183,15 @@ return [
     'assignment' => 'Assignment',
     'hint' => 'Hint',
 
+    'letters'=> 'Letters',
+    'word'=> 'Word',
+    'game_type'=> 'Game type',
+    'audio'=> 'Audio',
+    'num_letter'=> 'Number letter',
+    'num_letter_repeat'=> 'Number letter repeat',
+    'num_trial'=> 'Number trial',
+    'assignment'=> 'Assignment',
+    
     'admins' => 'Admins',
     'cannot_delete_parent_cata' => 'You cannot delete main category',
     'added'   => 'The data was saved successfully',
