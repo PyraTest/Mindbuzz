@@ -87,7 +87,6 @@ Route::group([
             Route::get('/create', 'DashboardController@createStage')->name('admin.create_stage');
             Route::post('/store', 'DashboardController@addStage')->name('admin.add_stage');
             Route::delete('/delete/{id}', 'DashboardController@deleteStage')->name('admin.delete_stage');
-
         });
         Route::group(['prefix' => 'units'], function () {
             Route::get('/', 'UnitController@getUnits')->name('admin.units');
@@ -149,6 +148,7 @@ Route::group([
         Route::group(['prefix' => 'benchmarks'], function () {
             Route::get('/', 'DashboardController@getBenchmarks')->name('admin.benchmarks');
             Route::get('/create', 'DashboardController@createBenchmark')->name('admin.create_benchmark');
+            Route::get('/post-units/{program}', 'DashboardController@postUnits')->name('admin.post_units');
             Route::post('/store', 'DashboardController@addBenchmark')->name('admin.add_benchmark');
             Route::get('/edit/{id}', 'DashboardController@editBenchmark')->name('admin.edit_benchmark');
             Route::patch('/update/{id}', 'DashboardController@updateBenchmark')->name('admin.update_benchmark');

@@ -3298,9 +3298,9 @@ input[type="month"].form-control {
   text-transform: uppercase;
   font-weight: 400; }
 
-.select2-container--classic:focus,
+/* .select2-container--classic:focus,
 .select2-container--default:focus {
-  outline: none; }
+  outline: none; } */
 
 .select2-container--classic .img-flag,
 .select2-container--default .img-flag {
@@ -3334,7 +3334,7 @@ input[type="month"].form-control {
   min-height: 40px !important;
   padding: 5px 8px !important;
   border-color: #D9D9D9 !important; }
-  .select2-container--classic .select2-selection--multiple .select2-selection__choice,
+  /* .select2-container--classic .select2-selection--multiple .select2-selection__choice,
   .select2-container--default .select2-selection--multiple .select2-selection__choice {
     padding: 2px 6px !important;
     margin-top: 0px !important;
@@ -3342,16 +3342,16 @@ input[type="month"].form-control {
     border-color: #3a44e1 !important;
     color: #FFFFFF;
     margin-right: 8px !important;
-    margin-bottom: 2px; }
+    margin-bottom: 2px; } */
   .select2-container--classic .select2-selection--multiple .select2-selection__rendered,
   .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     display: block !important;
     padding: 0 !important; }
-  .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove,
+  /* .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove,
   .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: #FFFFFF !important;
     float: right;
-    margin-left: 0.5rem; }
+    margin-left: 0.5rem; } */
   .select2-container--classic .select2-selection--multiple i,
   .select2-container--default .select2-selection--multiple i {
     position: relative;

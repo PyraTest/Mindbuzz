@@ -177,11 +177,17 @@ class DashboardController extends Controller
         $benchmarks = Benchmark::paginate(3);
         return view('dashboard.benchmark.index')->with("benchmarks", $benchmarks);
     }
-    public function createBenchmark()
+    public function postUnits($program)
+    {
+        $units = Unit::where("program_id", $program)->get();
+        return response()->json($units);
+    }
+    public function createBenchmark(Program $program)
     {
         $programs = Program::all();
         $tests = Test::all();
-        return view('dashboard.benchmark.create', compact("tests", "programs"));
+        $units = Unit::all();
+        return view('dashboard.benchmark.create', compact(["tests", "programs", 'units']));
     }
     public function addBenchmark(Request $request)
     {

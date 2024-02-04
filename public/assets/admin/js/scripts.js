@@ -47,4 +47,5 @@ $(document).ready(function () {
             "<option value=" + value + ">" + value + "</option>"
         );
     });
+    $(".js-select-unit").select2();
 });
