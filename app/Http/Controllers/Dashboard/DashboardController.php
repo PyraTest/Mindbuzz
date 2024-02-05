@@ -855,7 +855,7 @@ class DashboardController extends Controller
 
         $rules = [];
 
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]$/|string|max:30']);
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
         $data = $request->except('_token');
         if(Course::where('name',$request->name)->count() == 0)
         $course = Course::create($data);
