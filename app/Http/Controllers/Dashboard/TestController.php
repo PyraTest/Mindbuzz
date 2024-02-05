@@ -53,10 +53,20 @@ class TestController extends Controller
     }
     public function updateTest(Request $request, $id)
     {
+        $request->validate([
+            'type' => 'required|in:' . implode(',', [Test::TYPE_TEST, Test::TYPE_QUIZ, Test::TYPE_HOMEWORK]),
+            'name' => 'required|max:16',
+        ]);
 
+        
         $tests = Test::findOrFail($id);
         $data = $request->except('_token');
+        if(Test::where('name',$request->name)->where('type',$request->type)->count() == 0)
         $tests->update($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
+        
 
         return redirect()->back()->with(['success' => __('admin/forms.updated_successfully')]);
     }
