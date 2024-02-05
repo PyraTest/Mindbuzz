@@ -104,7 +104,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             <input type="text" name="num_of_letters" id="num_of_letters"
                                                                 class="form-control" required>
                                                             <label>{{ __('admin.num_of_letters_repeat') }}</label>
-                                                            <input type="text" name="num_of_letter_repeat"
+                                                            <input type="number" min="1" max="9" name="num_of_letter_repeat"
                                                                 id="num_of_letters_repeat" class="form-control" required>
                                                             @error('num_of_letters')
                                                                 <span class="text-danger">{{ $message }}</span>
