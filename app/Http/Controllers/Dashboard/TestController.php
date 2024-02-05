@@ -13,7 +13,7 @@ class TestController extends Controller
     
     public function getTests()
     {
-        $tests = Test::paginate(3);
+        $tests = Test::paginate(25);
         return view('dashboard.test.index')->with("tests", $tests);
     }
     public function createTest()

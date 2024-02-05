@@ -35,7 +35,7 @@ class ProgramController extends Controller
 
     public function getPrograms()
     {
-        $programs = Program::with(['school', 'course', 'stage'])->paginate(3);
+        $programs = Program::with(['school', 'course', 'stage'])->paginate(25);
         return view('dashboard.program.index', compact(['programs']));
     }
     public function createProgram()

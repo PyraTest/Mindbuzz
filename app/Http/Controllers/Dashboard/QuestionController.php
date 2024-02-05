@@ -18,7 +18,7 @@ class QuestionController extends Controller
    //  Questions
    public function getQuestions()
    {
-       $questions = Question::paginate(3);
+       $questions = Question::paginate(25);
        return view('dashboard.question.index')->with("questions", $questions);
    }
    public function createQuestion()

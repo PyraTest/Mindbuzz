@@ -35,7 +35,7 @@ class LessonController extends Controller
      //  lesson Endings
      public function getLessonEndings()
      {
-         $lessonEndings = LessonEnding::paginate(3);
+         $lessonEndings = LessonEnding::paginate(25);
          return view('dashboard.lesson-endings.index')->with("lessonEndings", $lessonEndings);
      }
      public function createLessonEnding()

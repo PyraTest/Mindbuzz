@@ -24,19 +24,19 @@ class UnitController extends Controller
     //  Units Start
     public function getUnits()
     {
-        $units = Unit::paginate(3);
+        $units = Unit::paginate(25);
         return view('dashboard.unit.index', compact(['units']));
     }
 
     public function getUnitBeginning($id)
     {
-        $beginnings = UnitBeginning::where('unit_id', $id)->paginate(3);
+        $beginnings = UnitBeginning::where('unit_id', $id)->paginate(25);
         return view('dashboard.unit.beginning.index', compact(['beginnings', 'id']));
     }
 
     public function getUnitLessons($id)
     {
-        $lessons = Lesson::where('unit_id', $id)->paginate(3);
+        $lessons = Lesson::where('unit_id', $id)->paginate(25);
         return view('dashboard.unit.lesson.index', compact(['lessons', 'id']));
     }
     public function getPresentation($id)
@@ -61,7 +61,7 @@ class UnitController extends Controller
 
     public function getUnitEnding($id)
     {
-        $endings = UnitEnding::where('unit_id', $id)->paginate(3);
+        $endings = UnitEnding::where('unit_id', $id)->paginate(25);
         return view('dashboard.unit.ending.index', compact(['endings', 'id']));
     }
     public function createUnitEnding($id)
@@ -95,7 +95,7 @@ class UnitController extends Controller
 
     public function getUnitCheckpoint($id)
     {
-        $checkpoints = UnitCheckpoint::where('unit_id', $id)->paginate(3);
+        $checkpoints = UnitCheckpoint::where('unit_id', $id)->paginate(25);
         return view('dashboard.unit.checkpoint.index', compact(['checkpoints', 'id']));
     }
 
