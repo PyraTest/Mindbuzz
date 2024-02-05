@@ -24,9 +24,19 @@ class ProgramController extends Controller
     // Program journy
     public function addProgram(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required|max:16',
+        ]);
         $data = $request->except('_token');
+        if(Program::where('name',$request->name)->where('course_id',$request->course_id)
+            ->where('stage_id',$request->stage_id)->where('school_id',$request->school_id)
+            ->count() == 0)
         $program = Program::create($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
+        
+        
 
         DB::commit();
 

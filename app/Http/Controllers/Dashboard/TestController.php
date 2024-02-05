@@ -54,7 +54,6 @@ class TestController extends Controller
     public function updateTest(Request $request, $id)
     {
         $request->validate([
-            'type' => 'required|in:' . implode(',', [Test::TYPE_TEST, Test::TYPE_QUIZ, Test::TYPE_HOMEWORK]),
             'name' => 'required|max:16',
         ]);
 
