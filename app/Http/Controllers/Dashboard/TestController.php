@@ -30,7 +30,11 @@ class TestController extends Controller
         ]);
 
         $data = $request->except('_token');
+        if(Test::where('name',$request->name)->where('type',$request->type)->count() == 0)
         $test = Test::create($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
         DB::commit();
 
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
