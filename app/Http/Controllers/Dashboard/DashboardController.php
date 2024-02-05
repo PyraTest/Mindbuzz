@@ -855,9 +855,13 @@ class DashboardController extends Controller
 
         $rules = [];
 
-
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]$/|string|max:30']);
         $data = $request->except('_token');
+        if(Course::where('name',$request->name)->count() == 0)
         $course = Course::create($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
         // save photo category
         // if ($request->hasFile('icon')) {
         //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
