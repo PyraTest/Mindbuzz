@@ -26,7 +26,7 @@ class TestController extends Controller
         $rules = [];
         $request->validate([
             'type' => 'required|in:' . implode(',', [Test::TYPE_TEST, Test::TYPE_QUIZ, Test::TYPE_HOMEWORK]),
-            'name' => 'required',
+            'name' => 'required|max:16',
         ]);
 
         $data = $request->except('_token');
