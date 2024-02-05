@@ -873,17 +873,17 @@ class DashboardController extends Controller
 
     public function getSchools()
     {
-        $schools = School::paginate(3);
+        $schools = School::paginate(25);
         return view('dashboard.school.index', compact(['schools']));
     }
     public function getCourses()
     {
-        $courses = Course::paginate(3);
+        $courses = Course::paginate(25);
         return view('dashboard.course.index', compact(['courses']));
     }
     public function getStages()
     {
-        $stages = Stage::paginate(10);
+        $stages = Stage::paginate(25);
         return view('dashboard.stage.index', compact(['stages']));
     }
 
