@@ -60,11 +60,7 @@ $active_links = ['sub_services', 'addsub_services'];
 
 
 
-<<<<<<< HEAD
-
-=======
                                                    
->>>>>>> 15ab33b8bff52052dcdc6bacd5d9fd21fea0703d
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.question') }}</label>
@@ -75,9 +71,8 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6" id="ans">
+                                                    <div class="col-md-6" >
                                                         <div class="form-group">
-<<<<<<< HEAD
                                                             <label>{{ __('admin.hint') }}</label>
                                                             <input type="text" name="hint" class="form-control">
                                                             @error('hint')
@@ -87,8 +82,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     </div>
                                                     <div class="col-md-6" id="ans">
                                                         <div class="form-group">
-=======
->>>>>>> 15ab33b8bff52052dcdc6bacd5d9fd21fea0703d
                                                             <label>{{ __('admin.answer') }}</label>
                                                             <textarea name="answer" class="form-control" id="answer" cols="30" rows="10"></textarea>
                                                             @error('answer')
@@ -96,27 +89,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             @enderror
                                                         </div>
                                                     </div>
-<<<<<<< HEAD
-                                                    
-                                                    <div class="col-md-6" id="ans_choice">
-                                                        <div class="form-group">
-                                                            <label>{{ __('admin.answer') }}</label>
-                                                            <select name="choice_ans" class="form-control">
-
-                                                                <option value="a">
-                                                                    A
-                                                                </option>
-                                                                <option value="b">
-                                                                    B
-                                                                </option>
-                                                                <option value="c">
-                                                                    C
-                                                                </option>
-                                                                <option value="d">
-                                                                    D
-                                                                </option>
-                                                            </select>
-=======
                                                     <div class="col-md-6" id="ans_choice" >
                                                         <div class="form-group">
                                                             <label>{{ __('admin.answer') }}</label>
@@ -124,7 +96,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                                 
                                                                 
                                                         </select>
->>>>>>> 15ab33b8bff52052dcdc6bacd5d9fd21fea0703d
                                                             @error('answer')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -157,19 +128,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>{{ __('admin.type') }}</label>
-<<<<<<< HEAD
-                                                            <select name="type" id="type_id" class="form-control">
-
-                                                                <option value="0">
-                                                                    Complete question
-                                                                </option>
-                                                                <option value="1">
-                                                                    Choices
-                                                                </option>
-                                                                <option value="2">
-                                                                    True / False
-                                                                </option>
-=======
                                                             <select name="type" id="type_id" class="form-control" >
                                                                 
                                                                     <option value="0">
@@ -181,7 +139,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                                     <option value="2">
                                                                         True / False
                                                                     </option>
->>>>>>> 15ab33b8bff52052dcdc6bacd5d9fd21fea0703d
                                                             </select>
                                                             @error('type_id')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -190,42 +147,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     </div>
 
                                                     <div class="choices" id="choices" style="width:100%">
-<<<<<<< HEAD
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>{{ __('admin.choice1') }}</label>
-                                                                <input type="text" id="a" name="choice[]"
-                                                                    class="form-control">
-                                                                <button class="btn-lg btn-primary">+</button>
-
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="complete" id="complete" style="width:100%">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>{{ __('admin.first_part') }}</label>
-                                                                <input type="text" name="first_part"
-                                                                    class="form-control">
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>{{ __('admin.second_part') }}</label>
-                                                                <input type="text" name="second_part"
-                                                                    class="form-control">
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-=======
                                                     <div class="col-md-6">
                                                         <label>{{ __('admin.choices') }}</label>
                                                         <div class="form-group row" id="choice_div">
@@ -264,7 +185,6 @@ $active_links = ['sub_services', 'addsub_services'];
                                                     </div>
                                                 </div>
                                                 
->>>>>>> 15ab33b8bff52052dcdc6bacd5d9fd21fea0703d
                                                 </div>
 
 

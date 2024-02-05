@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Unit;
 use App\Models\Benchmark;
 use App\Models\Beginning;
+use App\Models\BenchmarkAssignTo;
 use App\Models\Ending;
 use App\Traits\backendTraits;
 use App\Traits\HelpersTrait;
@@ -47,8 +48,12 @@ class ProgramController extends Controller
     public function showProgram($id)
     {
         $programs = Program::find($id);
-        // $units = Unit::where("program_id", $id)->get();
-        return view('dashboard.program.show', compact('programs'));
+        $units = BenchmarkAssignTo::orderBy('unit_id')
+            ->orderBy('benchmark_id')
+                ->get()
+            ->groupBy('benchmark_id');
+
+        return view('dashboard.program.show', compact(['programs', 'units']));
     }
     public function showProgramUnits($id)
     {

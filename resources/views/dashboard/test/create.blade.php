@@ -64,7 +64,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                         <div class="form-group">
                                                             <label>{{ __('admin.name') }}</label>
                                                             <input type="text" class="form-control" placeholder="name" name="name">
-                                                            @error('type')
+                                                            @error('name')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>

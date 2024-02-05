@@ -189,12 +189,12 @@ Route::group([
             Route::delete('/delete/{id}', 'DashboardController@deletePresentation')->name('admin.delete_presentation');
         });
         Route::group(['prefix' => 'lesson-endings'], function () {
-            Route::get('/', 'DashboardController@getLessonEndings')->name('admin.lesson-endings');
-            Route::get('/create', 'DashboardController@createLessonEnding')->name('admin.create_lesson_ending');
-            Route::post('/store', 'DashboardController@addLessonEnding')->name('admin.add_lesson_ending');
-            Route::get('/edit/{id}', 'DashboardController@editLessonEnding')->name('admin.edit_lesson_ending');
-            Route::patch('/update/{id}', 'DashboardController@updateLessonEnding')->name('admin.update_lesson_ending');
-            Route::delete('/delete/{id}', 'DashboardController@deleteLessonEnding')->name('admin.delete_lesson_ending');
+            Route::get('/', 'LessonController@getLessonEndings')->name('admin.lesson-endings');
+            Route::get('/create', 'LessonController@createLessonEnding')->name('admin.create_lesson_ending');
+            Route::post('/store', 'LessonController@addLessonEnding')->name('admin.add_lesson_ending');
+            Route::get('/edit/{id}', 'LessonController@editLessonEnding')->name('admin.edit_lesson_ending');
+            Route::patch('/update/{id}', 'LessonController@updateLessonEnding')->name('admin.update_lesson_ending');
+            Route::delete('/delete/{id}', 'LessonController@deleteLessonEnding')->name('admin.delete_lesson_ending');
         });
 
         Route::group(['prefix' => 'warmups'], function () {
