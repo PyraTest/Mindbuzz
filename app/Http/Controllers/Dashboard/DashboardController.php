@@ -841,7 +841,7 @@ class DashboardController extends Controller
     }
     public function getStages()
     {
-        $stages = Stage::paginate(3);
+        $stages = Stage::paginate(10);
         return view('dashboard.stage.index', compact(['stages']));
     }
 
