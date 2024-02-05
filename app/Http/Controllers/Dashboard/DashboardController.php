@@ -825,27 +825,26 @@ class DashboardController extends Controller
     public function addStage(Request $request)
     {
 
-        $rules = [];
 
         $rules = [];
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+$/u']);
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]+$/']);
         
-        // $data = $request->except('_token');
-        if(School::where('name',$request->name)->count() == 0)
-        $school = School::create($data);
+        $data = $request->except('_token');
+        if(Stage::where('name',$request->name)->count() == 0)
+        $stage = Stage::create($data);
     else
     return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
 
 
 
 
-        $data = $request->except('_token');
-        $stage = Stage::create($data);
-        // save photo category
-        // if ($request->hasFile('icon')) {
-        //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
-        //     $city->save();
-        // } // end of upload photo
+        // $data = $request->except('_token');
+        // $stage = Stage::create($data);
+        // // save photo category
+        // // if ($request->hasFile('icon')) {
+        // //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
+        // //     $city->save();
+        // // } // end of upload photo
 
         DB::commit();
 
