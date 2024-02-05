@@ -99,10 +99,9 @@ $active_links = ['stages', 'showusers'];
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                     @foreach ($stages as $index => $stage)
                                                         <tr>
-                                                            <td class="text-info">{{ $stage->id }}</td>
+                                                            <td class="text-info">{{ ($stages->perPage() * ($stages->currentPage()-1)) + $loop->iteration }}</td>
                                                             <td class="text-info">{{ $stage->name }}</td>
 
                                                             <!--<td class="text-info"></td>-->
