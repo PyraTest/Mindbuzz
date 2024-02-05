@@ -775,11 +775,43 @@ class DashboardController extends Controller
     public function addSchool(Request $request)
     {
 
+
+
+//         try {
+//             DB::beginTransaction();
+
+//             $lang = [];
+//             // foreach (config('translatable.locales') as $one_lang) {
+//             //     // $lang += [$one_lang . '.name' => 'required|min:2|max:100'];
+//             //     $lang += [$one_lang . '.name' => 'required|min:2|max:100|unique:category_translations,name'];
+//             // }
+//             // $lang += [
+//             //     'icon'     => 'required|image',
+//             // ];
+//             // $data = $this->validate($request, $lang);
+
+//             $school = School::create($request->all());
+
+//             if(!School::where('name',$school->name)->count() > 1){
+//             DB::commit();
+// }
+//             return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+//         } catch (\Exception $ex) {
+//             DB::rollback();
+//             return redirect()->back()->with(['error' => __('admin/forms.wrong')]);
+//         }
+
+
+
+
         $rules = [];
-
-
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+$/u']);
+        
         $data = $request->except('_token');
+        if(School::where('name',$request->name)->count() == 0)
         $school = School::create($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
         // save photo category
         // if ($request->hasFile('icon')) {
         //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
@@ -794,6 +826,17 @@ class DashboardController extends Controller
     {
 
         $rules = [];
+
+        $rules = [];
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+$/u']);
+        
+        // $data = $request->except('_token');
+        if(School::where('name',$request->name)->count() == 0)
+        $school = School::create($data);
+    else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+
+
 
 
         $data = $request->except('_token');
