@@ -805,7 +805,7 @@ class DashboardController extends Controller
 
 
         $rules = [];
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+$/u']);
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
         
         $data = $request->except('_token');
         if(School::where('name',$request->name)->count() == 0)
@@ -827,7 +827,7 @@ class DashboardController extends Controller
 
 
         $rules = [];
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]+$/']);
+        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]+$/|string|max:16']);
         
         $data = $request->except('_token');
         if(Stage::where('name',$request->name)->count() == 0)
