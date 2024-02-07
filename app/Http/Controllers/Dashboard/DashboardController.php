@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 // Git Test 
+// second Test
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
 use App\Models\GameImage;
@@ -21,9 +22,6 @@ use App\Models\BenchmarkAssignTo;
 use App\Models\SalonReserve;
 use App\Models\Transaction;
 use App\Models\Sliders;
-
-
-
 use App\Models\School;
 use App\Models\Course;
 use App\Models\Ending;
@@ -58,7 +56,7 @@ class DashboardController extends Controller
         $schools = School::all();
         return view('dashboard.index', compact(['schools']));
     }
-    
+
 
 
     public function createSchool()
@@ -79,6 +77,10 @@ class DashboardController extends Controller
     {
         $units = Unit::paginate(25);
         return view('dashboard.unit.index', compact(['units']));
+    }
+    public function hello()
+    {
+        return "Hello world";
     }
 
     public function getUnitBeginning($id)
@@ -321,8 +323,8 @@ class DashboardController extends Controller
         // $units->delete();
         // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
     }
-    
-    
+
+
     //  Units
 
     //  Tests
@@ -340,7 +342,7 @@ class DashboardController extends Controller
         $tests = Test::all();
         return view('dashboard.unit.lesson.warmup.create', compact(['tests']));
     }
-    
+
     public function addWarmup(Request $request)
     {
 
@@ -375,7 +377,7 @@ class DashboardController extends Controller
 
 
 
-    
+
 
 
     //  Benchmarks
@@ -770,48 +772,48 @@ class DashboardController extends Controller
 
     // End Presentations
 
-   
+
 
     public function addSchool(Request $request)
     {
 
 
 
-//         try {
-//             DB::beginTransaction();
+        //         try {
+        //             DB::beginTransaction();
 
-//             $lang = [];
-//             // foreach (config('translatable.locales') as $one_lang) {
-//             //     // $lang += [$one_lang . '.name' => 'required|min:2|max:100'];
-//             //     $lang += [$one_lang . '.name' => 'required|min:2|max:100|unique:category_translations,name'];
-//             // }
-//             // $lang += [
-//             //     'icon'     => 'required|image',
-//             // ];
-//             // $data = $this->validate($request, $lang);
+        //             $lang = [];
+        //             // foreach (config('translatable.locales') as $one_lang) {
+        //             //     // $lang += [$one_lang . '.name' => 'required|min:2|max:100'];
+        //             //     $lang += [$one_lang . '.name' => 'required|min:2|max:100|unique:category_translations,name'];
+        //             // }
+        //             // $lang += [
+        //             //     'icon'     => 'required|image',
+        //             // ];
+        //             // $data = $this->validate($request, $lang);
 
-//             $school = School::create($request->all());
+        //             $school = School::create($request->all());
 
-//             if(!School::where('name',$school->name)->count() > 1){
-//             DB::commit();
-// }
-//             return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-//         } catch (\Exception $ex) {
-//             DB::rollback();
-//             return redirect()->back()->with(['error' => __('admin/forms.wrong')]);
-//         }
+        //             if(!School::where('name',$school->name)->count() > 1){
+        //             DB::commit();
+        // }
+        //             return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+        //         } catch (\Exception $ex) {
+        //             DB::rollback();
+        //             return redirect()->back()->with(['error' => __('admin/forms.wrong')]);
+        //         }
 
 
 
 
         $rules = [];
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
-        
+        $this->validate($request, ['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
+
         $data = $request->except('_token');
-        if(School::where('name',$request->name)->count() == 0)
-        $school = School::create($data);
-    else
-    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        if (School::where('name', $request->name)->count() == 0)
+            $school = School::create($data);
+        else
+            return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
         // save photo category
         // if ($request->hasFile('icon')) {
         //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
@@ -827,13 +829,13 @@ class DashboardController extends Controller
 
 
         $rules = [];
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z0-9]+$/|string|max:16']);
-        
+        $this->validate($request, ['name' => 'required|regex:/^[a-zA-Z0-9]+$/|string|max:16']);
+
         $data = $request->except('_token');
-        if(Stage::where('name',$request->name)->count() == 0)
-        $stage = Stage::create($data);
-    else
-    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        if (Stage::where('name', $request->name)->count() == 0)
+            $stage = Stage::create($data);
+        else
+            return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
 
 
 
@@ -855,13 +857,13 @@ class DashboardController extends Controller
 
         $rules = [];
 
-        $this->validate($request,['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
+        $this->validate($request, ['name' => 'required|regex:/^[a-zA-Z]+/|string|max:30']);
         $data = $request->except('_token');
-        if(Course::where('name',$request->name)->count() == 0)
-        $course = Course::create($data);
-    else
-    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
-        
+        if (Course::where('name', $request->name)->count() == 0)
+            $course = Course::create($data);
+        else
+            return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+
         // save photo category
         // if ($request->hasFile('icon')) {
         //     $city->icon = $this->upploadImage($request->File('icon'), 'assets/images/cities/');
@@ -873,7 +875,7 @@ class DashboardController extends Controller
         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
     }
 
-   
+
 
     public function getSchools()
     {
@@ -890,10 +892,4 @@ class DashboardController extends Controller
         $stages = Stage::paginate(25);
         return view('dashboard.stage.index', compact(['stages']));
     }
-
-
-
-
-
-
 }
