@@ -48,7 +48,7 @@ Route::group([
         Route::get('/', 'DashboardController@index')->name('admin.dashboard')->middleware('adminauth:admin');
         //Login process
         Route::get('/login', 'AuthController@login')->name('admin.login');
-        Route::post('/do-login', 'AuthController@doLogin')->name('admin.doLogin');
+        Route::post('MindbuzzTest/Mindbuzz/public/do-login', 'AuthController@doLogin')->name('admin.doLogin');
         Route::name('admin.')->middleware('adminauth:admin')->group(function () {
             //Logout proccess
             Route::get('/logout', 'AuthController@logout')->name('logout');
