@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('benchmarks', function (Blueprint $table) {
             $table->id();
+            
             $table->integer('number');
             $table->bigInteger('program_id')->nullable()->unsigned();
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');

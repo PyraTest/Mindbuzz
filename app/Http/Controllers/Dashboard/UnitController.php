@@ -24,7 +24,7 @@ class UnitController extends Controller
     //  Units Start
     public function getUnits()
     {
-        $units = Unit::paginate(25);
+        $units = Unit::orderBy("program_id")->paginate(25);
         return view('dashboard.unit.index', compact(['units']));
     }
 
@@ -242,23 +242,24 @@ class UnitController extends Controller
         // return redirect()->back()->with(['success' => __('admin/forms.deleted_successfully')]);
     }
 
-     // Add unit
-     public function addUnit(Request $request)
-     {
- 
-         $rules = [];
- 
-         $number = +1;
-         while (Unit::where('number', $number)->exists()) {
-             $number++;
-         }
-         $data = $request->except('_token');
-         $data["number"] = $number;
-         $unit = Unit::create($data);
-         DB::commit();
- 
-         return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
-     }
+    // Add unit
+    public function addUnit(Request $request)
+    {
+
+        $rules = [];
+
+        $number = +1;
+        while (Unit::where('number', $number)->where('program_id', $request->program_id)->exists()) {
+            $num = Unit::where('program_id', $request->program_id)->orderBy('id', 'desc')->first()->number;
+            $number = $num + 1;
+        }
+        $data = $request->except('_token');
+        $data["number"] = $number;
+        $unit = Unit::create($data);
+        DB::commit();
+
+        return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);
+    }
     // Unit end
 
 }
