@@ -86,7 +86,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             <select name="bank_id" id="" class="form-control">
                                                                 @foreach ($banks as $bank)
                                                                     <option value="{{ $bank->id }}">
-                                                                        {{ $bank->id }}</option>
+                                                                        {{ $bank->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('program_id')

@@ -107,7 +107,7 @@ $active_links = ['users', 'showusers'];
                                                             <td class="text-info">{{ $index + 1 }}</td>
                                                             <td class="text-info">{{ $lessonEnding->lesson->name }}</td>
                                                             <td class="text-info">
-                                                                @if ($lessonEnding->test->type == 0)
+                                                                @if ($lessonEnding->test->name)
                                                                     Test
                                                                 @elseif ($lessonEnding->test->type == 1)
                                                                     Quiz

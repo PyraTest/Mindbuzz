@@ -134,7 +134,7 @@ $active_links = ['users', 'showusers'];
                                                                 @endif
                                                             </td>
                                                             <td class="text-info">
-                                                                <a href="{{ route('admin.show_view_beginning', $beginning->id) }}"
+                                                                <a href="{{ route('admin.show_program_view_beginning', $beginning->id) }}"
                                                                     class="btn-info btn   ">
                                                                     <i class="fa-solid fa-eye"></i>
                                                                 </a>

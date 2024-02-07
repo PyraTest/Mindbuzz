@@ -69,7 +69,6 @@ Route::group([
             Route::get("/show/program/endings/{id}", 'ProgramController@showProgramEndings')->name('admin.show_program_endings');
             Route::get("/show/program/view-ending/{id}", 'ProgramController@showProgramViewEnding')->name('admin.show_program_view_ending');
             Route::delete('/delete/{id}', 'ProgramController@deleteProgram')->name('admin.delete_program');
-        
         });
         Route::group(['prefix' => 'schools'], function () {
             Route::get('/', 'DashboardController@getSchools')->name('admin.schools');
@@ -105,7 +104,7 @@ Route::group([
 
             Route::get('/lessons/{id}', 'UnitController@getUnitLessons')->name('admin.unit_lessons');
             Route::get('/create_lesson/{id}', 'UnitController@createUnitLesson')->name('admin.create_unit_lesson');
-            Route::post('/store_lesson', 'UnitController@storeUnitLesson')->name('admin.store_unit_lesson');
+            Route::post('/store_lesson', 'LessonController@storeUnitLesson')->name('admin.store_unit_lesson');
             Route::get('/checkpoints/{id}', 'UnitController@getUnitCheckpoint')->name('admin.unit_checkpoint');
             Route::get('/end/{id}', 'UnitController@getUnitEnding')->name('admin.unit_end');
             Route::get('/create_ending/{id}', 'UnitController@createUnitEnding')->name('admin.create_unit_end');
