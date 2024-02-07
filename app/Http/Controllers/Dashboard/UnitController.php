@@ -247,14 +247,28 @@ class UnitController extends Controller
      {
  
          $rules = [];
- 
+         $request->validate([
+            'name' => 'required|max:16',
+        ]);
+        
          $number = +1;
          while (Unit::where('number', $number)->exists()) {
              $number++;
          }
+
+
+
          $data = $request->except('_token');
-         $data["number"] = $number;
-         $unit = Unit::create($data);
+        if(Unit::where('name',$request->name)
+            ->count() == 0){
+        $data["number"] = $number;
+        $unit = Unit::create($data);
+            }
+        else
+    return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
+
+        //  $unit = Unit::create($data);
          DB::commit();
  
          return redirect()->back()->with(['success' => __('admin/forms.added_successfully')]);

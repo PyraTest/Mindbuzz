@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('question_banks', function (Blueprint $table) {
             $table->id();
+            
             $table->timestamps();
         });
     }
