@@ -143,7 +143,8 @@ $active_links = ['sub_services', 'addsub_services'];
                                                         <div class="form-group">
                                                             <label>{{ __('admin.type') }}</label>
                                                             <select name="type" id="type_id" class="form-control">
-
+                                                                <option value="" selected disabled>Select type
+                                                                </option>
                                                                 <option value="0">
                                                                     Complete question
                                                                 </option>
