@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->integer('is_active')->default(1)->comment('0 => Not Active , 1 => Active');
+            // $table->integer('is_active')->default(1)->comment('0 => Not Active , 1 => Active');
             $table->text('name');
             $table->bigInteger('school_id')->nullable()->unsigned();
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');

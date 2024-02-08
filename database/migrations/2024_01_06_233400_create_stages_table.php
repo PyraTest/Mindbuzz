@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
-            $table->integer('is_active')->default(1)->comment('0 => Not Active , 1 => Active');
+            // $table->integer('is_active')->default(1)->comment('0 => Not Active , 1 => Active');
 
             $table->text('name');
             $table->timestamps();

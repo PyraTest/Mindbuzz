@@ -41,7 +41,7 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localizationRedirect', 'localeViewPath'],
 ], function () {
-
+ 
 
     Route::group(['prefix' => 'dashboard', 'namespace' => 'App\Http\Controllers\Dashboard'], function () {
 
