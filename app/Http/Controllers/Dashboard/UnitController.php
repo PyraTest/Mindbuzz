@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Traits\backendTraits;
+use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Unit;
@@ -21,6 +23,8 @@ use Illuminate\Support\Facades\DB;
 
 class UnitController extends Controller
 {
+    use HelpersTrait;
+    use backendTraits;
     //  Units Start
     public function getUnits()
     {

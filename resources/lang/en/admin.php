@@ -55,6 +55,10 @@ return [
     'beginning' => ' Beginning',
     'video_author' => '  Author',
     'video' => ' video',
+    'trueOrFalse' => ' True or False',
+    'true' => ' True ',
+    'false' => ' False ',
+
     'revision_question' => ' Revision question',
     'choices' => 'Choices',
     'choice1' => 'First Choice (A)',

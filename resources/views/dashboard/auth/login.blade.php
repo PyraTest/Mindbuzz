@@ -20,7 +20,7 @@
                 @include('dashboard.includes.alerts.success')
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form-horizontal form-simple" action="/dashboard/do-login" method="post"
+                            <form class="form-horizontal form-simple" action="{{ route('admin.doLogin')}}" method="post"
                                   novalidate>
                                 @csrf
 

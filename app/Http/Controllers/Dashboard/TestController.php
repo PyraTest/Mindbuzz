@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Test;
+use App\Traits\backendTraits;
+use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
-    
+    use HelpersTrait;
+    use backendTraits;
     public function getTests()
     {
         $tests = Test::paginate(25);

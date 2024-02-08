@@ -9,12 +9,16 @@ use App\Models\Question;
 use App\Models\QuestionBank;
 use App\Models\RevisionQuestionsBank;
 use App\Models\Test;
+use App\Traits\backendTraits;
+use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
+    use HelpersTrait;
+    use backendTraits;
    //  Questions
    public function getQuestions()
    {

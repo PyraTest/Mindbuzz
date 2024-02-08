@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Lesson;
 use App\Models\LessonEnding;
 use App\Models\Test;
+use App\Traits\backendTraits;
+use App\Traits\HelpersTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
+    use HelpersTrait;
+    use backendTraits;
     public function storeUnitLesson(Request $request)
     {
         $request->validate([
