@@ -14,6 +14,7 @@ class TestController extends Controller
 {
     use HelpersTrait;
     use backendTraits;
+    
     public function getTests()
     {
         $tests = Test::paginate(25);
