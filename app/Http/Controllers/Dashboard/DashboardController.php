@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-// Git Test 
-// second Test
+
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
 use App\Models\GameImage;
 use App\Models\GameLetter;
-// mohamed khaled
+
 use App\Models\Program;
 use App\Models\QuestionBank;
 use App\Models\RevisionQuestionsBank;
