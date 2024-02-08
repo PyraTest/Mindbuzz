@@ -19,15 +19,20 @@ class LessonController extends Controller
     public function storeUnitLesson(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:16',
             'unit_id' => 'required',
             'warmup_id' => 'required',
         ]);
         $number = +1;
+        
+        if(Lesson::where('name', $request->name)->where('unit_id',$request->unit_id)->where('warmup_id',$request->warmup_id)->count()  > 0)
+            return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+        
         while (Lesson::where('number', $number)->exists()) {
             $number++;
-        }
-
+        
+    }
+    
         $data = $request->except('_token');
         $data['number'] = $number;
         Lesson::create($data);

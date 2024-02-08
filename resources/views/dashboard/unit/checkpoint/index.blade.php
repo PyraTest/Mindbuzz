@@ -114,7 +114,7 @@ $active_links = ['users', 'showusers'];
 
                                                                 {{ $checkpoint->test->type == 0 ? 'Test' : ($checkpoint->test->type == 1 ? 'Quiz' : 'Homework') }}
                                                             </td>
-                                                            <td class="text-info">{{ $checkpoint->bank_id }}</td>
+                                                            <td class="text-info">{{ \App\Models\QuestionBank::find($checkpoint->bank_id)->name }}</td>
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">

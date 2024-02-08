@@ -104,10 +104,6 @@ class DashboardController extends Controller
         $lessonEndings = LessonEnding::where('lesson_id', $id)->get();
         return view('dashboard.unit.lesson.lesson-ending.index', compact(['lessonEndings', 'id']));
     }
-
-
-
-
     public function getUnitEnding($id)
     {
         $endings = UnitEnding::where('unit_id', $id)->paginate(25);
@@ -639,6 +635,12 @@ class DashboardController extends Controller
     public function addRevisionQuestion(Request $request)
     {
         $number = +1;
+        
+        if(RevisionQuestionsBank::where('question', $request->question)
+        ->where('answer', $request->answer)
+        ->where('bank_id', $request->bank_id)->count()  > 0)
+        return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
+
         while (RevisionQuestionsBank::where('number', $number)->exists()) {
             $number++;
         }
@@ -655,8 +657,12 @@ class DashboardController extends Controller
     }
     public function createQuestionBank(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required|max:16',
+        ]);
         $data = $request->except('_token');
+        if(QuestionBank::where('name', $request->name)->count()  > 0)
+            return redirect()->back()->with(['error' => __('admin/forms.market_category_unique_name')]);
         $questionBank = QuestionBank::create($data);
         return redirect()->route("admin.create_revision_question")->with(['success' => __('admin/forms.added_successfully')]);
     }

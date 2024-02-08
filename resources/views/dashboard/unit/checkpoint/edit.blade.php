@@ -107,7 +107,7 @@ $active_links = ['sub_services', 'addsub_services'];
                                                             <select name="bank_id" id="" class="form-control">
                                                                 @foreach ($banks as $bank)
                                                                     <option value="{{ $bank->id }}" {{ $checkpoints->bank_id == $bank->id ? 'selected' : '' }}>
-                                                                        {{ $bank->id }}</option>
+                                                                        {{ \App\Models\QuestionBank::find($bank->id)->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('program_id')
