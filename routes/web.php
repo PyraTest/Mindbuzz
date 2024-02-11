@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -209,3 +211,19 @@ Route::group([
         });
     });
 });
+
+Auth::routes();
+
+Route::get('/home2', function () {
+    return view('home2');
+});
+
+Route::resources([
+    'roles' => RoleController::class,
+    'users' => UserController::class,
+    // 'products' => ProductController::class,
+]);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

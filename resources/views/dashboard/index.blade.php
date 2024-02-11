@@ -37,7 +37,7 @@
                 
                 
                 
-                
+                @can('create-unit')
                 <div class="col-xl-3 col-lg-6 col-12">
                     <div class="card pull-up">
                         <div class="card-content">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                 
+                 @endcan
             </div>
             <!--/ eCommerce statistic -->
             <!-- Candlestick Multi Level Control Chart -->
@@ -67,6 +67,7 @@
             <!-- Sell Orders & Buy Order -->
             <!--<div class="row match-heighttt">-->
             <h2>Placeholder</h2>
+            
  <table
                                         class="table table-striped w-100 text-center display wrap table-bordered ">
                                         <thead>
