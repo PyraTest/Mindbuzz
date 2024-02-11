@@ -31,7 +31,7 @@ class QuestionController extends Controller
     {
         $request->validate([
             'choices' => 'required',
-       
+            'question' => 'required',
         ]);
         $number = +1;
         while (Question::where('number', $number)->exists()) {
@@ -51,33 +51,6 @@ class QuestionController extends Controller
                 $new_choice->choice = $choice;
 
 
-
-                // switch ($request->choice_ans) {
-                //     case 'a':
-                //         if ($index == 0) {
-                //             $new_choice->answer_flag = 1;
-                //         } else
-                //             $new_choice->answer_flag = 0;
-                //         break;
-                //     case 'b':
-                //         if ($index == 1) {
-                //             $new_choice->answer_flag = 1;
-                //         } else
-                //             $new_choice->answer_flag = 0;
-                //         break;
-                //     case 'c':
-                //         if ($index == 2) {
-                //             $new_choice->answer_flag = 1;
-                //         } else
-                //             $new_choice->answer_flag = 0;
-                //         break;
-                //     case 'd':
-                //         if ($index == 3) {
-                //             $new_choice->answer_flag = 1;
-                //         } else
-                //             $new_choice->answer_flag = 0;
-                //         break;
-                // }
 
                 $new_choice->save();
             }
